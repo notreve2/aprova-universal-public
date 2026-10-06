@@ -1,0 +1,89 @@
+{
+  "updated_at": "2026-10-06",
+  "sources": [
+    {
+      "id": "fgv",
+      "name": "FGV Conhecimento",
+      "home": "https://conhecimento.fgv.br/concursos",
+      "active": "https://conhecimento.fgv.br/concursos?categoria=Em+andamento",
+      "type": "banca"
+    },
+    {
+      "id": "cebraspe",
+      "name": "Cebraspe",
+      "home": "https://www.cebraspe.org.br/concursos/",
+      "active": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "type": "banca"
+    },
+    {
+      "id": "vunesp",
+      "name": "Fundação Vunesp",
+      "home": "https://www.vunesp.com.br/",
+      "active": "https://www.vunesp.com.br/",
+      "type": "banca"
+    },
+    {
+      "id": "aocp",
+      "name": "Instituto AOCP",
+      "home": "https://www.institutoaocp.org.br/",
+      "active": "https://link.institutoaocp.org.br/",
+      "type": "banca"
+    },
+    {
+      "id": "idecan",
+      "name": "IDECAN",
+      "home": "https://www.idecan.org.br/",
+      "active": "https://www.idecan.org.br/",
+      "type": "banca"
+    },
+    {
+      "id": "ibfc",
+      "name": "IBFC",
+      "home": "https://www.ibfc.org.br/",
+      "active": "https://www.ibfc.org.br/",
+      "type": "banca"
+    },
+    {
+      "id": "iades",
+      "name": "IADES",
+      "home": "https://www.iades.com.br/",
+      "active": "https://www.iades.com.br/",
+      "type": "banca"
+    },
+    {
+      "id": "consulplan",
+      "name": "Instituto Consulplan",
+      "home": "https://www.institutoconsulplan.org.br/",
+      "active": "https://www.institutoconsulplan.org.br/",
+      "type": "banca"
+    },
+    {
+      "id": "cesgranrio",
+      "name": "Fundação Cesgranrio",
+      "home": "https://www.cesgranrio.org.br/",
+      "active": "https://www.cesgranrio.org.br/",
+      "type": "banca"
+    },
+    {
+      "id": "quadrix",
+      "name": "Instituto Quadrix",
+      "home": "https://quadrix.org.br/",
+      "active": "https://quadrix.org.br/index/todos/",
+      "type": "banca"
+    },
+    {
+      "id": "fcc",
+      "name": "Fundação Carlos Chagas",
+      "home": "https://www.concursosfcc.com.br/",
+      "active": "https://www.concursosfcc.com.br/",
+      "type": "banca"
+    },
+    {
+      "id": "oab",
+      "name": "OAB/FGV Exame de Ordem",
+      "home": "https://examedeordem.oab.org.br/",
+      "active": "https://examedeordem.oab.org.br/",
+      "type": "exame"
+    }
+  ]
+}

@@ -1,0 +1,1364 @@
+{
+  "updated_at": "2026-10-06T18:09:55.777521+00:00",
+  "count": 95,
+  "scan_report": [
+    {
+      "banca": "FGV",
+      "found": 37,
+      "new": 37,
+      "ok": true
+    },
+    {
+      "banca": "Quadrix",
+      "found": 10,
+      "new": 10,
+      "ok": true
+    },
+    {
+      "banca": "Cebraspe",
+      "found": 0,
+      "new": 0,
+      "ok": true
+    },
+    {
+      "banca": "Instituto AOCP",
+      "found": 0,
+      "new": 0,
+      "ok": true
+    }
+  ],
+  "items": [
+    {
+      "id": "aocp-casan26",
+      "title": "CASAN/SC — Concurso Público nº 002/2026",
+      "banca": "Instituto AOCP",
+      "status": "Inscrições abertas / andamento",
+      "category": "Concurso público",
+      "source_url": "https://link.institutoaocp.org.br/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "AOCP"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "aocp-ifpa26",
+      "title": "IFPA — cargos de nível médio, técnico e superior",
+      "banca": "Instituto AOCP",
+      "status": "Inscrições abertas / andamento",
+      "category": "Concurso público",
+      "source_url": "https://link.institutoaocp.org.br/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "AOCP"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "aocp-sadpe-educ26",
+      "title": "SAD/PE — Educação Especial",
+      "banca": "Instituto AOCP",
+      "status": "Inscrições abertas / andamento",
+      "category": "Concurso público",
+      "source_url": "https://link.institutoaocp.org.br/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "AOCP"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "aocp-saebba26",
+      "title": "SAEB/BA — Concurso Público nº 02/2026",
+      "banca": "Instituto AOCP",
+      "status": "Inscrições abertas / andamento",
+      "category": "Concurso público",
+      "source_url": "https://link.institutoaocp.org.br/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "AOCP"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "aocp-seadap26",
+      "title": "SEAD/AP — Concurso Público nº 001/2026",
+      "banca": "Instituto AOCP",
+      "status": "Inscrições abertas / andamento",
+      "category": "Concurso público",
+      "source_url": "https://link.institutoaocp.org.br/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "AOCP"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quad-crbio1-26",
+      "title": "CRBio-SP/MT/MS — Edital nº 01/2026",
+      "banca": "Quadrix",
+      "status": "Inscrições abertas",
+      "category": "Concurso público",
+      "source_url": "https://quadrix.org.br/index/abertos/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quad-crecies26",
+      "title": "CRECI-ES — Edital nº 01/2026",
+      "banca": "Quadrix",
+      "status": "Inscrições abertas",
+      "category": "Concurso público",
+      "source_url": "https://quadrix.org.br/index/abertos/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quad-crqpr26",
+      "title": "CRQ-PR — Edital nº 01/2026",
+      "banca": "Quadrix",
+      "status": "Inscrições abertas",
+      "category": "Concurso público",
+      "source_url": "https://quadrix.org.br/index/abertos/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-agepar26",
+      "title": "AGEPAR/PR 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-agu-est26",
+      "title": "AGU — Estagiário 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-alprev26",
+      "title": "ALPREV 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-ansa26",
+      "title": "ANSA 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-arsal26",
+      "title": "ARS/AL 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-caesb24",
+      "title": "CAESB",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-cbmma26",
+      "title": "CBM/MA 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-cgeal26",
+      "title": "CGE/AL 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-cgmporto26",
+      "title": "CGM Porto Velho/RO 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-camara26",
+      "title": "Câmara dos Deputados 2026 — PLF",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-detranal26",
+      "title": "DETRAN/AL 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-fapeal26",
+      "title": "FAPE/AL 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-pcal26",
+      "title": "Polícia Civil de Alagoas 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-pcce-del25",
+      "title": "Polícia Civil do Ceará — Delegado",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-pcdf-del26",
+      "title": "Polícia Civil do DF — Delegado 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-pcma-del26",
+      "title": "Polícia Civil do Maranhão — Delegado 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "ceb-pcma-inv26",
+      "title": "Polícia Civil do Maranhão — Investigador 2026",
+      "banca": "Cebraspe",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://www.cebraspe.org.br/concursos/em-andamento/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Cebraspe"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-b1418675b2",
+      "title": "2ª Edição do Exame de Qualificação Técnica (EQT) de 2026",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/exames/cfceqt/2026.2",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-cfc3-26",
+      "title": "CFC — Exame de Suficiência nº 3/2026",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-cpnu2",
+      "title": "Concurso Público Nacional Unificado 2",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-e0078e3d01",
+      "title": "Concurso Público para Secretaria de Planejamento e Gestão do Estado do Rio de Janeiro – SEPLAG/RJ",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/seplagrj",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-88f550882d",
+      "title": "Concurso Público para Tribunal de Justiça do Estado do Amapá - Juiz de Direito Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/tjap26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-cf808af846",
+      "title": "Concurso Público para a Agência Reguladora de Energia e Saneamento Básico do Estado do Rio de Janeiro - AGENERSA",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/agenersa2022",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-cb51dd0dcf",
+      "title": "Concurso Público para a Assembleia Legislativa do Estado de Santa Catarina",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/alesc23",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-5d148715b9",
+      "title": "Concurso Público para a Assembleia Legislativa do Estado do Maranhão",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/alema23",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-00bae3f879",
+      "title": "Concurso Público para a Controladoria Geral do Município do Rio de Janeiro",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/cgmrj23",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-7fbdce1937",
+      "title": "Concurso Público para a Controladoria-Geral do Estado de Santa Catarina",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/cgesc22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-a5894a08c9",
+      "title": "Concurso Público para a Defensoria Pública do Estado do Rio de Janeiro",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/dperj2026",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-651b3058e8",
+      "title": "Concurso Público para a Empresa de Tecnologia e Informações da Previdência - DATAPREV",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/dataprev26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-3ae3d33a5e",
+      "title": "Concurso Público para a Polícia Civil do Estado do Paraná",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pcpr26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-8214af1a81",
+      "title": "Concurso Público para a Polícia Militar do Estado de São Paulo - Cabo PM 2022",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pmespcabo22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-00c486355a",
+      "title": "Concurso Público para a Polícia Militar do Estado de São Paulo - Oficiais do Quadro de Saúde",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pmesqos2022",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-2e84885794",
+      "title": "Concurso Público para a Prefeitura Municipal do Salvador 2026",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pms2026",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-c78302f30e",
+      "title": "Concurso Público para a Prefeitura Municipal do Salvador 2026 - Guarda Municipal",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pmsguarda2026",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-77c800b339",
+      "title": "Concurso Público para a Prefeitura de Macaé",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/prefeiturademacae24",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-b9d64fe2b9",
+      "title": "Concurso Público para a Procuradoria Geral do Município de Niterói",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pgm.niteroi23",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-f7af564c59",
+      "title": "Concurso Público para a Receita Federal do Brasil",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/rfb22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-2504773747",
+      "title": "Concurso Público para a Secretaria de Estado da Administração - SEAD-AP - Peritos",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/seadap.peritos22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-36f73105f8",
+      "title": "Concurso Público para a Secretaria de Estado de Planejamento e Administração e a Secretaria de Estado de Educação do Pará",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/seducpa26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-652aef2758",
+      "title": "Concurso Público para a Secretaria de Estado de Saúde do Tocantins e a Secretaria de Estado da Administração",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/sesto26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-cbf9a19d1e",
+      "title": "Concurso Público para o Banco do Estado do Espírito Santo - BANESTES 2022",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/banestes22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-0a60e68237",
+      "title": "Concurso Público para o Conselho Superior da Justiça do Trabalho",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/csjt23",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-59f86efecf",
+      "title": "Concurso Público para o Corpo de Bombeiros Militar do Estado do Rio de Janeiro",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/cbmerj22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-37a4b75e30",
+      "title": "Concurso Público para o Ministério Público do Estado de São Paulo",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/mpsp",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-1b8318231c",
+      "title": "Concurso Público para o Senado Federal",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/senado22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-6b62949df5",
+      "title": "Concurso Público para o Tribunal Regional do Trabalho - 13ª Região",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/trt13",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-d62e17d7fd",
+      "title": "Concurso Público para o Tribunal Regional do Trabalho - 16ª Região",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/trt16",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-7485dfedd9",
+      "title": "Concurso Público para o Tribunal de Contas do Estado do Espírito Santo",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/tcees22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-54218c0018",
+      "title": "Concurso Público para o Tribunal de Justiça do Estado de Mato Grosso do Sul - Juiz Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/tjmsjuiz23",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-42aa81e478",
+      "title": "Concurso Público para o Tribunal de Justiça do Estado do Rio Grande do Sul - Juiz Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/tjrsjuiz26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-e2a0a1abd0",
+      "title": "Conselho Federal de Contabilidade (CFC) - Exame de Suficiência nº 2/2026",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/exames/cfc/2026.2",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-df996480b8",
+      "title": "Conselho Federal de Contabilidade (CFC) - Exame de Suficiência nº 3/2026",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/exames/cfc/2026.3",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-dataprev26",
+      "title": "DATAPREV",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/dataprev26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-dpgerj26",
+      "title": "Defensoria Pública do Estado do Rio de Janeiro",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-ebserh26",
+      "title": "EBSERH — Área Médica",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-enac262",
+      "title": "ENAC 2026.2",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-enam262",
+      "title": "ENAM 2026.2",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-39d6f35292",
+      "title": "Exame Nacional da Magistratura - ENAM (2026.2)",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/exames/enam/6exame",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-03744ed0d1",
+      "title": "Exame Nacional dos Cartórios - ENAC - 2026.2",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/exames/enac/4exame",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-mprj-promotor26",
+      "title": "MPRJ — Promotor de Justiça Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/mprjpromotor2026",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-navbrasil26",
+      "title": "NAV Brasil",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/navbrasil26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-pcpr26",
+      "title": "Polícia Civil do Paraná",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-macae26",
+      "title": "Prefeitura de Macaé",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-salvador26",
+      "title": "Prefeitura de Salvador 2026",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-salvador-gm26",
+      "title": "Prefeitura de Salvador — Guarda Municipal",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-4fa47911b7",
+      "title": "Processo Seletivo para a Faculdade Evangélica Mackenzie do Paraná - FEMPAR 2023",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/fempar23",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-sead-sepa26",
+      "title": "SEPLAD/SEDUC — Pará",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-seplagrj26",
+      "title": "SEPLAG/RJ",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-sesto26",
+      "title": "Saúde e Administração do Tocantins",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/sesto26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-tjap-juiz26",
+      "title": "TJAP — Juiz de Direito Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-tjpe-juiz26",
+      "title": "TJPE — Juiz Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-tjrs-juiz26",
+      "title": "TJRS — Juiz Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-trf5-juiz26",
+      "title": "TRF5 — Juiz Federal Substituto",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "fgv-2851f3b408",
+      "title": "XVI Concurso Público para provimento de cargos de Juiz Federal Substituto da 5ª Região",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/trf5juiz26",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "oab-47",
+      "title": "47º Exame de Ordem Unificado",
+      "banca": "FGV/OAB",
+      "status": "Em andamento",
+      "category": "OAB",
+      "source_url": "https://examedeordem.oab.org.br/",
+      "official": true,
+      "exam_date": "2026-10-18",
+      "tags": [
+        "OAB",
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "oab-48",
+      "title": "48º Exame de Ordem Unificado",
+      "banca": "FGV/OAB",
+      "status": "Calendário publicado",
+      "category": "OAB",
+      "source_url": "https://examedeordem.oab.org.br/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "OAB",
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-0cbfa096eb",
+      "title": "Conselho Federal de Educação Física (CONFEF)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3077/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-9319ed96ca",
+      "title": "Conselho Federal de Enfermagem (COFEN)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3002/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-13536f00e5",
+      "title": "Conselho Regional de Arquitetura e Urbanismo de Santa Catarina (CAU-SC)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3078/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-9fff91fb43",
+      "title": "Conselho Regional de Biologia da 10ª Região (CRBio-ES)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3076/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-0f615f5869",
+      "title": "Conselho Regional de Contabilidade de Pernambuco (CRC-PE)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3074/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-5ca6811ecd",
+      "title": "Conselho Regional de Enfermagem da São Paulo (COREN-SP)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3075/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-2234f90f5b",
+      "title": "Conselho Regional de Enfermagem do Amapá (COREN-AP)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3079/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-750a8f9eba",
+      "title": "Conselho Regional de Farmácia do Estado de São Paulo (CRF-SP)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3080/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-50567b03fc",
+      "title": "Conselho Regional de Fisioterapia e Terapia Ocupacional da 12ª Região (CREFITO-AP/PA/TO)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3044/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quad-sedesdf26",
+      "title": "SEDES/DF — Edital nº 01/2026",
+      "banca": "Quadrix",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://quadrix.org.br/informacoes/3056/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quadrix-18ca9223f4",
+      "title": "Secretaria de Desenvolvimento Social do Distrito Federal (Sedes/DF)",
+      "banca": "Quadrix",
+      "status": "Em andamento / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://quadrix.org.br/informacoes/3056/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06"
+    }
+  ]
+}
