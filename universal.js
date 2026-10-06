@@ -1,4 +1,4 @@
-const ULS='aprova-universal-v3';
+const ULS='aprova-universal-v4';
 let u=JSON.parse(localStorage.getItem(ULS)||'{}');
 u.profile=u.profile||{};u.trial=u.trial||{};u.notes=u.notes||[];u.errors=u.errors||[];u.reviews=u.reviews||[];u.flashRatings=u.flashRatings||{};u.stage=u.stage||0;u.choice=u.choice||'';
 const trackLabels={concurso:'Concurso público',oab2:'OAB — 2ª fase',oab1:'OAB — 1ª fase',magistratura:'ENAM / Carreiras Jurídicas',saude:'Residência / Saúde',educacao:'ENEM / Vestibular',certificacao:'Certificação / Exame profissional',outro:'Outra prova'};
@@ -9,9 +9,9 @@ function usave(){localStorage.setItem(ULS,JSON.stringify(u));}
 function targetName(){return u.profile.target||trackLabels[u.profile.track]||'Sua prova';}
 function udays(){return Math.max(0,Math.ceil((universalExam-new Date())/86400000));}
 function updateTrackFields(){const t=document.getElementById('trialTrack')?.value,a=document.getElementById('trialArea');if(!a)return;if(t==='oab2')a.value='constitucional';else if(t==='concurso')a.value='geral';}
-function startFreeTrial(){const name=document.getElementById('trialName').value.trim(),email=document.getElementById('trialEmail').value.trim(),track=document.getElementById('trialTrack').value,target=document.getElementById('trialTarget').value.trim(),area=document.getElementById('trialArea').value,examDate=document.getElementById('trialExamDate').value;if(!name||!email||!examDate)return alert('Preencha nome, e-mail e data da prova.');u.profile={name,email,track,target:target||trackLabels[track],area,examDate};universalExam=new Date(examDate+'T13:00:00-03:00');if(!u.trial.startedAt){u.trial.startedAt=Date.now();u.trial.endsAt=u.trial.startedAt+300000;}usave();document.getElementById('trialGate').hidden=true;document.getElementById('trialBar').hidden=false;uRenderAll();startTrialClock();}
-function startTrialClock(){clearInterval(trialTicker);const tick=()=>{const left=Math.max(0,Math.ceil(((u.trial.endsAt||0)-Date.now())/1000));const e=document.getElementById('trialClock');if(e)e.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;const b=document.getElementById('trialBar');if(b)b.classList.toggle('ending',left<=60);if(left<=0){clearInterval(trialTicker);document.getElementById('trialBar').hidden=true;document.getElementById('paywall').hidden=false;}};tick();trialTicker=setInterval(tick,1000);}
-function restoreTrialUniversal(){if(!u.trial.startedAt)return;document.getElementById('trialGate').hidden=true;if((u.trial.endsAt||0)>Date.now()){document.getElementById('trialBar').hidden=false;startTrialClock();}else document.getElementById('paywall').hidden=false;}
+function startFreeTrial(){const name=document.getElementById('trialName').value.trim(),email=document.getElementById('trialEmail').value.trim(),track=document.getElementById('trialTrack').value,target=document.getElementById('trialTarget').value.trim(),area=document.getElementById('trialArea').value,examDate=document.getElementById('trialExamDate').value;if(!name||!email||!examDate)return alert('Preencha nome, e-mail e data da prova.');u.profile={name,email,track,target:target||trackLabels[track],area,examDate};universalExam=new Date(examDate+'T13:00:00-03:00');u.trial.startedAt=u.trial.startedAt||Date.now();u.trial.mode='first-stage';u.trial.firstStageCompleted=!!u.trial.firstStageCompleted;usave();document.getElementById('trialGate').hidden=true;uRenderAll();}
+function startTrialClock(){}
+function restoreTrialUniversal(){if(!u.trial.startedAt)return;document.getElementById('trialGate').hidden=true;}
 const CHECKOUT_CARD_URL='';
 const CHECKOUT_PIX_URL='';
 function goToCheckout(mode='card'){
