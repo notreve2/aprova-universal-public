@@ -1,18 +1,19 @@
 {
-  "updated_at": "2026-10-06T18:09:55.777521+00:00",
-  "count": 95,
+  "updated_at": "2026-10-06T18:17:45.728605+00:00",
+  "count": 86,
   "scan_report": [
     {
       "banca": "FGV",
       "found": 37,
-      "new": 37,
+      "new": 1,
       "ok": true
     },
     {
       "banca": "Quadrix",
-      "found": 10,
-      "new": 10,
-      "ok": true
+      "found": 0,
+      "new": 0,
+      "ok": false,
+      "error": "403 Client Error: Forbidden for url: https://quadrix.org.br/index/todos/"
     },
     {
       "banca": "Cebraspe",
@@ -659,6 +660,20 @@
       "last_seen": "2026-10-06"
     },
     {
+      "id": "fgv-398790894a",
+      "title": "Concurso Público para a Secretaria de Estado da Administração - SEAD-AP",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/seadap22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
       "id": "fgv-2504773747",
       "title": "Concurso Público para a Secretaria de Estado da Administração - SEAD-AP - Peritos",
       "banca": "FGV",
@@ -1207,151 +1222,11 @@
       "last_seen": "2026-10-06"
     },
     {
-      "id": "quadrix-0cbfa096eb",
-      "title": "Conselho Federal de Educação Física (CONFEF)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3077/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-9319ed96ca",
-      "title": "Conselho Federal de Enfermagem (COFEN)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3002/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-13536f00e5",
-      "title": "Conselho Regional de Arquitetura e Urbanismo de Santa Catarina (CAU-SC)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3078/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-9fff91fb43",
-      "title": "Conselho Regional de Biologia da 10ª Região (CRBio-ES)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3076/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-0f615f5869",
-      "title": "Conselho Regional de Contabilidade de Pernambuco (CRC-PE)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3074/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-5ca6811ecd",
-      "title": "Conselho Regional de Enfermagem da São Paulo (COREN-SP)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3075/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-2234f90f5b",
-      "title": "Conselho Regional de Enfermagem do Amapá (COREN-AP)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3079/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-750a8f9eba",
-      "title": "Conselho Regional de Farmácia do Estado de São Paulo (CRF-SP)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3080/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-50567b03fc",
-      "title": "Conselho Regional de Fisioterapia e Terapia Ocupacional da 12ª Região (CREFITO-AP/PA/TO)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
-      "source_url": "https://quadrix.org.br/informacoes/3044/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
       "id": "quad-sedesdf26",
       "title": "SEDES/DF — Edital nº 01/2026",
       "banca": "Quadrix",
       "status": "Em andamento",
       "category": "Concurso público",
-      "source_url": "https://quadrix.org.br/informacoes/3056/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "quadrix-18ca9223f4",
-      "title": "Secretaria de Desenvolvimento Social do Distrito Federal (Sedes/DF)",
-      "banca": "Quadrix",
-      "status": "Em andamento / histórico",
-      "category": "Concurso / exame",
       "source_url": "https://quadrix.org.br/informacoes/3056/",
       "official": true,
       "exam_date": null,
