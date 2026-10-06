@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-10-06T20:05:03.371202+00:00",
-  "count": 89,
+  "count": 91,
   "scan_report": [
     {
       "banca": "FGV",
@@ -505,17 +505,17 @@
       "id": "fgv-cfc3-26",
       "title": "CFC — Exame de Suficiência nº 3/2026",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 13/12/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-12-13",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-edital-2026.3-05.10.2026.pdf",
+      "exam_date_confidence": "official-curated"
     },
     {
       "id": "fgv-cpnu2",
@@ -842,33 +842,35 @@
       "id": "fgv-36f73105f8",
       "title": "Concurso Público para a Secretaria de Estado de Planejamento e Administração e a Secretaria de Estado de Educação do Pará",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 29/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/seducpa26",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-29",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-consolidado-01.10-minuta.pdf",
+      "exam_date_confidence": "official-curated",
+      "public_hidden": true
     },
     {
       "id": "fgv-652aef2758",
       "title": "Concurso Público para a Secretaria de Estado de Saúde do Tocantins e a Secretaria de Estado da Administração",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 01/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/sesto26",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-01",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma-para-publicacao-10.09.pdf",
+      "exam_date_confidence": "official-curated",
+      "public_hidden": true
     },
     {
       "id": "fgv-cbf9a19d1e",
@@ -1018,17 +1020,18 @@
       "id": "fgv-42aa81e478",
       "title": "Concurso Público para o Tribunal de Justiça do Estado do Rio Grande do Sul - Juiz Substituto",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 13/12/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/tjrsjuiz26",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-12-13",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/sei_9998416_edital_consolidado.pdf",
+      "exam_date_confidence": "official-curated",
+      "public_hidden": true
     },
     {
       "id": "fgv-e2a0a1abd0",
@@ -1050,17 +1053,18 @@
       "id": "fgv-df996480b8",
       "title": "Conselho Federal de Contabilidade (CFC) - Exame de Suficiência nº 3/2026",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 13/12/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/exames/cfc/2026.3",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-12-13",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-edital-2026.3-05.10.2026.pdf",
+      "exam_date_confidence": "official-curated",
+      "public_hidden": true
     },
     {
       "id": "fgv-dataprev26",
@@ -1114,65 +1118,67 @@
       "id": "fgv-enac262",
       "title": "ENAC 2026.2",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 22/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-22",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/minuta-edital-enac-2026.2-27.08.26-versao-final.pdf",
+      "exam_date_confidence": "official-curated"
     },
     {
       "id": "fgv-enam262",
       "title": "ENAM 2026.2",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 29/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-29",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma_enam-2026.2.pdf",
+      "exam_date_confidence": "official-curated"
     },
     {
       "id": "fgv-39d6f35292",
       "title": "Exame Nacional da Magistratura - ENAM (2026.2)",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 29/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/exames/enam/6exame",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-29",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma_enam-2026.2.pdf",
+      "exam_date_confidence": "official-curated",
+      "public_hidden": true
     },
     {
       "id": "fgv-03744ed0d1",
       "title": "Exame Nacional dos Cartórios - ENAC - 2026.2",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 22/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/exames/enac/4exame",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-22",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/minuta-edital-enac-2026.2-27.08.26-versao-final.pdf",
+      "exam_date_confidence": "official-curated",
+      "public_hidden": true
     },
     {
       "id": "fgv-mprj-promotor26",
@@ -1290,17 +1296,17 @@
       "id": "fgv-sead-sepa26",
       "title": "SEPLAD/SEDUC — Pará",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 29/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-29",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-consolidado-01.10-minuta.pdf",
+      "exam_date_confidence": "official-curated"
     },
     {
       "id": "fgv-seplagrj26",
@@ -1322,17 +1328,17 @@
       "id": "fgv-sesto26",
       "title": "Saúde e Administração do Tocantins",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 01/11/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/sesto26",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-11-01",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma-para-publicacao-10.09.pdf",
+      "exam_date_confidence": "official-curated"
     },
     {
       "id": "fgv-tjap-juiz26",
@@ -1370,17 +1376,17 @@
       "id": "fgv-tjrs-juiz26",
       "title": "TJRS — Juiz Substituto",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova futura confirmada • 13/12/2026",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-12-13",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/sei_9998416_edital_consolidado.pdf",
+      "exam_date_confidence": "official-curated"
     },
     {
       "id": "fgv-trf5-juiz26",
@@ -1433,18 +1439,18 @@
       "id": "oab-48",
       "title": "48º Exame de Ordem Unificado",
       "banca": "FGV/OAB",
-      "status": "Calendário publicado",
+      "status": "Calendário oficial • 1ª fase 10/01/2027",
       "category": "OAB",
       "source_url": "https://examedeordem.oab.org.br/",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2027-01-10",
       "tags": [
         "OAB",
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://examedeordem.oab.org.br/Calendario",
+      "exam_date_confidence": "official-curated"
     },
     {
       "id": "quad-sedesdf26",
@@ -1461,6 +1467,40 @@
       "last_seen": "2026-10-06",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
+    },
+    {
+      "id": "oab-49",
+      "title": "49º Exame de Ordem Unificado",
+      "banca": "FGV/OAB",
+      "status": "Calendário oficial • 1ª fase 09/05/2027",
+      "category": "Exame profissional",
+      "source_url": "https://examedeordem.oab.org.br/Calendario",
+      "official": true,
+      "exam_date": "2027-05-09",
+      "exam_date_source": "https://examedeordem.oab.org.br/Calendario",
+      "exam_date_confidence": "official-curated",
+      "tags": [
+        "OAB",
+        "FGV",
+        "Exame de Ordem"
+      ]
+    },
+    {
+      "id": "oab-50",
+      "title": "50º Exame de Ordem Unificado",
+      "banca": "FGV/OAB",
+      "status": "Calendário oficial • 1ª fase 12/09/2027",
+      "category": "Exame profissional",
+      "source_url": "https://examedeordem.oab.org.br/Calendario",
+      "official": true,
+      "exam_date": "2027-09-12",
+      "exam_date_source": "https://examedeordem.oab.org.br/Calendario",
+      "exam_date_confidence": "official-curated",
+      "tags": [
+        "OAB",
+        "FGV",
+        "Exame de Ordem"
+      ]
     }
   ],
   "date_enrichment": {

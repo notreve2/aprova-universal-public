@@ -8,6 +8,7 @@ async function loadAprovaCatalog(){
 }
 
 function isUpcomingCatalogItem(x){
+ if(x.public_hidden) return false;
  const today=new Date(); today.setHours(0,0,0,0);
  const status=norm(x.status||'');
  if(status.includes('historico')||status.includes('realizada')||status.includes('encerrado')) return false;
@@ -20,7 +21,6 @@ function isUpcomingCatalogItem(x){
  const blob=norm([x.id,x.title,x.source_url].join(' '));
  const oldOnly=/(?:^|[^0-9])(2022|2023|2024|2025)(?:[^0-9]|$)/.test(blob) && !/(?:^|[^0-9])(2026|2027)(?:[^0-9]|$)/.test(blob);
  if(oldOnly) return false;
- if(/(?:^|[^0-9])(2026|2027)(?:[^0-9]|$)/.test(blob)) return true;
  if(/inscricoes abertas|edital publicado|calendario publicado|previsto|iminente/.test(status)) return true;
  return false;
 }
