@@ -1,4 +1,4 @@
-const ULS='aprova-universal-v1';
+const ULS='aprova-universal-v3';
 let u=JSON.parse(localStorage.getItem(ULS)||'{}');
 u.profile=u.profile||{};u.trial=u.trial||{};u.notes=u.notes||[];u.errors=u.errors||[];u.reviews=u.reviews||[];u.flashRatings=u.flashRatings||{};u.stage=u.stage||0;u.choice=u.choice||'';
 const trackLabels={concurso:'Concurso público',oab2:'OAB — 2ª fase',oab1:'OAB — 1ª fase',magistratura:'ENAM / Carreiras Jurídicas',saude:'Residência / Saúde',educacao:'ENEM / Vestibular',certificacao:'Certificação / Exame profissional',outro:'Outra prova'};
@@ -12,7 +12,13 @@ function updateTrackFields(){const t=document.getElementById('trialTrack')?.valu
 function startFreeTrial(){const name=document.getElementById('trialName').value.trim(),email=document.getElementById('trialEmail').value.trim(),track=document.getElementById('trialTrack').value,target=document.getElementById('trialTarget').value.trim(),area=document.getElementById('trialArea').value,examDate=document.getElementById('trialExamDate').value;if(!name||!email||!examDate)return alert('Preencha nome, e-mail e data da prova.');u.profile={name,email,track,target:target||trackLabels[track],area,examDate};universalExam=new Date(examDate+'T13:00:00-03:00');if(!u.trial.startedAt){u.trial.startedAt=Date.now();u.trial.endsAt=u.trial.startedAt+300000;}usave();document.getElementById('trialGate').hidden=true;document.getElementById('trialBar').hidden=false;urenderAll();startTrialClock();}
 function startTrialClock(){clearInterval(trialTicker);const tick=()=>{const left=Math.max(0,Math.ceil(((u.trial.endsAt||0)-Date.now())/1000));const e=document.getElementById('trialClock');if(e)e.textContent=`${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;const b=document.getElementById('trialBar');if(b)b.classList.toggle('ending',left<=60);if(left<=0){clearInterval(trialTicker);document.getElementById('trialBar').hidden=true;document.getElementById('paywall').hidden=false;}};tick();trialTicker=setInterval(tick,1000);}
 function restoreTrialUniversal(){if(!u.trial.startedAt)return;document.getElementById('trialGate').hidden=true;if((u.trial.endsAt||0)>Date.now()){document.getElementById('trialBar').hidden=false;startTrialClock();}else document.getElementById('paywall').hidden=false;}
-function goToCheckout(){alert('Checkout de R$ 200: integração em configuração. Seu progresso foi salvo.');}
+const CHECKOUT_CARD_URL='';
+const CHECKOUT_PIX_URL='';
+function goToCheckout(mode='card'){
+ const url=mode==='pix'?CHECKOUT_PIX_URL:CHECKOUT_CARD_URL;
+ if(!url){alert('Checkout Mercado Pago em configuração. Seu progresso está salvo.');return;}
+ window.location.href=url;
+}
 function closePaywallPreview(){document.getElementById('paywall').hidden=true;}
 const guides={
  geral:{title:'Diagnóstico guiado',q:'Antes de estudar teoria, qual é a melhor primeira ação para descobrir como sua prova cobra o conteúdo?',choices:['Resolver uma questão diagnóstica','Ler todo o edital de uma vez','Comprar vários cursos','Memorizar resumos sem questões'],ok:'Resolver uma questão diagnóstica',why:'O diagnóstico revela padrão da prova e lacunas antes de distribuir seu tempo.',steps:['Resolva sem consultar','Corrija imediatamente','Classifique o erro','Transforme o erro em flashcard'],note:'Questão → correção → fonte → anotação → flashcard → revisão.',flash:[['Qual é o ciclo-base?','Questão → correção → fonte → anotação → flashcard → revisão'],['O que fazer com um erro?','Entender a causa e agendar revisão']]},
