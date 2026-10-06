@@ -31,7 +31,7 @@
         </select>
       </label>
       <label>Qual prova, órgão ou cargo?
-        <input id="trialTarget" list="popularTargets" type="text" placeholder="Ex.: PC-BA Investigador, TRT8, SEFAZ...">
+        <input id="trialTarget" list="popularTargets" type="text" onchange="applyOfficialExamMeta(this.value)" onblur="applyOfficialExamMeta(this.value)" placeholder="Ex.: PC-BA Investigador, TRT8, SEFAZ...">
         <datalist id="popularTargets">
           <option value="PC-BA — Investigador / Escrivão"><option value="Polícia Civil do Paraná — FGV"><option value="DATAPREV — FGV"><option value="CNU 2 — FGV"><option value="TRT8 — FCC"><option value="SEFAZ — Área Fiscal"><option value="Polícia Penal — Cebraspe"><option value="ENAM — FGV"><option value="ENAC — FGV">
         </datalist>
@@ -40,7 +40,7 @@
       <label>Quanto tempo você pretende estudar por dia?
         <select id="trialHours"><option value="0.5">30 minutos</option><option value="1">1 hora</option><option value="1.5">1h30</option><option value="2" selected>2 horas</option><option value="3">3 horas</option><option value="4">4 horas</option><option value="5">5 horas</option><option value="6">6 horas ou mais</option></select>
       </label>
-      <label>Data da sua prova<input id="trialExamDate" type="date" value="2026-10-18"></label>
+      <label>Data da prova <span class="muted">(preenchida automaticamente quando houver edital)</span><input id="trialExamDate" type="date"></label>
       <button class="btn trial-start" onclick="startFreeTrial()">Começar minha primeira etapa →</button>
       <small>Nenhum pagamento é solicitado para concluir sua primeira etapa.</small>
     </div>
