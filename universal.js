@@ -20,6 +20,7 @@ const CHECKOUT_PIX_URL='';
 function goToCheckout(mode='card'){
  const url=mode==='pix'?CHECKOUT_PIX_URL:CHECKOUT_CARD_URL;
  if(!url){alert('Checkout Mercado Pago em configuração. Seu progresso está salvo.');return;}
+ if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:'Aprova - acesso completo',content_category:mode,value:mode==='pix'?179.90:199.90,currency:'BRL'});
  window.location.href=url;
 }
 function closePaywallPreview(){document.getElementById('paywall').hidden=true;}
