@@ -15,14 +15,49 @@ function syncOfficialExamDate(){if(!u.profile?.target)return false;const hit=app
 function startFreeTrial(){const name=document.getElementById('trialName').value.trim(),email=document.getElementById('trialEmail').value.trim(),track=document.getElementById('trialTrack').value,target=document.getElementById('trialTarget').value.trim(),area=document.getElementById('trialArea').value,manualDate=document.getElementById('trialExamDate').value;if(!name||!email)return alert('Preencha nome e e-mail.');u.profile={name,email,track,target:target||trackLabels[track],area,examDate:manualDate||null};const hit=applyOfficialExamMeta(u.profile.target);if(!hit&&manualDate){u.profile.examDate=manualDate;u.profile.examDateSource='manual';universalExam=new Date(manualDate+'T13:00:00-03:00');}else if(!hit&&!manualDate){u.profile.examDate=null;u.profile.examDateSource='unknown';universalExam=null;}u.sessionLoggedOut=false;u.trial.startedAt=u.trial.startedAt||Date.now();u.trial.mode='first-stage';u.trial.firstStageCompleted=!!u.trial.firstStageCompleted;usave();document.getElementById('trialGate').hidden=true;uRenderAll();}
 function startTrialClock(){}
 function restoreTrialUniversal(){if(u.sessionLoggedOut)return;if(!u.trial.startedAt)return;document.getElementById('trialGate').hidden=true;}
-const CHECKOUT_CARD_URL='';
-const CHECKOUT_PIX_URL='';
-function goToCheckout(mode='card'){
- const url=mode==='pix'?CHECKOUT_PIX_URL:CHECKOUT_CARD_URL;
- if(!url){alert('Checkout Mercado Pago em configuração. Seu progresso está salvo.');return;}
- if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:'Aprova - acesso completo',content_category:mode,value:mode==='pix'?179.90:199.90,currency:'BRL'});
- window.location.href=url;
+const PAYMENT_API='https://aprova-payments-production.up.railway.app';
+async function goToCheckout(mode='card'){
+ try{
+  const price=mode==='pix'?179.90:199.90;
+  if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:'Aprova - acesso completo',content_category:mode,value:price,currency:'BRL'});
+  const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,email:u.profile?.email||'',name:u.profile?.name||''})});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||!data.checkout_url)throw new Error(data.error||'Checkout indisponível.');
+  localStorage.setItem('aprova-pending-order',data.order_id||'');
+  localStorage.setItem('aprova-pending-mode',mode);
+  window.location.href=data.checkout_url;
+ }catch(err){alert((err&&err.message)||'Não foi possível abrir o Mercado Pago agora. Tente novamente em instantes.');}
 }
+async function verifyAprovaPayment(showPending=false){
+ const orderId=localStorage.getItem('aprova-pending-order');
+ if(!orderId)return false;
+ try{
+  const res=await fetch(PAYMENT_API+'/order?id='+encodeURIComponent(orderId),{cache:'no-store'});
+  const data=await res.json().catch(()=>({}));
+  if(data.approved){
+   u.trial=u.trial||{};u.trial.paid=true;u.trial.paidAt=Date.now();u.trial.orderId=orderId;usave();
+   localStorage.removeItem('aprova-pending-order');localStorage.removeItem('aprova-pending-mode');
+   const pw=document.getElementById('paywall');if(pw)pw.hidden=true;
+   if(typeof window.aprovaTrack==='function')window.aprovaTrack('Purchase',{content_name:'Aprova - acesso completo',value:Number(data.total_amount||0),currency:'BRL'});
+   history.replaceState({},document.title,location.pathname);
+   alert('Pagamento confirmado. Seu acesso completo foi liberado.');
+   return true;
+  }
+  if(showPending)alert('Pagamento ainda não confirmado. Se você acabou de pagar por Pix, aguarde alguns segundos e tente novamente.');
+ }catch(e){if(showPending)alert('Não foi possível confirmar o pagamento agora. Tente novamente em instantes.');}
+ return false;
+}
+async function handleAprovaPaymentReturn(){
+ const state=new URLSearchParams(location.search).get('mp');
+ if(!state||u.trial?.paid)return;
+ if(state==='failure'){alert('O pagamento não foi concluído. Você pode tentar novamente.');history.replaceState({},document.title,location.pathname);return;}
+ for(let i=0;i<6;i++){
+  if(await verifyAprovaPayment(false))return;
+  if(i<5)await new Promise(r=>setTimeout(r,2500));
+ }
+ if(state==='pending'||state==='success')alert('Recebemos o retorno do Mercado Pago, mas a confirmação ainda está pendente. Seu progresso está salvo; tente verificar novamente em alguns instantes.');
+}
+window.verifyAprovaPayment=()=>verifyAprovaPayment(true);
 function closePaywallPreview(){document.getElementById('paywall').hidden=true;}
 const guides={
  geral:{title:'Diagnóstico guiado',q:'Antes de estudar teoria, qual é a melhor primeira ação para descobrir como sua prova cobra o conteúdo?',choices:['Resolver uma questão diagnóstica','Ler todo o edital de uma vez','Comprar vários cursos','Memorizar resumos sem questões'],ok:'Resolver uma questão diagnóstica',why:'O diagnóstico revela padrão da prova e lacunas antes de distribuir seu tempo.',steps:['Resolva sem consultar','Corrija imediatamente','Classifique o erro','Transforme o erro em flashcard'],note:'Questão → correção → fonte → anotação → flashcard → revisão.',flash:[['Qual é o ciclo-base?','Questão → correção → fonte → anotação → flashcard → revisão'],['O que fazer com um erro?','Entender a causa e agendar revisão']]},
@@ -60,4 +95,4 @@ function uRenderSim(){document.getElementById('simulados').innerHTML=`<div class
 function generateUniversalPDF(){const g=currentGuide();if(!(window.jspdf&&window.jspdf.jsPDF))return alert('Gerador carregando. Tente novamente em alguns segundos.');const {jsPDF}=window.jspdf,doc=new jsPDF({orientation:'landscape'}),W=297,H=210,cx=W/2,cy=92;doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text('Mapa mental de revisão',12,14);doc.setFontSize(10);doc.text(targetName(),12,21);doc.roundedRect(cx-35,cy-12,70,24,5,5);doc.setFontSize(13);doc.text('CONTEÚDO ESTUDADO',cx,cy+1,{align:'center'});const branches=[['Regra-chave',g.note],['Fonte',g.steps.slice(0,2).join(' • ')],['Flashcards',g.flash.map(x=>x[0]).join(' • ')],['Erros',u.errors.slice(0,3).map(x=>x.text).join(' • ')||'Nenhum erro registrado'],['Minha anotação',u.notes[0]?.text||'Faça sua anotação no bloco guiado']];const pts=[[18,40],[18,135],[194,35],[194,120],[105,155]];branches.forEach((b,i)=>{const [x,y]=pts[i];doc.line(cx,cy,x+(i<2?55:0),y+16);doc.roundedRect(x,y,85,32,4,4);doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(b[0],x+4,y+6);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text(doc.splitTextToSize(b[1],77).slice(0,4),x+4,y+12);});doc.setFontSize(7);doc.text('Revisão gerada pela plataforma de estudo guiado.',12,H-7);doc.save('mapa-mental-revisao.pdf');}
 function uCountdown(){const e=document.getElementById('countdown'),d=udays();if(!e)return;const s=document.getElementById('smartStrip');if(d===null){e.innerHTML='DATA<br><small>A CONFIRMAR</small>';if(s)s.innerHTML=`<b>Plano automático:</b> ${targetName()} • aguardando data oficial da prova no edital.`;return;}const h=Math.max(0,Math.floor(((universalExam-new Date())%86400000)/3600000));e.innerHTML=d===0?'DIA DA PROVA':`${d} dias<br><small>${h}h restantes</small>`;if(s)s.innerHTML=`<b>Plano automático:</b> ${d} dias até ${targetName()} • data vinculada ao certame selecionado.`;}
 function uRenderAll(){universalExam=u.profile.examDate?new Date(u.profile.examDate+'T13:00:00-03:00'):null;const title=document.getElementById('areaTitle'),eye=document.getElementById('examEyebrow');if(title)title.textContent=u.profile.target||'Sua próxima aprovação';if(eye)eye.textContent=`${trackLabels[u.profile.track]||'PLANO INTELIGENTE'} • ESTUDO GUIADO`;uRenderToday();uRenderSchedule();uRenderContent();uRenderMaterial();uRenderQuestions();uRenderSim();uRenderReview();uRenderErrors();uCountdown();const p=document.getElementById('progressText');if(p)p.textContent=`Bloco atual: ${Math.min(6,u.stage+1)}/6 etapas`;}
-restoreTrialUniversal();uRenderAll();setInterval(uCountdown,60000);
+restoreTrialUniversal();uRenderAll();handleAprovaPaymentReturn();setInterval(uCountdown,60000);
