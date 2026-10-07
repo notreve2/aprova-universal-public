@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-10-06T20:05:03.371202+00:00",
-  "count": 91,
+  "updated_at": "2026-10-07T16:25:23.999136+00:00",
+  "count": 93,
   "scan_report": [
     {
       "banca": "FGV",
       "found": 37,
-      "new": 1,
+      "new": 2,
       "ok": true
     },
     {
@@ -29,61 +29,6 @@
     }
   ],
   "items": [
-    {
-      "id": "pcba-2026-inv-esc",
-      "title": "PC-BA — Investigador / Escrivão",
-      "banca": "Instituto AOCP",
-      "status": "Edital SAEB nº 02/2026 • prova 06/12/2026",
-      "category": "Policial",
-      "source_url": "https://noticias.institutoaocp.org.br/blog/pcba-divulga-edital-do-concurso-publico-para-delegado-escrivao-e-investigador/",
-      "official": true,
-      "exam_date": "2026-12-06",
-      "tags": [
-        "PC-BA",
-        "Polícia Civil da Bahia",
-        "Investigador",
-        "Escrivão",
-        "AOCP",
-        "SAEB 02/2026"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "pcba-2026-escrivao",
-      "title": "PC-BA — Escrivão de Polícia",
-      "banca": "Instituto AOCP",
-      "status": "Edital SAEB nº 02/2026 • prova 06/12/2026",
-      "category": "Policial",
-      "source_url": "https://noticias.institutoaocp.org.br/blog/pcba-divulga-edital-do-concurso-publico-para-delegado-escrivao-e-investigador/",
-      "official": true,
-      "exam_date": "2026-12-06",
-      "tags": [
-        "PC-BA",
-        "Polícia Civil da Bahia",
-        "Escrivão",
-        "AOCP",
-        "SAEB 02/2026"
-      ],
-      "last_seen": "2026-10-06"
-    },
-    {
-      "id": "pcba-2026-investigador",
-      "title": "PC-BA — Investigador de Polícia",
-      "banca": "Instituto AOCP",
-      "status": "Edital SAEB nº 02/2026 • prova 06/12/2026",
-      "category": "Policial",
-      "source_url": "https://noticias.institutoaocp.org.br/blog/pcba-divulga-edital-do-concurso-publico-para-delegado-escrivao-e-investigador/",
-      "official": true,
-      "exam_date": "2026-12-06",
-      "tags": [
-        "PC-BA",
-        "Polícia Civil da Bahia",
-        "Investigador",
-        "AOCP",
-        "SAEB 02/2026"
-      ],
-      "last_seen": "2026-10-06"
-    },
     {
       "id": "aocp-casan26",
       "title": "CASAN/SC — Concurso Público nº 002/2026",
@@ -496,7 +441,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-eqt-edital-2026.2-12.08.2026.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": "s 16h de 19/08/2026 prazo maximo para pagamento do boleto 20/08/2026 divulgacao dos locais da prova 21/09/2026 realizacao da prova de qualificacao tecnica geral 28/09/2026 realizacao da qualificacao tecnica geral para perito conta"
@@ -545,7 +490,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -561,7 +506,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -577,7 +522,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -593,7 +538,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -609,7 +554,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -625,7 +570,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital_cgm_-_retificado_2.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": " site 27/03/2023 12 envio dos titulos pelos candidatos (cargo: contador) 27/03/2023 - 10/04/2023 13 aplicacao da prova objetiva 02/04/2023 14 divulgacao do gabarito preliminar da prova objetiva 04/04/2023 15 interposicao de recursos contr"
@@ -642,7 +587,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -658,7 +603,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -674,7 +619,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -690,7 +635,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -706,7 +651,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -722,7 +667,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -734,13 +679,13 @@
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/pms2026",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2027-01-17",
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "last_seen": "2026-10-07",
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-prefeitura-de-salvador-2026-guarda-retificado-1_1.pdf",
+      "exam_date_confidence": "alias-propagated"
     },
     {
       "id": "fgv-c78302f30e",
@@ -750,13 +695,14 @@
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/pmsguarda2026",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2027-01-17",
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "last_seen": "2026-10-07",
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-prefeitura-de-salvador-2026-guarda-retificado-1_1.pdf",
+      "exam_date_confidence": "official-explicit-event",
+      "exam_event_context": "026 divulgacao da relacao candidato vaga 01/12/2026 publicacao dos locais de prova (cci) 11/01/2027 aplicacao da prova objetiva 17/01/2027 divulgacao do gabarito preliminar da prova objetiva 18/01/2027 prefeitura municipal do salvador edi"
     },
     {
       "id": "fgv-77c800b339",
@@ -770,7 +716,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -786,7 +732,23 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
+      "exam_date_source": null,
+      "exam_date_confidence": "unknown"
+    },
+    {
+      "id": "fgv-329ef45dce",
+      "title": "Concurso Público para a Procuradoria-Geral do Estado de Santa Catarina",
+      "banca": "FGV",
+      "status": "Em andamento",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pgesc22",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -794,17 +756,18 @@
       "id": "fgv-f7af564c59",
       "title": "Concurso Público para a Receita Federal do Brasil",
       "banca": "FGV",
-      "status": "Prova realizada / histórico",
+      "status": "Prova principal realizada / histórico",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/rfb22",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2023-03-19",
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "last_seen": "2026-10-07",
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma-previsto-rfb-final-19.09.pdf",
+      "exam_date_confidence": "official-explicit-event",
+      "exam_event_context": "r de inscricao 09/02/2023 - 10/02/2023 10 publicacao da relacao definitiva de inscricao 24/02/23 11 aplicacao da prova objetiva e discursiva 19/03/23 12 publicacao do gabarito preliminar 21/03/23 13 interposicao de recursos contra o gabarito prelimi"
     },
     {
       "id": "fgv-398790894a",
@@ -834,7 +797,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -850,7 +813,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-consolidado-01.10-minuta.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -867,7 +830,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma-para-publicacao-10.09.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -884,7 +847,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -900,7 +863,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -908,17 +871,18 @@
       "id": "fgv-59f86efecf",
       "title": "Concurso Público para o Corpo de Bombeiros Militar do Estado do Rio de Janeiro",
       "banca": "FGV",
-      "status": "Prova realizada / histórico",
+      "status": "Prova principal realizada / histórico",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/cbmerj22",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2022-11-27",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital_retificado_3_1.pdf",
+      "exam_date_confidence": "official-explicit-event",
+      "exam_event_context": "is para a realizacao das provas 07/11/2022 11 publicacao dos locais de provas no site 21/11/2022 12 aplicacao da prova objetiva 27/11/2022 13 divulgacao do gabarito preliminar da prova objetiva 28/11/2022 14 interposicao de recursos contr"
     },
     {
       "id": "fgv-37a4b75e30",
@@ -932,7 +896,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -948,7 +912,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -964,7 +928,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -980,7 +944,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -996,7 +960,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -1012,7 +976,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -1028,7 +992,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/sei_9998416_edital_consolidado.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1037,17 +1001,18 @@
       "id": "fgv-e2a0a1abd0",
       "title": "Conselho Federal de Contabilidade (CFC) - Exame de Suficiência nº 2/2026",
       "banca": "FGV",
-      "status": "Prova realizada / histórico",
+      "status": "Prova principal realizada / histórico",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/exames/cfc/2026.2",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-09-21",
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "last_seen": "2026-10-07",
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-edital-2026.2-08.07.2026.pdf",
+      "exam_date_confidence": "official-explicit-event",
+      "exam_event_context": "o) 07/08/2026 prazo maximo para pagamento do boleto 10/08/2026 divulgacao dos locais da prova (cci) 21/09/2026 aplicacao da prova 27/09/2026 divulgacao do gabarito preliminar da prova objetiva 28/09/2026 prazo para interposicao d"
     },
     {
       "id": "fgv-df996480b8",
@@ -1061,7 +1026,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-edital-2026.3-05.10.2026.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1158,7 +1123,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma_enam-2026.2.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1175,7 +1140,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/minuta-edital-enac-2026.2-27.08.26-versao-final.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1184,33 +1149,35 @@
       "id": "fgv-mprj-promotor26",
       "title": "MPRJ — Promotor de Justiça Substituto",
       "banca": "FGV",
-      "status": "Prova realizada / histórico",
+      "status": "Prova principal realizada / histórico",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/mprjpromotor2026",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-07-06",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/concursos/mprjpromotor2026",
+      "exam_date_confidence": "official-explicit-event",
+      "exam_event_context": "/2026 consulta individual - resultado preliminar da heteroidentificacao 06/07/2026 aviso - local de aplicacao das provas discursivas especializadas 06/07/2026 relacao de candidatos negros e indigenas que nao compareceram perante a comissao de heteroidentific"
     },
     {
       "id": "fgv-navbrasil26",
       "title": "NAV Brasil",
       "banca": "FGV",
-      "status": "Em andamento",
+      "status": "Prova principal realizada / histórico",
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos/navbrasil26",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2026-07-27",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma-nav-brasil_retificado_10_09.pdf",
+      "exam_date_confidence": "official-explicit-event",
+      "exam_event_context": "ublicacao do edital de homologacao definitiva das inscricoes 24/06/2026 12 publicacao dos locais de aplicacao da prova objetiva 27/07/2026 nav brasil 2 13 aplicacao da prova objetiva 02/08/2026 14 divulgacao do gabarito preliminar da prov"
     },
     {
       "id": "fgv-pcpr26",
@@ -1268,13 +1235,30 @@
       "category": "Concurso / exame",
       "source_url": "https://conhecimento.fgv.br/concursos",
       "official": true,
-      "exam_date": null,
+      "exam_date": "2027-01-17",
       "tags": [
         "FGV"
       ],
       "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-prefeitura-de-salvador-2026-guarda-retificado-1_1.pdf",
+      "exam_date_confidence": "alias-propagated"
+    },
+    {
+      "id": "fgv-d3a864a951",
+      "title": "Processo Seletivo Simplificado para a Secretaria de Estado de Justiça e Segurança Pública - SEJUSP",
+      "banca": "FGV",
+      "status": "Prova principal realizada / histórico",
+      "category": "Concurso / exame",
+      "source_url": "https://conhecimento.fgv.br/concursos/pss.sejusp22",
+      "official": true,
+      "exam_date": "2022-10-09",
+      "tags": [
+        "FGV"
+      ],
+      "last_seen": "2026-10-07",
+      "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital_retificado_5.pdf",
+      "exam_date_confidence": "official-explicit-event",
+      "exam_event_context": "os homologados 20/09/2022 prova objetiva 1 1 publicacao dos locais de provas no site 03/10/2022 1 2 aplicacao da prova objetiva 09/10/2022 1 3 gabarito preliminar da prova objetiva 10/10/2022 1 4 interposicao de recursos contra o gabarito"
     },
     {
       "id": "fgv-4fa47911b7",
@@ -1416,7 +1400,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-06",
+      "last_seen": "2026-10-07",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -1453,22 +1437,6 @@
       "exam_date_confidence": "official-curated"
     },
     {
-      "id": "quad-sedesdf26",
-      "title": "SEDES/DF — Edital nº 01/2026",
-      "banca": "Quadrix",
-      "status": "Em andamento",
-      "category": "Concurso público",
-      "source_url": "https://quadrix.org.br/informacoes/3056/",
-      "official": true,
-      "exam_date": null,
-      "tags": [
-        "Quadrix"
-      ],
-      "last_seen": "2026-10-06",
-      "exam_date_source": null,
-      "exam_date_confidence": "unknown"
-    },
-    {
       "id": "oab-49",
       "title": "49º Exame de Ordem Unificado",
       "banca": "FGV/OAB",
@@ -1501,12 +1469,83 @@
         "FGV",
         "Exame de Ordem"
       ]
+    },
+    {
+      "id": "pcba-2026-escrivao",
+      "title": "PC-BA — Escrivão de Polícia",
+      "banca": "Instituto AOCP",
+      "status": "Edital SAEB nº 02/2026 • prova 06/12/2026",
+      "category": "Policial",
+      "source_url": "https://noticias.institutoaocp.org.br/blog/pcba-divulga-edital-do-concurso-publico-para-delegado-escrivao-e-investigador/",
+      "official": true,
+      "exam_date": "2026-12-06",
+      "tags": [
+        "PC-BA",
+        "Polícia Civil da Bahia",
+        "Escrivão",
+        "AOCP",
+        "SAEB 02/2026"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "pcba-2026-inv-esc",
+      "title": "PC-BA — Investigador / Escrivão",
+      "banca": "Instituto AOCP",
+      "status": "Edital SAEB nº 02/2026 • prova 06/12/2026",
+      "category": "Policial",
+      "source_url": "https://noticias.institutoaocp.org.br/blog/pcba-divulga-edital-do-concurso-publico-para-delegado-escrivao-e-investigador/",
+      "official": true,
+      "exam_date": "2026-12-06",
+      "tags": [
+        "PC-BA",
+        "Polícia Civil da Bahia",
+        "Investigador",
+        "Escrivão",
+        "AOCP",
+        "SAEB 02/2026"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "pcba-2026-investigador",
+      "title": "PC-BA — Investigador de Polícia",
+      "banca": "Instituto AOCP",
+      "status": "Edital SAEB nº 02/2026 • prova 06/12/2026",
+      "category": "Policial",
+      "source_url": "https://noticias.institutoaocp.org.br/blog/pcba-divulga-edital-do-concurso-publico-para-delegado-escrivao-e-investigador/",
+      "official": true,
+      "exam_date": "2026-12-06",
+      "tags": [
+        "PC-BA",
+        "Polícia Civil da Bahia",
+        "Investigador",
+        "AOCP",
+        "SAEB 02/2026"
+      ],
+      "last_seen": "2026-10-06"
+    },
+    {
+      "id": "quad-sedesdf26",
+      "title": "SEDES/DF — Edital nº 01/2026",
+      "banca": "Quadrix",
+      "status": "Em andamento",
+      "category": "Concurso público",
+      "source_url": "https://quadrix.org.br/informacoes/3056/",
+      "official": true,
+      "exam_date": null,
+      "tags": [
+        "Quadrix"
+      ],
+      "last_seen": "2026-10-06",
+      "exam_date_source": null,
+      "exam_date_confidence": "unknown"
     }
   ],
   "date_enrichment": {
-    "run_at": "2026-10-06T20:05:03.371202+00:00",
-    "dated": 6,
-    "unknown": 83,
+    "run_at": "2026-10-07T16:25:23.999136+00:00",
+    "dated": 30,
+    "unknown": 63,
     "method": "strict-explicit-event"
   }
 }
