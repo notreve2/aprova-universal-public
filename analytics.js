@@ -1,0 +1,8 @@
+const APROVA_ANALYTICS_API='https://aprova-analytics-production.up.railway.app';
+const ANALYTICS_SESSION_KEY='aprova-analytics-session-v1';
+const ANALYTICS_TOUCH_KEY='aprova-analytics-touch-v1';
+function aprovaSessionId(){let id=localStorage.getItem(ANALYTICS_SESSION_KEY);if(!id){id=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(36).slice(2)));localStorage.setItem(ANALYTICS_SESSION_KEY,id);}return id;}
+function aprovaTouch(){let t={};try{t=JSON.parse(localStorage.getItem(ANALYTICS_TOUCH_KEY)||'{}')}catch{}const q=new URLSearchParams(location.search);const now={utm_source:q.get('utm_source')||'',utm_medium:q.get('utm_medium')||'',utm_campaign:q.get('utm_campaign')||'',utm_content:q.get('utm_content')||'',utm_term:q.get('utm_term')||'',referrer:document.referrer||''};if(!t.utm_source&&!t.referrer){t=now;localStorage.setItem(ANALYTICS_TOUCH_KEY,JSON.stringify(t));}return t;}
+function aprovaDevice(){const ua=navigator.userAgent||'';if(/iPad|Tablet/i.test(ua))return'tablet';if(/Mobi|Android|iPhone/i.test(ua))return'mobile';return'desktop';}
+window.aprovaAnalytics=function(event,extra={}){try{const t=aprovaTouch();const body={event,session_id:aprovaSessionId(),path:location.pathname,device:aprovaDevice(),...t,...extra};fetch(APROVA_ANALYTICS_API+'/event',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true}).catch(()=>{});}catch(e){}};
+document.addEventListener('DOMContentLoaded',()=>window.aprovaAnalytics('page_view'));

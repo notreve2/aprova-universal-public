@@ -18,13 +18,15 @@ function restoreTrialUniversal(){if(u.sessionLoggedOut)return;if(!u.trial.starte
 const PAYMENT_API='https://aprova-payments-production.up.railway.app';
 async function goToCheckout(mode='card'){
  try{
-  const price=mode==='pix'?179.90:199.90;
+  const price=mode==='pix'?179.90:199.90,ident={name:u.profile?.name||'',email:u.profile?.email||'',phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent};
   if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:'Aprova - acesso completo',content_category:mode,value:price,currency:'BRL'});
-  const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,email:u.profile?.email||'',name:u.profile?.name||''})});
+  if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_start',{...ident,mode,value:price});
+  const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,email:u.profile?.email||'',name:u.profile?.name||'',phone:u.profile?.phone||''})});
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.checkout_url)throw new Error(data.error||'Checkout indisponível.');
   localStorage.setItem('aprova-pending-order',data.order_id||'');
   localStorage.setItem('aprova-pending-mode',mode);
+  if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_created',{...ident,mode,value:price,order_id:data.order_id||''});
   window.location.href=data.checkout_url;
  }catch(err){alert((err&&err.message)||'Não foi possível abrir o Mercado Pago agora. Tente novamente em instantes.');}
 }
@@ -35,10 +37,12 @@ async function verifyAprovaPayment(showPending=false){
   const res=await fetch(PAYMENT_API+'/order?id='+encodeURIComponent(orderId),{cache:'no-store'});
   const data=await res.json().catch(()=>({}));
   if(data.approved){
+   const pendingMode=localStorage.getItem('aprova-pending-mode')||'';
    u.trial=u.trial||{};u.trial.paid=true;u.trial.paidAt=Date.now();u.trial.orderId=orderId;usave();
    localStorage.removeItem('aprova-pending-order');localStorage.removeItem('aprova-pending-mode');
    const pw=document.getElementById('paywall');if(pw)pw.hidden=true;
    if(typeof window.aprovaTrack==='function')window.aprovaTrack('Purchase',{content_name:'Aprova - acesso completo',value:Number(data.total_amount||0),currency:'BRL'});
+   if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('purchase',{name:u.profile?.name||'',email:u.profile?.email||'',phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent,mode:pendingMode,value:Number(data.total_amount||0),order_id:orderId});
    history.replaceState({},document.title,location.pathname);
    alert('Pagamento confirmado. Seu acesso completo foi liberado.');
    return true;
