@@ -52,3 +52,14 @@
 .welcome-final{font-weight:800;color:#173c68!important}
 .trial-welcome-modal .trial-start{margin-top:10px;font-size:16px;padding:15px 18px}
 @media(max-width:600px){.trial-welcome-modal{padding:24px 20px}.trial-welcome-modal h2{font-size:27px}.welcome-icon{font-size:42px}}
+
+/* Feedback cognitivo v4 — acerto, erro, percentual e fundamentação */
+.choice:disabled{cursor:default;opacity:1}
+.choice.choice-correct{border-color:#15905b!important;background:#ecfbf3!important;color:#0f6843!important;box-shadow:0 0 0 2px #15905b18 inset}
+.choice.choice-wrong{border-color:#d85757!important;background:#fff1f1!important;color:#9b2f2f!important}
+.choice.choice-locked{opacity:.62;background:#f7f9fb}
+.instant-result{margin:16px 0;border-radius:18px;padding:18px;border:1px solid #dbe5ef;animation:resultPop .26s ease-out}
+.instant-result h3{font-size:20px;margin:0 0 6px}.instant-result.instant-ok{background:linear-gradient(145deg,#effff6,#ffffff);border-color:#9ee0bd}.instant-result.instant-bad{background:linear-gradient(145deg,#fff6f6,#ffffff);border-color:#efb5b5}
+.motivation-line{font-weight:800;line-height:1.45;color:#29435f;margin:4px 0 14px}.performance-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 8px}.performance-strip>div{background:#fff;border:1px solid #dce6ef;border-radius:14px;text-align:center;padding:11px 7px}.performance-strip strong{display:block;font-size:22px;color:#103760}.performance-strip span{display:block;font-size:11px;font-weight:800;color:#6e8094;margin-top:2px}.accuracy-bar{height:8px;border-radius:999px;background:#e7edf4;overflow:hidden;margin:8px 0 16px}.accuracy-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#1f6feb,#19a86b);transition:width .35s ease}.mini-explain{background:#fff;border-radius:12px;padding:12px 14px;border-left:4px solid #19a86b;line-height:1.5}.legal-feedback-grid,.nonlegal-feedback-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.legal-box,.memory-tip{background:#fff;border:1px solid #dce5ef;border-radius:14px;padding:13px;line-height:1.45}.legal-box span,.memory-tip span{display:block;font-size:11px;font-weight:950;letter-spacing:.035em;color:#215b9a;margin-bottom:6px}.legal-box b{display:block;color:#102f52}.legal-box p,.memory-tip p{margin:0;color:#3d526a}.instant-bad .legal-box:nth-child(4){border-color:#edc27c;background:#fffaf0}.instant-result .answer-feedback{margin-top:12px}.center{text-align:center}
+@keyframes resultPop{from{transform:scale(.985);opacity:.55}to{transform:scale(1);opacity:1}}
+@media(max-width:640px){.instant-result{padding:15px}.performance-strip strong{font-size:20px}.legal-feedback-grid,.nonlegal-feedback-grid{grid-template-columns:1fr}.performance-strip>div{padding:9px 4px}.performance-strip span{font-size:10px}}
