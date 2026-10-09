@@ -11,20 +11,33 @@ function isUpcomingCatalogItem(x){
  if(x.public_hidden) return false;
  const today=new Date(); today.setHours(0,0,0,0);
  const status=norm(x.status||'');
- if(status.includes('historico')||status.includes('realizada')||status.includes('encerrado')) return false;
+ if(/historico|realizada|encerrado|finalizado|homologado|prova realizada/.test(status)) return false;
+ // Regra principal: havendo data oficial da prova, qualquer prova anterior a hoje sai do catálogo público.
  if(x.exam_date){
    const d=new Date(x.exam_date+'T00:00:00');
-   if(!Number.isNaN(d.getTime()) && d < today) return false;
-   return true;
+   if(Number.isNaN(d.getTime())) return false;
+   return d>=today;
  }
- // Sem data: só mantém certames atuais/2026+ ou explicitamente abertos/publicados.
+ // Sem data de prova, só permanece se estiver explicitamente ativo e tiver sido visto recentemente.
  const blob=norm([x.id,x.title,x.source_url].join(' '));
  const oldOnly=/(?:^|[^0-9])(2022|2023|2024|2025)(?:[^0-9]|$)/.test(blob) && !/(?:^|[^0-9])(2026|2027)(?:[^0-9]|$)/.test(blob);
  if(oldOnly) return false;
- if(/inscricoes abertas|edital publicado|calendario publicado|previsto|iminente/.test(status)) return true;
- return false;
+ const active=/inscricoes abertas|edital publicado|calendario publicado|previsto|iminente|em andamento/.test(status);
+ if(!active) return false;
+ if(x.last_seen){
+   const seen=new Date(x.last_seen+'T00:00:00');
+   if(!Number.isNaN(seen.getTime())){
+     const ageDays=(today-seen)/86400000;
+     if(ageDays>45) return false;
+   }
+ }
+ return true;
 }
-function publicCatalogItems(){return aprovaCatalog.items.filter(isUpcomingCatalogItem);}
+function publicCatalogItems(){return aprovaCatalog.items.filter(isUpcomingCatalogItem).sort((a,b)=>{
+ const da=a.exam_date?new Date(a.exam_date+'T00:00:00').getTime():Number.MAX_SAFE_INTEGER;
+ const db=b.exam_date?new Date(b.exam_date+'T00:00:00').getTime():Number.MAX_SAFE_INTEGER;
+ return da-db||String(a.title||'').localeCompare(String(b.title||''),'pt-BR');
+});}
 function norm(s){return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
 function enrichTargetList(){const dl=document.getElementById('popularTargets'); if(!dl)return; const existing=new Set([...dl.options].map(o=>o.value)); publicCatalogItems().slice(0,150).forEach(x=>{if(!existing.has(x.title)){const o=document.createElement('option');o.value=x.title;dl.appendChild(o);}});}
 function selectCatalogItem(id){const x=aprovaCatalog.items.find(i=>i.id===id);if(!x)return; u.profile=u.profile||{};u.profile.target=x.title;u.profile.banca=x.banca;u.profile.catalogId=x.id;if(x.exam_date){u.profile.examDate=x.exam_date;universalExam=new Date(x.exam_date+'T13:00:00-03:00');}usave();uRenderAll();document.querySelector('[data-tab="hoje"]')?.click();}
