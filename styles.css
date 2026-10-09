@@ -110,3 +110,6 @@
 .banca-reading-tip{margin-top:16px;border:1px solid #e2e8f0;border-radius:14px;padding:12px 14px;background:#fafcff}
 .banca-reading-tip summary{cursor:pointer;font-weight:800;color:#173b67}
 @media(max-width:760px){.official-question-frame{height:58vh;min-height:420px}.course-gate-modal,.study-setup-modal{width:calc(100vw - 28px)}.course-quick-choices{max-height:190px;overflow:auto}}
+
+.course-bank-lock{margin:12px 0 16px;padding:12px 14px;border:1px solid #b9ddc7;border-left:5px solid #18834d;border-radius:14px;background:#f0fbf4;color:#17364a;line-height:1.45}.course-bank-lock small{display:block;margin-top:6px;color:#587084}.course-bank-lock b{color:#0f5132}
+.exam-structure-card{display:grid;gap:6px;margin:0 0 18px;padding:14px 16px;border-radius:16px;border:1px solid #bcd3eb;background:#f3f8ff;color:#17364a}.exam-structure-card strong{font-size:17px;color:#123e70}.exam-structure-card p{margin:0}.exam-structure-card small{color:#60758d}.exam-structure-card.pending{border-style:dashed;background:#fafcff}
