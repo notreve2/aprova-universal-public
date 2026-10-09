@@ -94,8 +94,9 @@ window.startFreeTrial=function(){
  u.profile={...old,track,target:old.target||trackLabels[track],area:track==='oab2'?'constitucional':(old.area||'geral'),hours:Number(old.hours||2),name:old.name||'',email:old.email||'',phone:old.phone||'',marketingConsent:!!old.marketingConsent,banca:old.banca||''};
  u.sessionLoggedOut=false;u.trial.startedAt=u.trial.startedAt||Date.now();u.trial.previewStartedAt=u.trial.previewStartedAt||Date.now();u.trial.mode='first-stage';
  if(firstPreview){u.trial.firstStageCompleted=false;u.trial.leadCaptured=!!old.phone;ae.day={};if(typeof mastery!=='undefined'&&mastery?.oab)mastery.oab.stage=0;if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('StartTrialPreview',{content_name:'Aprova - inicio do teste',content_category:track});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_preview_start',{track,target:u.profile.target});}
- usave();aesave();const gate=document.getElementById('trialGate');if(gate)gate.hidden=true;uRenderAll();if(typeof renderMasterAll==='function')renderMasterAll();window.scrollTo({top:0,behavior:'smooth'});
+ usave();aesave();const gate=document.getElementById('trialGate');if(gate)gate.hidden=true;uRenderAll();if(typeof renderMasterAll==='function')renderMasterAll();const welcome=document.getElementById('trialWelcome');if(welcome)welcome.hidden=false;window.scrollTo({top:0,behavior:'smooth'});
 };
+window.continueTrialWelcome=function(){const welcome=document.getElementById('trialWelcome');if(welcome)welcome.hidden=true;if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_welcome_continue',{track:u.profile?.track||'',target:u.profile?.target||''});window.scrollTo({top:0,behavior:'smooth'});};
 
 window.requireTrialLeadCapture=function(flow,nextStage){
  if(u.trial?.paid||u.trial?.leadCaptured)return false;

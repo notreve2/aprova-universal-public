@@ -42,3 +42,13 @@
 @media(max-width:600px){.trial-launch{padding:28px 22px}.launch-start{font-size:18px}.plan-choice-grid{grid-template-columns:1fr}.plan-card{min-height:125px}.plan-card strong{font-size:28px}}
 .trial-modal.trial-launch{background:transparent;box-shadow:none;padding:0;overflow:visible;width:min(360px,100%)}
 .trial-modal.trial-launch .launch-start{margin:0;box-shadow:0 18px 45px #0005}
+
+/* Funnel v3.1 — mensagem de ativação após iniciar o teste */
+.trial-welcome-modal{width:min(560px,100%);text-align:center;padding:30px 28px}
+.welcome-icon{font-size:48px;line-height:1;margin:12px 0 8px}
+.trial-welcome-modal h2{font-size:30px;line-height:1.13;margin:10px 0 14px;color:#102b4e}
+.trial-welcome-modal>p{font-size:16px;line-height:1.55;color:#51657c}
+.welcome-highlight{margin:18px 0;padding:15px 16px;border-radius:16px;background:linear-gradient(135deg,#eef7ff,#effbf5);border:1px solid #d5e8f0;color:#21496c;font-weight:850;line-height:1.45}
+.welcome-final{font-weight:800;color:#173c68!important}
+.trial-welcome-modal .trial-start{margin-top:10px;font-size:16px;padding:15px 18px}
+@media(max-width:600px){.trial-welcome-modal{padding:24px 20px}.trial-welcome-modal h2{font-size:27px}.welcome-icon{font-size:42px}}
