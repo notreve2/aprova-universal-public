@@ -5,10 +5,20 @@ const DETAILED_PUBLIC_COURSE_IDS=new Set([
  'pcba-2026-investigador',
  'pcba-2026-escrivao'
 ]);
+function loadAprovaScript(src){
+ return new Promise((resolve,reject)=>{
+  const found=[...document.scripts].find(s=>s.src&&s.src.includes(src.split('?')[0]));
+  if(found){if(found.dataset.aprovaLoaded==='1')return resolve();found.addEventListener('load',resolve,{once:true});found.addEventListener('error',reject,{once:true});return;}
+  const s=document.createElement('script');s.src=src;s.async=false;s.addEventListener('load',()=>{s.dataset.aprovaLoaded='1';resolve();},{once:true});s.addEventListener('error',reject,{once:true});document.head.appendChild(s);
+ });
+}
 async function loadAprovaCatalog(){
  try{
+  await loadAprovaScript('validated_course_data.js?v=1');
+  if(window.APROVA_VALIDATED_COURSE_IDS)window.APROVA_VALIDATED_COURSE_IDS.forEach(id=>DETAILED_PUBLIC_COURSE_IDS.add(id));
   const [c,s]=await Promise.all([fetch('data/catalog.json?ts='+Date.now()),fetch('data/sources.json?ts='+Date.now())]);
-  const cj=await c.json(),sj=await s.json(); aprovaCatalog.items=cj.items||[]; aprovaCatalog.sources=sj.sources||[]; aprovaCatalog.loaded=true;
+  const cj=await c.json(),sj=await s.json(),curated=Array.isArray(window.APROVA_CURATED_COURSES)?window.APROVA_CURATED_COURSES:[],curatedIds=new Set(curated.map(x=>x.id));
+  aprovaCatalog.items=[...curated,...(cj.items||[]).filter(x=>!curatedIds.has(x.id))];aprovaCatalog.sources=sj.sources||[];aprovaCatalog.loaded=true;
   enrichTargetList(); if(typeof populateTrialCourseOptions==='function')populateTrialCourseOptions(); if(typeof syncOfficialExamDate==='function'&&syncOfficialExamDate())uRenderAll(); renderCatalog();
  }catch(e){console.warn('Catálogo indisponível',e); renderCatalog(true);}
 }
@@ -17,6 +27,8 @@ function isUpcomingCatalogItem(x){
  if(x.public_hidden) return false;
  // Fail-closed: o robô pode descobrir novos editais, mas eles só aparecem ao aluno depois de cargo, matérias e estrutura serem validados no Aprova.
  if(!DETAILED_PUBLIC_COURSE_IDS.has(x.id)) return false;
+ // Cursos curados adicionais só entram quando o motor de cargos/disciplinas já terminou de carregar.
+ if(window.APROVA_VALIDATED_COURSE_IDS?.has(x.id)&&!window.APROVA_VALIDATED_ENGINE_READY)return false;
  if(['aocp-saebba26','pcba-2026-inv-esc','fgv-37a4b75e30','fgv-cpnu2','fgv-pcpr26','fgv-seplagrj26','fgv-tjap-juiz26','fgv-ebserh26','aocp-sadpe-educ26','quad-sedesdf26','fgv-tjpe-juiz26'].includes(x.id)) return false;
  const today=new Date(); today.setHours(0,0,0,0);
  const status=norm(x.status||'');
@@ -70,4 +82,13 @@ function renderCatalog(failed=false){const el=document.getElementById('catalogo'
  const visible=publicCatalogItems();const bancas=[...new Set(visible.map(x=>x.banca))].sort();
  el.innerHTML=`<div class="card"><div class="catalog-head"><div><h2>Catálogo de provas e concursos</h2><p class="muted">Pesquise por órgão, cargo, prova ou banca. Só liberamos cursos cuja estrutura já foi validada no edital.</p></div><div class="kpi">${visible.length}<small>cursos validados</small></div></div><div class="catalog-tools"><input id="catalogSearch" type="search" placeholder="Ex.: Polícia Civil, Guarda Municipal..." oninput="filterCatalog()"><select id="catalogBanca" onchange="filterCatalog()"><option value="">Todas as bancas</option>${bancas.map(b=>`<option>${b}</option>`).join('')}</select></div><div class="source-strip">${aprovaCatalog.sources.length} fontes oficiais monitoradas • novos concursos ficam ocultos até validarmos cargo, matérias e estrutura</div><div id="catalogList"></div></div>`;filterCatalog();}
 function filterCatalog(){const q=norm(document.getElementById('catalogSearch')?.value),b=document.getElementById('catalogBanca')?.value||'';const list=publicCatalogItems().filter(x=>(!b||x.banca===b)&&(!q||norm([x.title,x.banca,x.status,...(x.tags||[])].join(' ')).includes(q))).slice(0,100);const el=document.getElementById('catalogList');if(!el)return;el.innerHTML=list.length?list.map(x=>{const dateLabel=x.exam_date?`Prova: ${new Date(x.exam_date+'T12:00:00').toLocaleDateString('pt-BR')}`:'Data da prova: aguardando publicação oficial';return `<article class="catalog-card"><div><span class="pill">${x.banca}</span><h3>${x.title}</h3><p class="muted">${dateLabel} • ${x.status}</p></div><div class="catalog-actions"><button class="btn good" onclick="selectCatalogItem('${x.id}')">Estudar este</button><a class="btn secondary linkbtn" href="${x.source_url}" target="_blank" rel="noopener">Fonte oficial ↗</a></div></article>`}).join(''):'<p class="muted">Nenhum curso já validado encontrado com esse filtro.</p>';}
+async function bootValidatedCourseEngine(){
+ try{
+  await loadAprovaScript('validated_course_engine.js?v=1');window.APROVA_VALIDATED_ENGINE_READY=true;
+  await loadAprovaScript('exam_guard.js?v=1');
+  if(typeof populateTrialCourseOptions==='function')populateTrialCourseOptions();
+  if(aprovaCatalog.loaded){enrichTargetList();renderCatalog();}
+ }catch(e){console.warn('Perfis adicionais validados não puderam ser carregados',e);}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootValidatedCourseEngine,{once:true});else bootValidatedCourseEngine();
 loadAprovaCatalog();
