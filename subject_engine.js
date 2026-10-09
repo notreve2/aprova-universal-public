@@ -67,9 +67,26 @@ function engineDayKey(){return typeof localDateKey==='function'?localDateKey():n
 function ensureDay(){const today=engineDayKey();if(ae.day.date!==today||!Array.isArray(ae.day.queue)){ae.day={date:today,queue:weightedQueue(),index:0,stage:0,maxStageIndex:0,answer:null,learned:'',learnedScore:null,startedAt:Date.now(),startChosen:false,startSubjectKey:'',sessionStats:{correct:0,total:0,streak:0,bestStreak:0},sessionSeen:{}};aesave();}const seq=[0,1,3,4,5,6,7,8,9,10],idx=Math.max(0,seq.indexOf(ae.day.stage||0));if(!Number.isInteger(ae.day.maxStageIndex))ae.day.maxStageIndex=idx;else ae.day.maxStageIndex=Math.max(ae.day.maxStageIndex,idx);ae.day.answers=ae.day.answers||{};ae.day.results=ae.day.results||{};ae.day.sessionStats=ae.day.sessionStats||{correct:0,total:0,streak:0,bestStreak:0};ae.day.sessionSeen=ae.day.sessionSeen||{};return ae.day;}
 function currentSubjectKey(){const d=ensureDay();return d.queue[Math.min(d.index,d.queue.length-1)]||'portugues';}
 function currentSubject(){return SUBJECTS[currentSubjectKey()]||SUBJECTS.portugues;}
-function startChoiceKeys(){const d=ensureDay();return [...new Set(d.queue.slice(d.index))].filter(k=>SUBJECTS[k]);}
-window.chooseStartSubject=function(k){const d=ensureDay();if(d.index!==0||Number(d.stage||0)!==0||!SUBJECTS[k])return;const pos=d.queue.indexOf(k,d.index);if(pos<0)return;const picked=d.queue.splice(pos,1)[0];d.queue.splice(d.index,0,picked);d.startChosen=true;d.startSubjectKey=picked;aesave();uRenderAll();};
-function startSubjectChooser(){const d=ensureDay();if(d.index!==0||Number(d.stage||0)!==0)return'';const keys=startChoiceKeys(),active=currentSubjectKey();return `<div class="start-picker"><div class="start-picker-title"><span>1</span><div><b>Por qual matéria você quer começar?</b><small>O sistema definiu o conteúdo do dia. Você escolhe apenas a primeira matéria.</small></div></div><div class="start-choice-grid">${keys.map((k,i)=>{const x=SUBJECTS[k],selected=k===active;return `<button class="start-choice ${selected?'selected':''}" onclick="chooseStartSubject('${k}')"><span class="queue-dot" style="background:${x.color}"></span><span><b>${x.name}</b><small>${x.minutes} min${!d.startChosen&&i===0?' • recomendado':''}</small></span>${selected?'<strong>COMEÇAR</strong>':''}</button>`}).join('')}</div></div>`;}
+function startChoiceKeys(){
+ const d=ensureDay();
+ if(!u?.trial?.paid&&d.index===0&&Number(d.stage||0)===0&&!d.startChosen){
+  const ranked=Object.entries(weightsForUser()).filter(([k,v])=>SUBJECTS[k]&&v>0).sort((a,b)=>b[1]-a[1]).map(([k])=>k);
+  const keys=ranked.filter(k=>k!=='portugues').slice(0,5);
+  if(ranked.includes('portugues'))keys.push('portugues');
+  return keys;
+ }
+ return [...new Set(d.queue.slice(d.index))].filter(k=>SUBJECTS[k]);
+}
+window.chooseStartSubject=function(k){
+ const d=ensureDay();if(d.index!==0||Number(d.stage||0)!==0||!SUBJECTS[k])return;
+ if(!u?.trial?.paid){d.queue=[k];d.index=0;}
+ else{const pos=d.queue.indexOf(k,d.index);if(pos<0)return;const picked=d.queue.splice(pos,1)[0];d.queue.splice(d.index,0,picked);}
+ d.startChosen=true;d.startSubjectKey=k;d.masterStage=0;d.answer=null;d.answers={};d.results={};d.reinforcementAnswers={};aesave();uRenderAll();window.scrollTo({top:0,behavior:'smooth'});
+};
+function startSubjectChooser(){
+ const d=ensureDay();if(d.index!==0||Number(d.stage||0)!==0||d.startChosen)return'';const keys=startChoiceKeys();
+ return `<div class="start-picker"><div class="start-picker-title"><span>1</span><div><b>Escolha a matéria para iniciar</b><small>Comece por uma matéria com a qual você tenha mais afinidade. Português continua disponível, mas não é selecionado automaticamente.</small></div></div><div class="start-choice-grid">${keys.map((k,i)=>{const x=SUBJECTS[k],hint=k==='portugues'?'disponível se você preferir':i===0?'boa para começar':'escolha livre';return `<button class="start-choice" onclick="chooseStartSubject('${k}')"><span class="queue-dot" style="background:${x.color}"></span><span><b>${x.name}</b><small>${hint}</small></span><strong>INICIAR</strong></button>`}).join('')}</div></div>`;
+}
 function updatePerf(ok){const k=currentSubjectKey(),p=ae.performance[k]||{correct:0,total:0};p.total++;if(ok)p.correct++;ae.performance[k]=p;aesave();}
 const LEGAL_Q_META={
  constitucional:[
