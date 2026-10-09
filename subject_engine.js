@@ -45,7 +45,53 @@ const SUBJECTS={
   {q:'Qual é a melhor forma de revisar atualidades?',choices:['ligar fato, contexto, causa e consequência','decorar apenas datas','memorizar manchetes','ler apenas opinião'],ok:0,why:'Questões de atualidades exigem compreensão contextual.'},
   {q:'Uma notícia ganha confiabilidade quando:',choices:['tem fonte identificável e verificável','circula muito em redes sociais','tem título chamativo','não apresenta data'],ok:0,why:'Confiabilidade depende de origem verificável, contexto, data e confirmação.'}
  ],flash:[['Como memorizar atualidades?','Fato + contexto + causa + consequência.'],['O que aumenta a confiabilidade?','Fonte identificável e verificável.']]}
+  ,constitucionalcivil:{name:'Noções de Direito Constitucional e Direito Civil',color:'#90CAF9',icon:'🔵',minutes:25,summary:'Integre os fundamentos constitucionais cobrados no edital às noções civis exigidas para a atuação pública.',keywords:['constituição','direitos','civil','pessoa','responsabilidade'],questions:[{q:'A dignidade da pessoa humana é, na Constituição Federal:',choices:['fundamento da República','objetivo apenas econômico','competência municipal','regra transitória'],ok:0,why:'A dignidade da pessoa humana é fundamento da República, prevista no art. 1º, III, da CF.'},{q:'A personalidade civil da pessoa começa, em regra:',choices:['com o nascimento com vida','com a maioridade','com o casamento','com o registro eleitoral'],ok:0,why:'O Código Civil dispõe que a personalidade civil começa com o nascimento com vida, resguardados desde a concepção os direitos do nascituro.'}],flash:[['Dignidade da pessoa humana?','Fundamento da República.'],['Personalidade civil?','Começa, em regra, com o nascimento com vida.']]},
+ penalprocessual:{name:'Noções de Direito Penal e Direito Processual Penal',color:'#EF9A9A',icon:'🔴',minutes:25,summary:'Associe tipicidade, dolo, culpa, tentativa e crimes frequentes às regras processuais de investigação, prova e prisão.',keywords:['crime','dolo','prova','prisão','processo'],questions:[{q:'A tentativa exige, em regra:',choices:['início da execução e não consumação por circunstâncias alheias à vontade','mera cogitação','resultado consumado','apenas intenção'],ok:0,why:'A tentativa pressupõe início da execução e não consumação por circunstâncias alheias à vontade do agente.'},{q:'A cadeia de custódia busca preservar principalmente:',choices:['a rastreabilidade do vestígio','a competência territorial','o segredo absoluto','a iniciativa da ação penal'],ok:0,why:'A cadeia de custódia documenta e preserva o percurso do vestígio.'}],flash:[['Tentativa?','Execução iniciada + não consumação por circunstância alheia.'],['Cadeia de custódia?','Rastreabilidade do vestígio.']]},
+ administracaopoliticas:{name:'Noções de Administração e Políticas Públicas',color:'#A5D6A7',icon:'🟢',minutes:25,summary:'Estude princípios administrativos, organização pública, planejamento, políticas públicas, eficiência e prestação de serviços.',keywords:['administração','políticas públicas','planejamento','eficiência','serviço público'],questions:[{q:'O princípio da eficiência exige da Administração Pública:',choices:['busca de melhores resultados com adequada utilização de recursos','atuação sem controle','sigilo como regra absoluta','dispensa de legalidade'],ok:0,why:'Eficiência orienta a Administração à melhor entrega possível, sem afastar os demais princípios.'},{q:'Uma política pública normalmente parte de:',choices:['identificação de problema público e definição de objetivos','decisão sem diagnóstico','ausência de avaliação','mera escolha privada'],ok:0,why:'Políticas públicas articulam diagnóstico, objetivos, implementação e avaliação.'}],flash:[['Eficiência?','Melhor resultado com adequada utilização de recursos.'],['Política pública começa por quê?','Problema público + objetivo.']]},
+ atuacao:{name:'Conhecimentos na Área de Atuação',color:'#80CBC4',icon:'🛡️',minutes:25,summary:'Conteúdo diretamente ligado às atribuições da Guarda Civil Municipal, atuação preventiva, proteção de bens, serviços, instalações e cooperação com outros órgãos.',keywords:['guarda municipal','prevenção','proteção','atuação','cooperação'],questions:[{q:'A atuação da Guarda Civil Municipal possui forte caráter:',choices:['preventivo e de proteção municipal','exclusivamente judiciário','legislativo','tributário'],ok:0,why:'A atuação da guarda municipal está ligada à proteção municipal e à prevenção, nos limites legais.'},{q:'Na atuação integrada, a cooperação entre órgãos busca:',choices:['melhorar prevenção e resposta dentro das competências legais','eliminar competências','substituir o Judiciário','dispensar planejamento'],ok:0,why:'A cooperação deve respeitar competências e melhorar a atuação coordenada.'}],flash:[['Eixo da atuação da GCM?','Prevenção e proteção municipal.'],['Integração?','Cooperação com respeito às competências legais.']]},
+ legislacaoguarda:{name:'Legislação',color:'#CE93D8',icon:'📜',minutes:25,summary:'Treine a literalidade das normas indicadas no edital da Guarda Civil Municipal, com foco em competências, deveres, requisitos, exceções e prazos.',keywords:['lei','competência','dever','requisito','exceção'],questions:[{q:'Ao estudar legislação para prova objetiva, qual detalhe merece atenção especial?',choices:['competências, prazos, requisitos e exceções','somente títulos','apenas opiniões','apenas datas históricas'],ok:0,why:'Bancas transformam competências, prazos, requisitos e exceções em pegadinhas frequentes.'},{q:'Se a lei diz “poderá” e a alternativa troca por “deverá”, o correto é:',choices:['revisar a literalidade porque o sentido jurídico pode mudar','tratar como sinônimos','ignorar a troca','marcar sem conferir'],ok:0,why:'A troca de modalizador pode alterar faculdade em obrigação.'}],flash:[['Lei seca: o que marcar?','Competências, prazos, requisitos e exceções.'],['Poderá ≠ deverá?','Sim; pode mudar completamente o comando.']]},
+ pedagogia:{name:'Conhecimentos Pedagógicos',color:'#FFCC80',icon:'🟠',minutes:25,summary:'Estude fundamentos da educação, didática, currículo, avaliação, inclusão e organização do trabalho pedagógico sempre ligados ao cargo escolhido.',keywords:['didática','currículo','avaliação','inclusão','aprendizagem'],questions:[
+  {q:'Na avaliação formativa, o principal objetivo é:',choices:['acompanhar a aprendizagem e orientar intervenções pedagógicas','apenas classificar ao final','substituir o planejamento','eliminar a devolutiva ao aluno'],ok:0,why:'A avaliação formativa acompanha o processo e orienta ajustes no ensino e na aprendizagem.'},
+  {q:'Um currículo inclusivo deve:',choices:['considerar diferenças e remover barreiras à aprendizagem','aplicar uma única estratégia a todos','ignorar necessidades específicas','separar avaliação de aprendizagem'],ok:0,why:'Inclusão exige acesso, participação e aprendizagem, com remoção de barreiras e estratégias adequadas.'}
+ ],flash:[['Avaliação formativa serve para quê?','Acompanhar e melhorar o processo de aprendizagem.'],['Ideia central da inclusão?','Remover barreiras para garantir participação e aprendizagem.']]},
+ especificos:{name:'Conhecimentos Específicos',color:'#B39DDB',icon:'🟣',minutes:25,summary:'Este bloco é vinculado à área/cargo escolhido e deve seguir o conteúdo específico do edital correspondente.',keywords:['conteúdo específico','cargo','edital','aplicação','especialidade'],questions:[
+  {q:'No Aprova, o bloco de conhecimentos específicos deve ser definido por:',choices:['cargo/área e edital selecionados','uma lista genérica igual para todos','apenas pela banca','somente pela escolaridade'],ok:0,why:'O conteúdo específico depende do cargo/área e do edital selecionado.'},
+  {q:'Ao trocar de cargo dentro do mesmo concurso, o que deve mudar?',choices:['conteúdo específico e, quando previsto, distribuição das disciplinas','apenas a cor da tela','somente o nome do concurso','nada'],ok:0,why:'O cargo pode alterar conteúdo específico, pesos, questões e até etapas da seleção.'}
+ ],flash:[['O específico depende de quê?','Do cargo/área e do edital.'],['Trocar cargo pode mudar o quê?','Conteúdo, pesos, questões e etapas.']]}
 };
+
+
+const COURSE_ROLE_PROFILES={
+ 'fgv-2e84885794':{
+  title:'Prefeitura Municipal do Salvador 2026 • Educação',banca:'FGV',source:'https://conhecimento.fgv.br/concursos/pms2026',
+  structure:'70 questões: Língua Portuguesa 10, Raciocínio Lógico 5, Atualidades 5, Conhecimentos Pedagógicos 12, Legislação Específica 8 e Conhecimentos Específicos 30; além de 2 questões discursivas de conhecimentos específicos.',
+  roles:[
+   ['coord-ped','Coordenador Pedagógico','Conhecimentos Específicos — Coordenador Pedagógico'],
+   ['prof-infantil','Professor Municipal I — Educação Infantil ao 5º Ano','Conhecimentos Específicos — Educação Infantil ao 5º Ano'],
+   ['prof-ciencias','Professor Municipal I — Ciências Físicas e Biológicas','Conhecimentos Específicos — Ciências Físicas e Biológicas'],
+   ['prof-artes-plasticas','Professor Municipal I — Educação Artística — Artes Plásticas','Conhecimentos Específicos — Artes Plásticas'],
+   ['prof-danca','Professor Municipal I — Educação Artística — Dança','Conhecimentos Específicos — Dança'],
+   ['prof-musica','Professor Municipal I — Educação Artística — Música','Conhecimentos Específicos — Música'],
+   ['prof-teatro','Professor Municipal I — Educação Artística — Teatro','Conhecimentos Específicos — Teatro'],
+   ['prof-edfisica','Professor Municipal I — Educação Física','Conhecimentos Específicos — Educação Física'],
+   ['prof-geografia','Professor Municipal I — Geografia','Conhecimentos Específicos — Geografia'],
+   ['prof-historia','Professor Municipal I — História','Conhecimentos Específicos — História'],
+   ['prof-ingles','Professor Municipal I — Língua Estrangeira — Inglês','Conhecimentos Específicos — Inglês'],
+   ['prof-portugues','Professor Municipal I — Língua Portuguesa','Conhecimentos Específicos — Língua Portuguesa'],
+   ['prof-matematica','Professor Municipal I — Matemática','Conhecimentos Específicos — Matemática']
+  ].map(([id,label,specificLabel])=>({id,label,specificLabel,subjectWeights:{portugues:10,raciocinio:5,atualidades:5,pedagogia:12,legislacao:8,especificos:30},recommendedStart:'pedagogia'}))
+ }
+};
+const DIRECT_COURSE_PROFILES={
+ 'fgv-c78302f30e':{role:'Guarda Civil Municipal',subjectWeights:{portugues:10,raciocinio:10,informatica:8,constitucionalcivil:10,penalprocessual:7,administracaopoliticas:5,atuacao:10,legislacaoguarda:10},subjectLabels:{},recommendedStart:'atuacao',examStructure:'70 questões: Português 10, Raciocínio Lógico-Matemático 10, Informática 8, Noções de Direito Constitucional e Direito Civil 10, Noções de Direito Penal e Direito Processual Penal 7, Noções de Administração e Políticas Públicas 5, Conhecimentos na Área de Atuação 10 e Legislação 10.',examSource:'Edital nº 02/2026, item 9.4'}
+};
+function isMunicipalUmbrella(hit){const t=String(hit?.title||'');return /Prefeitura|Munic[ií]pio/i.test(t)&&!/(Guarda|Professor|Coordenador|Procurador|M[eé]dico|Enfermeiro|Dentista|T[eé]cnico|Agente|Auditor|Fiscal)/i.test(t);}
+function roleProfileForCourse(hit){return hit?COURSE_ROLE_PROFILES[hit.id]||null:null;}
+function applyCourseProfile(hit,role=null){
+ const direct=DIRECT_COURSE_PROFILES[hit?.id]||null, prof=role||direct;
+ u.profile.subjectWeights=prof?.subjectWeights?{...prof.subjectWeights}:null;u.profile.subjectLabels=prof?.subjectLabels?{...prof.subjectLabels}:{};u.profile.recommendedStart=prof?.recommendedStart||'';u.profile.role=prof?.label||prof?.role||'';u.profile.roleId=prof?.id||'';u.profile.specificSubjectLabel=prof?.specificLabel||'';u.profile.examStructure=prof?.examStructure||roleProfileForCourse(hit)?.structure||'';u.profile.examStructureSource=prof?.examSource||roleProfileForCourse(hit)?.source||hit?.source_url||'';
+}
+function subjectView(k){const base=SUBJECTS[k]||SUBJECTS.portugues,label=u?.profile?.subjectLabels?.[k]||(k==='especificos'&&u?.profile?.specificSubjectLabel)||base.name;return label===base.name?base:{...base,name:label};}
 
 const PROFILES={
  police:{portugues:18,penal:18,processopenal:18,constitucional:12,administrativo:10,direitoshumanos:9,informatica:7,raciocinio:5,legislacao:14},
@@ -60,18 +106,19 @@ const PROFILES={
 function inferKind(){const t=(u?.profile?.target||'').toLowerCase();if(/pol[ií]cia|investigador|escriv|delegad|guarda|agente/.test(t))return'police';if(/tribunal|trt|tre|trf|judici/.test(t))return'tribunal';if(/sefaz|fiscal|receita|auditor|controladoria|tce|cgu/.test(t))return'fiscal';if(/ebserh|sa[uú]de|enferm|medic|resid[eê]ncia/.test(t))return'health';if(/professor|educa|enem|vestibular/.test(t))return'education';if(/oab|magistr|promotor|defensor|procurador|enam|enac/.test(t))return'legal';return'general';}
 function bancaBias(weights){const b=(u?.profile?.banca||'').toLowerCase(),w={...weights};if(b.includes('fgv')){w.portugues=(w.portugues||0)+5;w.constitucional=(w.constitucional||0)+2;}if(b.includes('cebraspe')){w.legislacao=(w.legislacao||0)+3;w.constitucional=(w.constitucional||0)+2;}if(b.includes('aocp')){w.portugues=(w.portugues||0)+3;w.informatica=(w.informatica||0)+2;}if(b.includes('quadrix')){w.portugues=(w.portugues||0)+2;w.legislacao=(w.legislacao||0)+3;}return w;}
 function performanceBias(weights){const w={...weights};Object.keys(w).forEach(k=>{const p=ae.performance[k];if(!p)return;const rate=p.total?p.correct/p.total:1;if(rate<.5)w[k]+=8;else if(rate<.7)w[k]+=4;else if(rate>.9)w[k]=Math.max(1,w[k]-2);});return w;}
-function weightsForUser(){return performanceBias(bancaBias(PROFILES[inferKind()]||PROFILES.general));}
+function weightsForUser(){const exact=u?.profile?.subjectWeights;if(exact&&Object.keys(exact).length)return performanceBias({...exact});return performanceBias(bancaBias(PROFILES[inferKind()]||PROFILES.general));}
 function dailyBlocks(){if(!u?.trial?.paid||!u?.profile?.hoursConfigured)return 1;const hours=Number(u?.profile?.hours||2);return Math.max(1,Math.floor(hours*60/25));}
 function weightedQueue(){const w=weightsForUser(),entries=Object.entries(w).filter(([k,v])=>SUBJECTS[k]&&v>0),scores={};entries.forEach(([k])=>scores[k]=0);const n=dailyBlocks(),out=[],total=entries.reduce((s,x)=>s+x[1],0);for(let i=0;i<n;i++){entries.forEach(([k,v])=>scores[k]+=v);entries.sort((a,b)=>scores[b[0]]-scores[a[0]]);const k=entries[0][0];out.push(k);scores[k]-=total;}return out;}
 function engineDayKey(){return typeof localDateKey==='function'?localDateKey():new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo'}).format(new Date());}
 function ensureDay(){const today=engineDayKey();if(ae.day.date!==today||!Array.isArray(ae.day.queue)){ae.day={date:today,queue:weightedQueue(),index:0,stage:0,maxStageIndex:0,answer:null,learned:'',learnedScore:null,startedAt:Date.now(),startChosen:false,startSubjectKey:'',sessionStats:{correct:0,total:0,streak:0,bestStreak:0},sessionSeen:{}};aesave();}const seq=[0,1,3,4,5,6,7,8,9,10],idx=Math.max(0,seq.indexOf(ae.day.stage||0));if(!Number.isInteger(ae.day.maxStageIndex))ae.day.maxStageIndex=idx;else ae.day.maxStageIndex=Math.max(ae.day.maxStageIndex,idx);ae.day.answers=ae.day.answers||{};ae.day.results=ae.day.results||{};ae.day.sessionStats=ae.day.sessionStats||{correct:0,total:0,streak:0,bestStreak:0};ae.day.sessionSeen=ae.day.sessionSeen||{};return ae.day;}
 function currentSubjectKey(){const d=ensureDay();return d.queue[Math.min(d.index,d.queue.length-1)]||'portugues';}
-function currentSubject(){return SUBJECTS[currentSubjectKey()]||SUBJECTS.portugues;}
+function currentSubject(){return subjectView(currentSubjectKey());}
 function startChoiceKeys(){
  const d=ensureDay();
  if(!u?.trial?.paid&&d.index===0&&Number(d.stage||0)===0&&!d.startChosen){
-  const ranked=Object.entries(weightsForUser()).filter(([k,v])=>SUBJECTS[k]&&v>0).sort((a,b)=>b[1]-a[1]).map(([k])=>k);
-  const keys=ranked.filter(k=>k!=='portugues').slice(0,5);
+  let ranked=Object.entries(weightsForUser()).filter(([k,v])=>SUBJECTS[k]&&v>0).sort((a,b)=>b[1]-a[1]).map(([k])=>k);
+  const rec=u?.profile?.recommendedStart;if(rec&&ranked.includes(rec))ranked=[rec,...ranked.filter(k=>k!==rec)];
+  const keys=ranked.filter(k=>k!=='portugues').slice(0,6);
   if(ranked.includes('portugues'))keys.push('portugues');
   return keys;
  }
@@ -85,7 +132,7 @@ window.chooseStartSubject=function(k){
 };
 function startSubjectChooser(){
  const d=ensureDay();if(d.index!==0||Number(d.stage||0)!==0||d.startChosen)return'';const keys=startChoiceKeys();
- return `<div class="start-picker"><div class="start-picker-title"><span>1</span><div><b>Escolha a matéria para iniciar</b><small>Comece por uma matéria com a qual você tenha mais afinidade. Português continua disponível, mas não é selecionado automaticamente.</small></div></div><div class="start-choice-grid">${keys.map((k,i)=>{const x=SUBJECTS[k],hint=k==='portugues'?'disponível se você preferir':i===0?'boa para começar':'escolha livre';return `<button class="start-choice" onclick="chooseStartSubject('${k}')"><span class="queue-dot" style="background:${x.color}"></span><span><b>${x.name}</b><small>${hint}</small></span><strong>INICIAR</strong></button>`}).join('')}</div></div>`;
+ return `<div class="start-picker"><div class="start-picker-title"><span>1</span><div><b>Escolha a matéria para iniciar</b><small>Comece por uma matéria com a qual você tenha mais afinidade. Português continua disponível, mas não é selecionado automaticamente.</small></div></div><div class="start-choice-grid">${keys.map((k,i)=>{const x=subjectView(k),hint=k==='portugues'?'disponível se você preferir':i===0?'boa para começar':'escolha livre';return `<button class="start-choice" onclick="chooseStartSubject('${k}')"><span class="queue-dot" style="background:${x.color}"></span><span><b>${x.name}</b><small>${hint}</small></span><strong>INICIAR</strong></button>`}).join('')}</div></div>`;
 }
 function updatePerf(ok){const k=currentSubjectKey(),p=ae.performance[k]||{correct:0,total:0};p.total++;if(ok)p.correct++;ae.performance[k]=p;aesave();}
 const LEGAL_Q_META={
@@ -215,6 +262,7 @@ window.ensureExactCourseProfile=function(){
 window.applyExactCourseSelection=function(hit,{trial=false}={}){
  if(!hit)return false;const old=u.profile||{},changing=!!old.catalogId&&old.catalogId!==hit.id,isOab=/oab|exame de ordem/i.test([hit.title,hit.category,...(hit.tags||[])].join(' '));
  u.profile={...old,track:isOab?'oab2':'concurso',target:hit.title,banca:hit.banca||'',catalogId:hit.id,examDate:hit.exam_date||null,examDateSource:hit.exam_date?'official':null};
+ applyCourseProfile(hit,null);
  universalExam=hit.exam_date?new Date(hit.exam_date+'T13:00:00-03:00'):null;
  if(!u.trial?.paid){delete u.profile.hours;u.profile.hoursConfigured=false;}
  if(changing||trial){ae.day={};ae.performance={};ae.notes=[];if(typeof mastery!=='undefined'){mastery.contest={};if(mastery.oab){mastery.oab.stage=0;mastery.oab.answer={};}if(typeof msave==='function')msave();}}
@@ -237,12 +285,19 @@ window.openCourseChooser=function(){
 };
 window.closeCourseChooser=function(){const gate=document.getElementById('courseGate');if(gate)gate.hidden=true;document.body.classList.remove('modal-open');};
 window.pickTrialCourse=function(id){const x=exactCatalogCourseById(id),input=document.getElementById('trialCourseSearch');if(x&&input){input.value=x.title;input.dataset.courseId=x.id;}};
+window.openRoleChooser=function(hit,profile){const course=document.getElementById('courseGate'),gate=document.getElementById('roleGate'),box=document.getElementById('roleChoices'),title=document.getElementById('roleGateTitle'),sub=document.getElementById('roleGateSubtitle');if(!gate||!box)return false;u.trial=u.trial||{};u.trial.pendingCourseId=hit.id;if(title)title.textContent='Qual cargo você vai disputar?';if(sub)sub.textContent=`${hit.title} • ${hit.banca}. Escolha o cargo para carregar somente as matérias e a estrutura correspondentes.`;box.innerHTML=profile.roles.map(r=>`<button type="button" onclick="selectTrialRole('${hit.id}','${r.id}')"><b>${htmlEsc(r.label)}</b><small>Ver matérias deste cargo →</small></button>`).join('');if(course)course.hidden=true;gate.hidden=false;return true;};
+window.backToCourseChooser=function(){const r=document.getElementById('roleGate'),c=document.getElementById('courseGate');if(r)r.hidden=true;if(c)c.hidden=false;};
+window.selectTrialRole=function(courseId,roleId){const hit=((typeof aprovaCatalog!=='undefined'?aprovaCatalog.items:[])||[]).find(x=>x.id===courseId),profile=hit&&roleProfileForCourse(hit),role=profile?.roles?.find(r=>r.id===roleId);if(!hit||!role)return alert('Cargo não encontrado. Escolha novamente.');const isOab=/oab|exame de ordem/i.test([hit.title,hit.category,...(hit.tags||[])].join(' '));u.profile={...(u.profile||{}),track:isOab?'oab2':'concurso',target:hit.title,banca:hit.banca||'',catalogId:hit.id,examDate:hit.exam_date||null,examDateSource:hit.exam_date?'official':null};applyCourseProfile(hit,role);if(hit.exam_date)universalExam=new Date(hit.exam_date+'T13:00:00-03:00');else universalExam=null;u.trial=u.trial||{};u.trial.courseChosenAt=Date.now();u.trial.courseChosenTitle=hit.title;u.trial.firstStageCompleted=false;u.trial.leadCaptured=false;u.trial.previewStartedAt=0;u.trial.startedAt=0;ae.day={};aesave();usave();const rg=document.getElementById('roleGate');if(rg)rg.hidden=true;closeCourseChooser();startFreeTrial();};
+
 window.confirmTrialCourse=function(){
  const input=document.getElementById('trialCourseSearch'),raw=(input?.value||'').trim();if(!raw)return alert('Escolha a prova, órgão ou cargo para iniciar o teste.');
  const hit=(input?.dataset?.courseId?exactCatalogCourseById(input.dataset.courseId):null)||exactCatalogCourseByTitle(raw);
  if(!hit)return alert('Escolha uma opção exata do catálogo. Assim o Aprova carrega a banca, a estrutura e as questões corretas sem misturar concursos.');
+ const roleProfile=roleProfileForCourse(hit);
+ if(roleProfile?.roles?.length){applyExactCourseSelection(hit,{trial:true});usave();return openRoleChooser(hit,roleProfile);}
+ if(isMunicipalUmbrella(hit))return alert('Os cargos deste concurso ainda estão em validação oficial. O Aprova não vai adivinhar matérias nem misturar conteúdos de outro cargo.');
  applyExactCourseSelection(hit,{trial:true});
- u.trial=u.trial||{};u.trial.courseChosenAt=Date.now();u.trial.courseChosenTitle=hit.title;if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_course_selected',{target:hit.title,banca:hit.banca||'',track:u.profile.track,catalog_id:hit.id});u.trial.firstStageCompleted=false;u.trial.leadCaptured=false;u.trial.previewStartedAt=0;u.trial.startedAt=0;
+ u.trial=u.trial||{};u.trial.courseChosenAt=Date.now();u.trial.courseChosenTitle=hit.title;if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_course_selected',{target:hit.title,banca:hit.banca||'',track:u.profile.track,catalog_id:hit.id,role:u.profile.role||''});u.trial.firstStageCompleted=false;u.trial.leadCaptured=false;u.trial.previewStartedAt=0;u.trial.startedAt=0;
  usave();closeCourseChooser();startFreeTrial();
 };
 
