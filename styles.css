@@ -70,3 +70,25 @@
 .reinforce-question{padding:16px 0;border-top:1px solid #e4ecf4}.reinforce-question:first-of-type{border-top:0}.reinforce-question h4{margin:0 0 12px;font-size:17px;line-height:1.35}.choice-grid.compact{gap:8px}.choice-grid.compact .choice{padding:12px 14px;font-size:14px;min-height:auto}
 .reinforce-result{margin-top:10px;padding:13px 14px;border-radius:15px}.reinforce-result p{margin:6px 0 4px;line-height:1.45}.reinforce-result small{display:block;margin-top:5px;line-height:1.35}.reinforce-score{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.reinforce-score span{font-size:11px;font-weight:900;background:rgba(255,255,255,.72);padding:5px 8px;border-radius:999px}.reinforce-pending,.reinforce-complete{text-align:center;margin-top:12px;padding:10px;border-radius:12px;font-weight:850}.reinforce-pending{background:#fff6dd;color:#7d5b10}.reinforce-complete{background:#e9f8ef;color:#17663f}
 @media(max-width:600px){.reinforcement-block{padding:15px;border-radius:18px}.reinforce-head h3{font-size:20px}.reinforce-question h4{font-size:16px}.reinforce-score{justify-content:center}}
+
+/* Treino sequencial de leitura da banca */
+.bank-reading-cue{margin:14px 0 18px;padding:16px 17px;border-radius:18px;background:linear-gradient(135deg,#eef6ff,#fff8e6);border:1px solid #d8e5f2;color:#173b63}
+.bank-reading-cue>span{display:block;font-size:12px;font-weight:950;letter-spacing:.06em;color:#1e5fa8;margin-bottom:7px}
+.bank-reading-cue p{margin:0 0 9px;font-weight:800;line-height:1.42}
+.bank-reading-cue ol{margin:0;padding-left:21px;display:grid;gap:5px;line-height:1.38}
+.reinforce-question.single{animation:reinforceIn .22s ease}
+.reinforce-next{margin-top:14px}
+@keyframes reinforceIn{from{opacity:.25;transform:translateX(8px)}to{opacity:1;transform:none}}
+
+/* Conta individual pós-compra */
+.account-login-link{margin-top:12px;color:#173b63;font-weight:850}
+.license-notice{display:grid;gap:6px;margin:14px 0 16px;padding:14px 16px;border-radius:18px;background:#f2f7ff;border:1px solid #cfe0f4;text-align:left;color:#173b63}
+.license-notice b{font-size:14px}.license-notice span{font-weight:700;line-height:1.4}.license-notice small{color:#66788e;line-height:1.35}
+.license-notice.compact{padding:12px 14px;margin:12px 0 15px}
+.account-modal{position:relative;max-width:520px}
+.account-close{position:absolute;right:18px;top:15px;z-index:2}
+.account-message{margin:0 44px 16px 0;padding:12px 14px;border-radius:14px;background:#fff3cd;border:1px solid #f0d98a;color:#624b00;font-weight:750;line-height:1.4}
+.account-modal label{display:grid;gap:6px;text-align:left;font-weight:850;margin:12px 0;color:#243b59}
+.account-modal input{width:100%;box-sizing:border-box;padding:14px 15px;border:1px solid #cbd7e5;border-radius:14px;font:inherit;background:#fff}
+.account-modal .welcome-icon{font-size:38px;margin:4px 0 8px}
+@media(max-width:640px){.account-modal{width:calc(100vw - 28px);padding:22px 18px}.account-message{margin-right:36px}}

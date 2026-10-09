@@ -25,7 +25,21 @@ function startFreeTrial(){const name=document.getElementById('trialName').value.
 function startTrialClock(){}
 function restoreTrialUniversal(){if(u.sessionLoggedOut)return;if(!u.trial.startedAt)return;document.getElementById('trialGate').hidden=true;}
 const PAYMENT_API='https://aprova-payments-production.up.railway.app';
+const APROVA_AUTH_TOKEN_KEY='aprova-auth-token-v1';
+const APROVA_DEVICE_KEY='aprova-device-v1';
 let selectedCheckoutPlan='';
+
+function aprovaDeviceId(){let id=localStorage.getItem(APROVA_DEVICE_KEY);if(!id){id=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(36).slice(2)+'-'+Math.random().toString(36).slice(2)));localStorage.setItem(APROVA_DEVICE_KEY,id);}return id;}
+function aprovaAuthToken(){return localStorage.getItem(APROVA_AUTH_TOKEN_KEY)||'';}
+function aprovaAuthHeaders(){const token=aprovaAuthToken();return {'Content-Type':'application/json','X-Device-Id':aprovaDeviceId(),...(token?{'Authorization':'Bearer '+token}:{})};}
+function setAccountMessage(text=''){const el=document.getElementById('accountMessage');if(!el)return;el.textContent=text;el.hidden=!text;}
+window.showAprovaAccountMode=function(mode='login',message=''){const gate=document.getElementById('accountGate'),a=document.getElementById('accountActivatePanel'),l=document.getElementById('accountLoginPanel');if(!gate)return;if(a)a.hidden=mode!=='activate';if(l)l.hidden=mode==='activate';setAccountMessage(message);const email=(u.profile?.email||document.getElementById('checkoutEmail')?.value||'').trim();const ae=document.getElementById('activateEmail'),le=document.getElementById('loginEmail');if(ae&&!ae.value)ae.value=email;if(le&&!le.value)le.value=email;gate.hidden=false;document.body.classList.add('modal-open');};
+window.openAprovaLogin=function(){showAprovaAccountMode('login');};
+window.closeAprovaAccountGate=function(){const gate=document.getElementById('accountGate');if(gate)gate.hidden=true;document.body.classList.remove('modal-open');};
+function clearAprovaPaidSession(){localStorage.removeItem(APROVA_AUTH_TOKEN_KEY);u.trial=u.trial||{};u.trial.paid=false;u.account=null;usave();}
+function applyAuthenticatedAccount(data,token){if(token)localStorage.setItem(APROVA_AUTH_TOKEN_KEY,token);u.trial=u.trial||{};u.trial.paid=true;u.trial.plan=data?.account?.plan||u.trial.plan||'';u.account=data?.account||{};u.sessionLoggedOut=false;usave();const gate=document.getElementById('trialGate'),pay=document.getElementById('paywall');if(gate)gate.hidden=true;if(pay)pay.hidden=true;closeAprovaAccountGate();if(typeof renderMasterAll==='function')renderMasterAll();else if(typeof uRenderAll==='function')uRenderAll();}
+window.hasAprovaPaidSession=function(){return !!aprovaAuthToken();};
+
 window.rateTrialExperience=function(feedback){
  u.trial=u.trial||{};u.trial.feedback=feedback;u.trial.feedbackAt=Date.now();usave();
  if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('TrialFeedback',{feedback});
@@ -69,45 +83,83 @@ async function verifyAprovaPayment(showPending=false){
   const res=await fetch(PAYMENT_API+endpoint+encodeURIComponent(id),{cache:'no-store'});
   const data=await res.json().catch(()=>({}));
   if(data.approved){
-   u.trial=u.trial||{};u.trial.paid=true;u.trial.paidAt=Date.now();u.trial.plan=plan;
-   if(kind==='subscription')u.trial.subscriptionId=id;else u.trial.orderId=id;
-   usave();
-   localStorage.removeItem('aprova-pending-order');localStorage.removeItem('aprova-pending-kind');localStorage.removeItem('aprova-pending-plan');
-   const pw=document.getElementById('paywall');if(pw)pw.hidden=true;
-   const value=Number(data.total_amount|| (plan==='monthly'?99.90:199.99));
-   if(typeof window.aprovaTrack==='function')window.aprovaTrack('Purchase',{content_name:plan==='monthly'?'Aprova - mensal':'Aprova - vitalicio',value,currency:'BRL'});
-   if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('purchase',{name:u.profile?.name||'',email:u.profile?.email||'',phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent,plan,value,order_id:id,kind});
+   u.trial=u.trial||{};u.trial.paymentConfirmed=true;u.trial.plan=plan;u.trial.pendingEntitlementId=id;u.trial.pendingEntitlementKind=kind;usave();
+   const value=Number(data.total_amount||(plan==='monthly'?99.90:199.99));
+   if(!u.trial.purchaseTracked){u.trial.purchaseTracked=true;usave();if(typeof window.aprovaTrack==='function')window.aprovaTrack('Purchase',{content_name:plan==='monthly'?'Aprova - mensal':'Aprova - vitalicio',value,currency:'BRL'});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('purchase',{name:u.profile?.name||'',email:u.profile?.email||'',phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent,plan,value,order_id:id,kind});}
    history.replaceState({},document.title,location.pathname);
-   alert(plan==='monthly'?'Assinatura confirmada. Seu acesso completo está liberado.':'Pagamento confirmado. Seu acesso vitalício está liberado.');
-   if(typeof renderMasterAll==='function')renderMasterAll();
+   showAprovaAccountMode('activate','Pagamento confirmado. Agora crie sua senha pessoal para liberar o acesso.');
    return true;
   }
   if(showPending)alert(kind==='subscription'?'Sua assinatura ainda não foi autorizada. Conclua o pagamento no Mercado Pago e tente novamente.':'Pagamento ainda não confirmado. Se você acabou de pagar, aguarde alguns segundos e tente novamente.');
  }catch(e){if(showPending)alert('Não foi possível confirmar o pagamento agora. Tente novamente em instantes.');}
  return false;
 }
-async function verifyActiveSubscription(){
- if(!u.trial?.paid||u.trial?.plan!=='monthly'||!u.trial?.subscriptionId)return;
+window.verifyAprovaPayment=()=>verifyAprovaPayment(true);
+
+window.activateAprovaAccount=async function(){
+ const id=localStorage.getItem('aprova-pending-order')||u.trial?.pendingEntitlementId||'',kind=localStorage.getItem('aprova-pending-kind')||u.trial?.pendingEntitlementKind||'order';
+ const email=(document.getElementById('activateEmail')?.value||u.profile?.email||'').trim(),p1=document.getElementById('activatePassword')?.value||'',p2=document.getElementById('activatePassword2')?.value||'';
+ if(!id)return setAccountMessage('Não encontrei o pagamento confirmado neste aparelho. Entre com sua conta se você já criou a senha.');
+ if(!/^\S+@\S+\.\S+$/.test(email))return setAccountMessage('Informe o mesmo e-mail usado no pagamento.');
+ if(p1.length<8||!/\d/.test(p1)||!/[A-Za-zÀ-ÿ]/.test(p1))return setAccountMessage('Crie uma senha com pelo menos 8 caracteres, contendo letra e número.');
+ if(p1!==p2)return setAccountMessage('As duas senhas precisam ser iguais.');
  try{
-  const res=await fetch(PAYMENT_API+'/subscription?id='+encodeURIComponent(u.trial.subscriptionId),{cache:'no-store'});
-  if(!res.ok)return;
-  const data=await res.json();
-  if(data.status&&data.status!=='authorized'){
-   u.trial.paid=false;u.trial.subscriptionStatus=data.status;usave();if(typeof renderMasterAll==='function')renderMasterAll();
-  }
- }catch(e){}
+  setAccountMessage('Criando sua conta segura…');
+  const res=await fetch(PAYMENT_API+'/account/activate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind,id,email,password:p1,name:u.profile?.name||'',device_id:aprovaDeviceId()})});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok){if(data.code==='ALREADY_ACTIVATED'||data.code==='ACCOUNT_EXISTS'){showAprovaAccountMode('login',data.error||'Esta conta já foi criada. Entre com sua senha.');const le=document.getElementById('loginEmail');if(le)le.value=email;return;}throw new Error(data.error||'Não foi possível criar a conta.');}
+  localStorage.removeItem('aprova-pending-order');localStorage.removeItem('aprova-pending-kind');localStorage.removeItem('aprova-pending-plan');
+  u.profile={...(u.profile||{}),email};u.trial.paymentConfirmed=true;usave();applyAuthenticatedAccount(data,data.token);
+  alert('Conta criada. Seu acesso individual está liberado neste dispositivo e rede.');
+ }catch(e){setAccountMessage(e?.message||'Não foi possível criar sua conta agora.');}
+};
+
+window.loginAprovaAccount=async function(){
+ const email=(document.getElementById('loginEmail')?.value||'').trim(),password=document.getElementById('loginPassword')?.value||'';
+ if(!email||!password)return setAccountMessage('Informe e-mail e senha.');
+ try{
+  setAccountMessage('Confirmando seu acesso…');
+  const res=await fetch(PAYMENT_API+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,device_id:aprovaDeviceId()})});
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok)throw new Error(data.error||'Não foi possível entrar.');
+  u.profile={...(u.profile||{}),email};applyAuthenticatedAccount(data,data.token);
+ }catch(e){setAccountMessage(e?.message||'Não foi possível entrar agora.');}
+};
+
+window.logoutPaidAccount=async function(){
+ const token=aprovaAuthToken();
+ try{if(token)await fetch(PAYMENT_API+'/logout',{method:'POST',headers:aprovaAuthHeaders()});}catch(e){}
+ clearAprovaPaidSession();u.sessionLoggedOut=true;usave();const gate=document.getElementById('trialGate');if(gate)gate.hidden=false;const pay=document.getElementById('paywall');if(pay)pay.hidden=true;if(typeof renderMasterAll==='function')renderMasterAll();window.scrollTo({top:0,behavior:'smooth'});
+};
+
+async function restoreAprovaAccountSession(){
+ const token=aprovaAuthToken();
+ if(!token){if(u.trial?.paid){u.trial.paid=false;usave();}return false;}
+ try{
+  u.trial.paid=false;usave();
+  const res=await fetch(PAYMENT_API+'/session',{headers:aprovaAuthHeaders(),cache:'no-store'});
+  const data=await res.json().catch(()=>({}));
+  if(res.ok&&data.ok){applyAuthenticatedAccount(data,token);return true;}
+  localStorage.removeItem(APROVA_AUTH_TOKEN_KEY);u.trial.paid=false;usave();
+  if(data.code==='IP_CHANGED_RELOGIN')showAprovaAccountMode('login','Sua rede/IP mudou. Por segurança, faça login novamente para confirmar que é você.');
+  else if(data.code==='DEVICE_BLOCKED')showAprovaAccountMode('login','Este acesso está protegido por dispositivo. Encerre a sessão anterior antes de entrar em outro aparelho.');
+  else if(data.code==='SUBSCRIPTION_INACTIVE')showAprovaAccountMode('login','Sua assinatura mensal não está ativa. Regularize o pagamento para continuar.');
+  return false;
+ }catch(e){return false;}
 }
+
+async function verifyActiveSubscription(){return restoreAprovaAccountSession();}
 async function handleAprovaPaymentReturn(){
  const state=new URLSearchParams(location.search).get('mp');
- if(!state||u.trial?.paid)return;
- if(state==='failure'){alert('O pagamento não foi concluído. Você pode tentar novamente.');history.replaceState({},document.title,location.pathname);return;}
+ if(!state)return false;
+ if(state==='failure'){alert('O pagamento não foi concluído. Você pode tentar novamente.');history.replaceState({},document.title,location.pathname);return false;}
  for(let i=0;i<8;i++){
-  if(await verifyAprovaPayment(false))return;
+  if(await verifyAprovaPayment(false))return true;
   if(i<7)await new Promise(r=>setTimeout(r,2200));
  }
  if(state==='pending'||state==='success'||state==='subscription')alert('Recebemos o retorno do Mercado Pago, mas a confirmação ainda está pendente. Seu progresso está salvo; tente verificar novamente em instantes.');
+ return false;
 }
-window.verifyAprovaPayment=()=>verifyAprovaPayment(true);
 function closePaywallPreview(){document.getElementById('paywall').hidden=true;}
 const guides={
  geral:{title:'Diagnóstico guiado',q:'Antes de estudar teoria, qual é a melhor primeira ação para descobrir como sua prova cobra o conteúdo?',choices:['Resolver uma questão diagnóstica','Ler todo o edital de uma vez','Comprar vários cursos','Memorizar resumos sem questões'],ok:'Resolver uma questão diagnóstica',why:'O diagnóstico revela padrão da prova e lacunas antes de distribuir seu tempo.',steps:['Resolva sem consultar','Corrija imediatamente','Classifique o erro','Transforme o erro em flashcard'],note:'Questão → correção → fonte → anotação → flashcard → revisão.',flash:[['Qual é o ciclo-base?','Questão → correção → fonte → anotação → flashcard → revisão'],['O que fazer com um erro?','Entender a causa e agendar revisão']]},
@@ -147,4 +199,4 @@ function uRenderSim(){document.getElementById('simulados').innerHTML=`<div class
 function generateUniversalPDF(){const g=currentGuide();if(!(window.jspdf&&window.jspdf.jsPDF))return alert('Gerador carregando. Tente novamente em alguns segundos.');const {jsPDF}=window.jspdf,doc=new jsPDF({orientation:'landscape'}),W=297,H=210,cx=W/2,cy=92;doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text('Mapa mental de revisão',12,14);doc.setFontSize(10);doc.text(targetName(),12,21);doc.roundedRect(cx-35,cy-12,70,24,5,5);doc.setFontSize(13);doc.text('CONTEÚDO ESTUDADO',cx,cy+1,{align:'center'});const branches=[['Regra-chave',g.note],['Fonte',g.steps.slice(0,2).join(' • ')],['Flashcards',g.flash.map(x=>x[0]).join(' • ')],['Erros',u.errors.slice(0,3).map(x=>x.text).join(' • ')||'Nenhum erro registrado'],['Minha anotação',u.notes[0]?.text||'Faça sua anotação no bloco guiado']];const pts=[[18,40],[18,135],[194,35],[194,120],[105,155]];branches.forEach((b,i)=>{const [x,y]=pts[i];doc.line(cx,cy,x+(i<2?55:0),y+16);doc.roundedRect(x,y,85,32,4,4);doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(b[0],x+4,y+6);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text(doc.splitTextToSize(b[1],77).slice(0,4),x+4,y+12);});doc.setFontSize(7);doc.text('Revisão gerada pela plataforma de estudo guiado.',12,H-7);doc.save('mapa-mental-revisao.pdf');}
 function uCountdown(){const e=document.getElementById('countdown'),d=udays();if(!e)return;const s=document.getElementById('smartStrip');if(d===null){e.innerHTML='DATA<br><small>A CONFIRMAR</small>';if(s)s.innerHTML=`<b>Plano automático:</b> ${targetName()} • aguardando data oficial da prova no edital.`;return;}const h=Math.max(0,Math.floor(((universalExam-new Date())%86400000)/3600000));e.innerHTML=d===0?'DIA DA PROVA':`${d} dias<br><small>${h}h restantes</small>`;if(s)s.innerHTML=`<b>Plano automático:</b> ${d} dias até ${targetName()} • data vinculada ao certame selecionado.`;}
 function uRenderAll(){if(!u.activeStudyDate)syncUniversalStudyDay();universalExam=u.profile.examDate?new Date(u.profile.examDate+'T13:00:00-03:00'):null;const title=document.getElementById('areaTitle'),eye=document.getElementById('examEyebrow');if(title)title.textContent=u.profile.target||'Sua próxima aprovação';if(eye)eye.textContent=`${trackLabels[u.profile.track]||'PLANO INTELIGENTE'} • ESTUDO GUIADO`;uRenderToday();uRenderSchedule();uRenderContent();uRenderMaterial();uRenderQuestions();uRenderSim();uRenderReview();uRenderErrors();uCountdown();const p=document.getElementById('progressText');if(p)p.textContent=`Bloco atual: ${Math.min(6,u.stage+1)}/6 etapas`;}
-restoreTrialUniversal();syncUniversalStudyDay();uRenderAll();handleAprovaPaymentReturn();verifyActiveSubscription();setInterval(uCountdown,60000);
+restoreTrialUniversal();syncUniversalStudyDay();if(u.trial?.paid&&!aprovaAuthToken())u.trial.paid=false;uRenderAll();(async()=>{const paymentReturn=await handleAprovaPaymentReturn();if(!paymentReturn)await restoreAprovaAccountSession();})();setInterval(uCountdown,60000);
