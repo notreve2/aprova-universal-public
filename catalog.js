@@ -9,6 +9,7 @@ async function loadAprovaCatalog(){
 
 function isUpcomingCatalogItem(x){
  if(x.public_hidden) return false;
+ if(['aocp-saebba26','pcba-2026-inv-esc','fgv-37a4b75e30','fgv-cpnu2','fgv-pcpr26','fgv-seplagrj26','fgv-tjap-juiz26','fgv-ebserh26','aocp-sadpe-educ26','quad-sedesdf26','fgv-tjpe-juiz26'].includes(x.id)) return false;
  const today=new Date(); today.setHours(0,0,0,0);
  const status=norm(x.status||'');
  if(/historico|realizada|encerrado|finalizado|homologado|prova realizada/.test(status)) return false;
@@ -20,8 +21,11 @@ function isUpcomingCatalogItem(x){
  }
  // Sem data de prova, só permanece se estiver explicitamente ativo e tiver sido visto recentemente.
  const blob=norm([x.id,x.title,x.source_url].join(' '));
- const oldOnly=/(?:^|[^0-9])(2022|2023|2024|2025)(?:[^0-9]|$)/.test(blob) && !/(?:^|[^0-9])(2026|2027)(?:[^0-9]|$)/.test(blob);
- if(oldOnly) return false;
+ const hasCurrentYear=/(?:^|[^0-9])(2026|2027)(?:[^0-9]|$)/.test(blob)||/(?:^|[-_])(26|27)(?:$|[-_])/.test(norm(x.id||''));
+ const oldOnly=/(?:^|[^0-9])(2022|2023|2024|2025)(?:[^0-9]|$)/.test(blob) && !hasCurrentYear;
+ const legacyId=/(?:^|[-_])(22|23|24|25)(?:$|[-_])/.test(norm(x.id||''))&&!hasCurrentYear;
+ const legacySourceSlug=/(?:[a-z._-])(22|23|24|25)$/.test(norm(String(x.source_url||'').replace(/\/$/,'')))&&!hasCurrentYear;
+ if(oldOnly||legacyId||legacySourceSlug) return false;
  const active=/inscricoes abertas|edital publicado|calendario publicado|previsto|iminente|em andamento/.test(status);
  if(!active) return false;
  if(x.last_seen){
@@ -33,11 +37,24 @@ function isUpcomingCatalogItem(x){
  }
  return true;
 }
-function publicCatalogItems(){return aprovaCatalog.items.filter(isUpcomingCatalogItem).sort((a,b)=>{
- const da=a.exam_date?new Date(a.exam_date+'T00:00:00').getTime():Number.MAX_SAFE_INTEGER;
- const db=b.exam_date?new Date(b.exam_date+'T00:00:00').getTime():Number.MAX_SAFE_INTEGER;
- return da-db||String(a.title||'').localeCompare(String(b.title||''),'pt-BR');
-});}
+function publicCatalogItems(){
+ const filtered=aprovaCatalog.items.filter(isUpcomingCatalogItem),specificSource=new Map(),out=[];
+ for(const x of filtered){
+  const src=String(x.source_url||'').replace(/\/$/,'');
+  const canDedupe=/\/concursos\/[^/?#]+$/i.test(src);
+  if(canDedupe&&specificSource.has(src)){
+   const i=specificSource.get(src),prev=out[i];
+   const prevScore=(prev.exam_date?50:0)+(String(prev.title||'').length)+(prev.id?.match(/(?:26|27)$/)?5:0);
+   const curScore=(x.exam_date?50:0)+(String(x.title||'').length)+(x.id?.match(/(?:26|27)$/)?5:0);
+   if(curScore>prevScore)out[i]=x;
+  }else{if(canDedupe)specificSource.set(src,out.length);out.push(x);}
+ }
+ return out.sort((a,b)=>{
+  const da=a.exam_date?new Date(a.exam_date+'T00:00:00').getTime():Number.MAX_SAFE_INTEGER;
+  const db=b.exam_date?new Date(b.exam_date+'T00:00:00').getTime():Number.MAX_SAFE_INTEGER;
+  return da-db||String(a.title||'').localeCompare(String(b.title||''),'pt-BR');
+ });
+}
 function norm(s){return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
 function enrichTargetList(){const dl=document.getElementById('popularTargets'); if(!dl)return; const existing=new Set([...dl.options].map(o=>o.value)); publicCatalogItems().slice(0,150).forEach(x=>{if(!existing.has(x.title)){const o=document.createElement('option');o.value=x.title;dl.appendChild(o);}});}
 function selectCatalogItem(id){const x=aprovaCatalog.items.find(i=>i.id===id);if(!x)return; u.profile=u.profile||{};u.profile.target=x.title;u.profile.banca=x.banca;u.profile.catalogId=x.id;if(x.exam_date){u.profile.examDate=x.exam_date;universalExam=new Date(x.exam_date+'T13:00:00-03:00');}usave();uRenderAll();document.querySelector('[data-tab="hoje"]')?.click();}
