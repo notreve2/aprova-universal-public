@@ -3,7 +3,7 @@ async function loadAprovaCatalog(){
  try{
   const [c,s]=await Promise.all([fetch('data/catalog.json?ts='+Date.now()),fetch('data/sources.json?ts='+Date.now())]);
   const cj=await c.json(),sj=await s.json(); aprovaCatalog.items=cj.items||[]; aprovaCatalog.sources=sj.sources||[]; aprovaCatalog.loaded=true;
-  enrichTargetList(); if(typeof syncOfficialExamDate==='function'&&syncOfficialExamDate())uRenderAll(); renderCatalog();
+  enrichTargetList(); if(typeof populateTrialCourseOptions==='function')populateTrialCourseOptions(); if(typeof syncOfficialExamDate==='function'&&syncOfficialExamDate())uRenderAll(); renderCatalog();
  }catch(e){console.warn('Catálogo indisponível',e); renderCatalog(true);}
 }
 

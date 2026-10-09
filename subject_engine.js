@@ -61,7 +61,7 @@ function inferKind(){const t=(u?.profile?.target||'').toLowerCase();if(/pol[ií]
 function bancaBias(weights){const b=(u?.profile?.banca||'').toLowerCase(),w={...weights};if(b.includes('fgv')){w.portugues=(w.portugues||0)+5;w.constitucional=(w.constitucional||0)+2;}if(b.includes('cebraspe')){w.legislacao=(w.legislacao||0)+3;w.constitucional=(w.constitucional||0)+2;}if(b.includes('aocp')){w.portugues=(w.portugues||0)+3;w.informatica=(w.informatica||0)+2;}if(b.includes('quadrix')){w.portugues=(w.portugues||0)+2;w.legislacao=(w.legislacao||0)+3;}return w;}
 function performanceBias(weights){const w={...weights};Object.keys(w).forEach(k=>{const p=ae.performance[k];if(!p)return;const rate=p.total?p.correct/p.total:1;if(rate<.5)w[k]+=8;else if(rate<.7)w[k]+=4;else if(rate>.9)w[k]=Math.max(1,w[k]-2);});return w;}
 function weightsForUser(){return performanceBias(bancaBias(PROFILES[inferKind()]||PROFILES.general));}
-function dailyBlocks(){const hours=Number(u?.profile?.hours||2);return Math.max(1,Math.floor(hours*60/25));}
+function dailyBlocks(){if(!u?.trial?.paid||!u?.profile?.hoursConfigured)return 1;const hours=Number(u?.profile?.hours||2);return Math.max(1,Math.floor(hours*60/25));}
 function weightedQueue(){const w=weightsForUser(),entries=Object.entries(w).filter(([k,v])=>SUBJECTS[k]&&v>0),scores={};entries.forEach(([k])=>scores[k]=0);const n=dailyBlocks(),out=[],total=entries.reduce((s,x)=>s+x[1],0);for(let i=0;i<n;i++){entries.forEach(([k,v])=>scores[k]+=v);entries.sort((a,b)=>scores[b[0]]-scores[a[0]]);const k=entries[0][0];out.push(k);scores[k]-=total;}return out;}
 function engineDayKey(){return typeof localDateKey==='function'?localDateKey():new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo'}).format(new Date());}
 function ensureDay(){const today=engineDayKey();if(ae.day.date!==today||!Array.isArray(ae.day.queue)){ae.day={date:today,queue:weightedQueue(),index:0,stage:0,maxStageIndex:0,answer:null,learned:'',learnedScore:null,startedAt:Date.now(),startChosen:false,startSubjectKey:'',sessionStats:{correct:0,total:0,streak:0,bestStreak:0},sessionSeen:{}};aesave();}const seq=[0,1,3,4,5,6,7,8,9,10],idx=Math.max(0,seq.indexOf(ae.day.stage||0));if(!Number.isInteger(ae.day.maxStageIndex))ae.day.maxStageIndex=idx;else ae.day.maxStageIndex=Math.max(ae.day.maxStageIndex,idx);ae.day.answers=ae.day.answers||{};ae.day.results=ae.day.results||{};ae.day.sessionStats=ae.day.sessionStats||{correct:0,total:0,streak:0,bestStreak:0};ae.day.sessionSeen=ae.day.sessionSeen||{};return ae.day;}
@@ -189,14 +189,39 @@ function midTrialOffer(){return '';}
 function nextSubject(){const d=ensureDay();if(d.index===0&&!u.trial?.paid){const firstComplete=!u.trial.firstStageCompleted;u.trial.firstStageCompleted=true;usave();if(firstComplete){if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('FreeStageComplete',{content_name:'Aprova - primeira etapa gratuita'});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('free_stage_complete',analyticsLeadIdentity());}if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('paywall_view',analyticsLeadIdentity());const pw=document.getElementById('paywall');if(pw)pw.hidden=false;return;}d.index++;d.stage=0;d.maxStageIndex=0;d.answer=null;d.answers={};d.results={};d.reinforcementAnswers={};d.learned='';d.learnedScore=null;aesave();uRenderAll();window.scrollTo({top:0,behavior:'smooth'});}
 function restartTodayPlan(){ae.day={};aesave();ensureDay();uRenderAll();}
 
+window.populateTrialCourseOptions=function(){
+ const dl=document.getElementById('trialCourseOptions'),quick=document.getElementById('courseQuickChoices');if(!dl)return;
+ let items=[];try{items=(typeof publicCatalogItems==='function'?publicCatalogItems():((typeof aprovaCatalog!=='undefined'&&aprovaCatalog.items)||[])).slice();}catch(e){}
+ const uniq=new Map();items.forEach(x=>{if(x?.title&&!uniq.has(x.title))uniq.set(x.title,x);});
+ dl.innerHTML=[...uniq.values()].slice(0,180).map(x=>`<option value="${htmlEsc(x.title)}">${htmlEsc(x.banca||'')}</option>`).join('');
+ if(quick){const preferred=[...uniq.values()].filter(x=>/PC-BA|Exame de Ordem|Guarda Municipal|Polícia Civil/i.test(x.title)).slice(0,6);quick.innerHTML=preferred.map(x=>`<button type="button" onclick="pickTrialCourse('${String(x.id).replace(/'/g,"\\'")}')">${htmlEsc(x.title)}</button>`).join('');}
+};
+window.openCourseChooser=function(){
+ const gate=document.getElementById('courseGate');if(!gate)return startFreeTrial();
+ const input=document.getElementById('trialCourseSearch');if(input)input.value='';
+ populateTrialCourseOptions();gate.hidden=false;document.body.classList.add('modal-open');setTimeout(()=>input?.focus(),60);
+};
+window.closeCourseChooser=function(){const gate=document.getElementById('courseGate');if(gate)gate.hidden=true;document.body.classList.remove('modal-open');};
+window.pickTrialCourse=function(id){const x=(typeof aprovaCatalog!=='undefined'?aprovaCatalog.items:[]).find(i=>i.id===id);const input=document.getElementById('trialCourseSearch');if(x&&input)input.value=x.title;};
+window.confirmTrialCourse=function(){
+ const raw=(document.getElementById('trialCourseSearch')?.value||'').trim();if(!raw)return alert('Escolha a prova, órgão ou cargo para iniciar o teste.');
+ let hit=null;try{const n=(typeof norm==='function'?norm(raw):raw.toLowerCase());hit=((typeof aprovaCatalog!=='undefined'?aprovaCatalog.items:[])||[]).find(x=>(typeof norm==='function'?norm(x.title):String(x.title).toLowerCase())===n)||null;}catch(e){}
+ const title=hit?.title||raw,banca=hit?.banca||'',isOab=/oab|exame de ordem/i.test([title,hit?.category,...(hit?.tags||[])].join(' '));
+ u.profile={...(u.profile||{}),track:isOab?'oab2':'concurso',target:title,banca,catalogId:hit?.id||'',examDate:hit?.exam_date||null,examDateSource:hit?.exam_date?'official':null};
+ if(hit?.exam_date)universalExam=new Date(hit.exam_date+'T13:00:00-03:00');else universalExam=null;
+ u.trial=u.trial||{};u.trial.courseChosenAt=Date.now();u.trial.courseChosenTitle=title;if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_course_selected',{target:title,banca,track:isOab?'oab2':'concurso'});u.trial.firstStageCompleted=false;u.trial.leadCaptured=false;u.trial.previewStartedAt=0;u.trial.startedAt=0;
+ ae.day={};aesave();usave();closeCourseChooser();startFreeTrial();
+};
+
 window.startFreeTrial=function(){
  const params=new URLSearchParams(location.search);
  const requested=params.get('track');
  const allowed=new Set(['concurso','oab2','oab1','magistratura','saude','educacao','certificacao','outro']);
  const old=u.profile||{};
+ if(!u.trial?.courseChosenAt||!old.target){openCourseChooser();return;}
  const track=allowed.has(requested)?requested:(old.track||'concurso');
  const firstPreview=!u.trial?.previewStartedAt;
- u.profile={...old,track,target:old.target||trackLabels[track],area:track==='oab2'?'constitucional':(old.area||'geral'),hours:Number(old.hours||2),name:old.name||'',email:old.email||'',phone:old.phone||'',marketingConsent:!!old.marketingConsent,banca:old.banca||''};
+ u.profile={...old,track,target:old.target,area:track==='oab2'?'constitucional':(old.area||'geral'),name:old.name||'',email:old.email||'',phone:old.phone||'',marketingConsent:!!old.marketingConsent,banca:old.banca||''};
  u.sessionLoggedOut=false;u.trial.startedAt=u.trial.startedAt||Date.now();u.trial.previewStartedAt=u.trial.previewStartedAt||Date.now();u.trial.mode='first-stage';
  if(firstPreview){u.trial.firstStageCompleted=false;u.trial.leadCaptured=!!old.phone;ae.day={};if(typeof mastery!=='undefined'&&mastery?.oab)mastery.oab.stage=0;if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('StartTrialPreview',{content_name:'Aprova - inicio do teste',content_category:track});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_preview_start',{track,target:u.profile.target});}
  usave();aesave();const gate=document.getElementById('trialGate');if(gate)gate.hidden=true;uRenderAll();if(typeof renderMasterAll==='function')renderMasterAll();const welcome=document.getElementById('trialWelcome');if(welcome)welcome.hidden=false;window.scrollTo({top:0,behavior:'smooth'});
@@ -253,7 +278,7 @@ window.uRenderReview=function(){const notes=ae.notes.slice(0,8),sub=currentSubje
 window.generateUniversalPDF=function(){if(!(window.jspdf&&window.jspdf.jsPDF))return alert('Gerador carregando. Tente novamente em instantes.');const {jsPDF}=window.jspdf,doc=new jsPDF(),d=ensureDay();let y=16;doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text('Resumo de revisão — Aprova',14,y);y+=9;doc.setFontSize(11);doc.text(`${u.profile.target||'Minha prova'} | ${u.profile.hours||2}h/dia`,14,y);y+=10;const used=[...new Set(d.queue.slice(0,Math.min(d.index+1,d.queue.length)))];used.forEach(k=>{const s=SUBJECTS[k];if(y>250){doc.addPage();y=16;}doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text(s.name,15,y);y+=7;doc.setFont('helvetica','normal');doc.setFontSize(9);const lines=doc.splitTextToSize(s.summary,178);doc.text(lines,15,y);y+=lines.length*4+4;s.flash.forEach(f=>{doc.setFont('helvetica','bold');doc.text('• '+f[0],15,y);y+=4;doc.setFont('helvetica','normal');const a=doc.splitTextToSize(f[1],174);doc.text(a,19,y);y+=a.length*4+3;});});if(ae.notes.length){if(y>230){doc.addPage();y=16;}doc.setFont('helvetica','bold');doc.setFontSize(13);doc.text('O que eu aprendi',14,y);y+=7;ae.notes.slice(0,6).forEach(n=>{const t=doc.splitTextToSize(`${n.subject}: ${n.text}`,180);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text(t,15,y);y+=t.length*4+4;});}doc.save('aprova-resumo-revisao.pdf');};
 
 const oldSelectCatalogItem=window.selectCatalogItem;
-window.selectCatalogItem=function(id){const x=window.aprovaCatalog?.items?.find(i=>i.id===id);if(!x)return oldSelectCatalogItem&&oldSelectCatalogItem(id);u.profile=u.profile||{};u.profile.target=x.title;u.profile.banca=x.banca;u.profile.catalogId=x.id;if(x.exam_date){u.profile.examDate=x.exam_date;universalExam=new Date(x.exam_date+'T13:00:00-03:00');}if(!u.profile.hours)u.profile.hours=2;ae.day={};usave();aesave();uRenderAll();document.querySelector('[data-tab="hoje"]')?.click();};
+window.selectCatalogItem=function(id){const x=(typeof aprovaCatalog!=='undefined'?aprovaCatalog.items:[]).find(i=>i.id===id);if(!x)return oldSelectCatalogItem&&oldSelectCatalogItem(id);u.profile=u.profile||{};u.profile.target=x.title;u.profile.banca=x.banca;u.profile.catalogId=x.id;if(x.exam_date){u.profile.examDate=x.exam_date;universalExam=new Date(x.exam_date+'T13:00:00-03:00');}u.trial=u.trial||{};u.trial.courseChosenAt=Date.now();u.trial.courseChosenTitle=x.title;ae.day={};usave();aesave();uRenderAll();document.querySelector('[data-tab="hoje"]')?.click();};
 
 window.uRenderAll=function(){universalExam=u.profile.examDate?new Date(u.profile.examDate+'T13:00:00-03:00'):null;const title=document.getElementById('areaTitle'),eye=document.getElementById('examEyebrow');if(title)title.textContent=u.profile.target||'Sua próxima aprovação';if(eye)eye.textContent=`${u.profile.banca||trackLabels[u.profile.track]||'PLANO INTELIGENTE'} • ESTUDO GUIADO`;uRenderToday();uRenderSchedule();uRenderContent();uRenderMaterial();uRenderQuestions();uRenderSim();uRenderReview();uRenderErrors();uCountdown();const p=document.getElementById('progressText');if(p){const d=ensureDay();p.textContent=`Hoje: ${Math.min(d.index+1,d.queue.length)}/${d.queue.length} blocos`;}};
 if(u?.profile?.name){ensureDay();uRenderAll();}
