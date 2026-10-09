@@ -25,53 +25,87 @@ function startFreeTrial(){const name=document.getElementById('trialName').value.
 function startTrialClock(){}
 function restoreTrialUniversal(){if(u.sessionLoggedOut)return;if(!u.trial.startedAt)return;document.getElementById('trialGate').hidden=true;}
 const PAYMENT_API='https://aprova-payments-production.up.railway.app';
-async function goToCheckout(mode='card'){
+let selectedCheckoutPlan='';
+window.rateTrialExperience=function(feedback){
+ u.trial=u.trial||{};u.trial.feedback=feedback;u.trial.feedbackAt=Date.now();usave();
+ if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('TrialFeedback',{feedback});
+ if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_feedback',{...((typeof analyticsLeadIdentity==='function')?analyticsLeadIdentity():{}),feedback,track:u.profile?.track||'',target:u.profile?.target||''});
+ const first=document.getElementById('trialFeedbackBlock'),opts=document.getElementById('checkoutOptions');if(first)first.hidden=true;if(opts)opts.hidden=false;
+};
+window.selectCheckoutPlan=function(plan){
+ selectedCheckoutPlan=plan==='monthly'?'monthly':'lifetime';
+ document.querySelectorAll('.plan-card').forEach(x=>x.classList.remove('selected'));
+ const cards=document.querySelectorAll('.plan-card');if(selectedCheckoutPlan==='monthly')cards[0]?.classList.add('selected');else cards[1]?.classList.add('selected');
+ const box=document.getElementById('checkoutEmailBox'),btn=document.getElementById('checkoutContinueBtn');if(box)box.hidden=false;if(btn)btn.textContent=selectedCheckoutPlan==='monthly'?'Assinar por R$ 99,90/mês →':'Comprar vitalício por R$ 199,99 →';
+ if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_plan_select',{plan:selectedCheckoutPlan,value:selectedCheckoutPlan==='monthly'?99.90:199.99});
+};
+window.continueSelectedCheckout=function(){if(!selectedCheckoutPlan)return alert('Escolha Mensal ou Vitalício.');return goToCheckout(selectedCheckoutPlan);};
+async function goToCheckout(plan='lifetime'){
  try{
-  const email=((u.profile?.email||'').trim()||(document.getElementById('checkoutEmail')?.value||'').trim());
-  if(!/^\S+@\S+\.\S+$/.test(email))return alert('Informe um e-mail válido para receber e recuperar seu acesso.');
+  plan=plan==='monthly'?'monthly':'lifetime';
+  const email=((document.getElementById('checkoutEmail')?.value||'').trim()||(u.profile?.email||'').trim());
+  if(!/^\S+@\S+\.\S+$/.test(email))return alert('Informe um e-mail válido para liberar e recuperar seu acesso.');
   u.profile={...(u.profile||{}),email};usave();
-  const price=mode==='pix'?179.90:199.90,ident={name:u.profile?.name||'',email,phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent};
-  if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:'Aprova - acesso completo',content_category:mode,value:price,currency:'BRL'});
-  if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_start',{...ident,mode,value:price});
-  const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,email,name:u.profile?.name||'',phone:u.profile?.phone||''})});
+  const price=plan==='monthly'?99.90:199.99,ident={name:u.profile?.name||'',email,phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent};
+  if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:plan==='monthly'?'Aprova - plano mensal':'Aprova - acesso vitalicio',content_category:plan,value:price,currency:'BRL'});
+  if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_start',{...ident,plan,value:price,feedback:u.trial?.feedback||''});
+  const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan,email,name:u.profile?.name||'',phone:u.profile?.phone||''})});
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.checkout_url)throw new Error(data.error||'Checkout indisponível.');
   localStorage.setItem('aprova-pending-order',data.order_id||'');
-  localStorage.setItem('aprova-pending-mode',mode);
-  if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_created',{...ident,mode,value:price,order_id:data.order_id||''});
+  localStorage.setItem('aprova-pending-kind',data.kind||'order');
+  localStorage.setItem('aprova-pending-plan',data.plan||plan);
+  if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_created',{...ident,plan,value:price,order_id:data.order_id||'',kind:data.kind||'order'});
   window.location.href=data.checkout_url;
  }catch(err){alert((err&&err.message)||'Não foi possível abrir o Mercado Pago agora. Tente novamente em instantes.');}
 }
 async function verifyAprovaPayment(showPending=false){
- const orderId=localStorage.getItem('aprova-pending-order');
- if(!orderId)return false;
+ const id=localStorage.getItem('aprova-pending-order');
+ if(!id)return false;
+ const kind=localStorage.getItem('aprova-pending-kind')||'order';
+ const plan=localStorage.getItem('aprova-pending-plan')||(kind==='subscription'?'monthly':'lifetime');
  try{
-  const res=await fetch(PAYMENT_API+'/order?id='+encodeURIComponent(orderId),{cache:'no-store'});
+  const endpoint=kind==='subscription'?'/subscription?id=':'/order?id=';
+  const res=await fetch(PAYMENT_API+endpoint+encodeURIComponent(id),{cache:'no-store'});
   const data=await res.json().catch(()=>({}));
   if(data.approved){
-   const pendingMode=localStorage.getItem('aprova-pending-mode')||'';
-   u.trial=u.trial||{};u.trial.paid=true;u.trial.paidAt=Date.now();u.trial.orderId=orderId;usave();
-   localStorage.removeItem('aprova-pending-order');localStorage.removeItem('aprova-pending-mode');
+   u.trial=u.trial||{};u.trial.paid=true;u.trial.paidAt=Date.now();u.trial.plan=plan;
+   if(kind==='subscription')u.trial.subscriptionId=id;else u.trial.orderId=id;
+   usave();
+   localStorage.removeItem('aprova-pending-order');localStorage.removeItem('aprova-pending-kind');localStorage.removeItem('aprova-pending-plan');
    const pw=document.getElementById('paywall');if(pw)pw.hidden=true;
-   if(typeof window.aprovaTrack==='function')window.aprovaTrack('Purchase',{content_name:'Aprova - acesso completo',value:Number(data.total_amount||0),currency:'BRL'});
-   if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('purchase',{name:u.profile?.name||'',email:u.profile?.email||'',phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent,mode:pendingMode,value:Number(data.total_amount||0),order_id:orderId});
+   const value=Number(data.total_amount|| (plan==='monthly'?99.90:199.99));
+   if(typeof window.aprovaTrack==='function')window.aprovaTrack('Purchase',{content_name:plan==='monthly'?'Aprova - mensal':'Aprova - vitalicio',value,currency:'BRL'});
+   if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('purchase',{name:u.profile?.name||'',email:u.profile?.email||'',phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent,plan,value,order_id:id,kind});
    history.replaceState({},document.title,location.pathname);
-   alert('Pagamento confirmado. Seu acesso completo foi liberado.');
+   alert(plan==='monthly'?'Assinatura confirmada. Seu acesso completo está liberado.':'Pagamento confirmado. Seu acesso vitalício está liberado.');
+   if(typeof renderMasterAll==='function')renderMasterAll();
    return true;
   }
-  if(showPending)alert('Pagamento ainda não confirmado. Se você acabou de pagar por Pix, aguarde alguns segundos e tente novamente.');
+  if(showPending)alert(kind==='subscription'?'Sua assinatura ainda não foi autorizada. Conclua o pagamento no Mercado Pago e tente novamente.':'Pagamento ainda não confirmado. Se você acabou de pagar, aguarde alguns segundos e tente novamente.');
  }catch(e){if(showPending)alert('Não foi possível confirmar o pagamento agora. Tente novamente em instantes.');}
  return false;
+}
+async function verifyActiveSubscription(){
+ if(!u.trial?.paid||u.trial?.plan!=='monthly'||!u.trial?.subscriptionId)return;
+ try{
+  const res=await fetch(PAYMENT_API+'/subscription?id='+encodeURIComponent(u.trial.subscriptionId),{cache:'no-store'});
+  if(!res.ok)return;
+  const data=await res.json();
+  if(data.status&&data.status!=='authorized'){
+   u.trial.paid=false;u.trial.subscriptionStatus=data.status;usave();if(typeof renderMasterAll==='function')renderMasterAll();
+  }
+ }catch(e){}
 }
 async function handleAprovaPaymentReturn(){
  const state=new URLSearchParams(location.search).get('mp');
  if(!state||u.trial?.paid)return;
  if(state==='failure'){alert('O pagamento não foi concluído. Você pode tentar novamente.');history.replaceState({},document.title,location.pathname);return;}
- for(let i=0;i<6;i++){
+ for(let i=0;i<8;i++){
   if(await verifyAprovaPayment(false))return;
-  if(i<5)await new Promise(r=>setTimeout(r,2500));
+  if(i<7)await new Promise(r=>setTimeout(r,2200));
  }
- if(state==='pending'||state==='success')alert('Recebemos o retorno do Mercado Pago, mas a confirmação ainda está pendente. Seu progresso está salvo; tente verificar novamente em alguns instantes.');
+ if(state==='pending'||state==='success'||state==='subscription')alert('Recebemos o retorno do Mercado Pago, mas a confirmação ainda está pendente. Seu progresso está salvo; tente verificar novamente em instantes.');
 }
 window.verifyAprovaPayment=()=>verifyAprovaPayment(true);
 function closePaywallPreview(){document.getElementById('paywall').hidden=true;}
@@ -113,4 +147,4 @@ function uRenderSim(){document.getElementById('simulados').innerHTML=`<div class
 function generateUniversalPDF(){const g=currentGuide();if(!(window.jspdf&&window.jspdf.jsPDF))return alert('Gerador carregando. Tente novamente em alguns segundos.');const {jsPDF}=window.jspdf,doc=new jsPDF({orientation:'landscape'}),W=297,H=210,cx=W/2,cy=92;doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text('Mapa mental de revisão',12,14);doc.setFontSize(10);doc.text(targetName(),12,21);doc.roundedRect(cx-35,cy-12,70,24,5,5);doc.setFontSize(13);doc.text('CONTEÚDO ESTUDADO',cx,cy+1,{align:'center'});const branches=[['Regra-chave',g.note],['Fonte',g.steps.slice(0,2).join(' • ')],['Flashcards',g.flash.map(x=>x[0]).join(' • ')],['Erros',u.errors.slice(0,3).map(x=>x.text).join(' • ')||'Nenhum erro registrado'],['Minha anotação',u.notes[0]?.text||'Faça sua anotação no bloco guiado']];const pts=[[18,40],[18,135],[194,35],[194,120],[105,155]];branches.forEach((b,i)=>{const [x,y]=pts[i];doc.line(cx,cy,x+(i<2?55:0),y+16);doc.roundedRect(x,y,85,32,4,4);doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(b[0],x+4,y+6);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text(doc.splitTextToSize(b[1],77).slice(0,4),x+4,y+12);});doc.setFontSize(7);doc.text('Revisão gerada pela plataforma de estudo guiado.',12,H-7);doc.save('mapa-mental-revisao.pdf');}
 function uCountdown(){const e=document.getElementById('countdown'),d=udays();if(!e)return;const s=document.getElementById('smartStrip');if(d===null){e.innerHTML='DATA<br><small>A CONFIRMAR</small>';if(s)s.innerHTML=`<b>Plano automático:</b> ${targetName()} • aguardando data oficial da prova no edital.`;return;}const h=Math.max(0,Math.floor(((universalExam-new Date())%86400000)/3600000));e.innerHTML=d===0?'DIA DA PROVA':`${d} dias<br><small>${h}h restantes</small>`;if(s)s.innerHTML=`<b>Plano automático:</b> ${d} dias até ${targetName()} • data vinculada ao certame selecionado.`;}
 function uRenderAll(){if(!u.activeStudyDate)syncUniversalStudyDay();universalExam=u.profile.examDate?new Date(u.profile.examDate+'T13:00:00-03:00'):null;const title=document.getElementById('areaTitle'),eye=document.getElementById('examEyebrow');if(title)title.textContent=u.profile.target||'Sua próxima aprovação';if(eye)eye.textContent=`${trackLabels[u.profile.track]||'PLANO INTELIGENTE'} • ESTUDO GUIADO`;uRenderToday();uRenderSchedule();uRenderContent();uRenderMaterial();uRenderQuestions();uRenderSim();uRenderReview();uRenderErrors();uCountdown();const p=document.getElementById('progressText');if(p)p.textContent=`Bloco atual: ${Math.min(6,u.stage+1)}/6 etapas`;}
-restoreTrialUniversal();syncUniversalStudyDay();uRenderAll();handleAprovaPaymentReturn();setInterval(uCountdown,60000);
+restoreTrialUniversal();syncUniversalStudyDay();uRenderAll();handleAprovaPaymentReturn();verifyActiveSubscription();setInterval(uCountdown,60000);

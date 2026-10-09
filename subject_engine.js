@@ -85,38 +85,34 @@ function nextSubject(){const d=ensureDay();if(d.index===0&&!u.trial?.paid){const
 function restartTodayPlan(){ae.day={};aesave();ensureDay();uRenderAll();}
 
 window.startFreeTrial=function(){
- const track=document.getElementById('trialTrack')?.value||'concurso';
- const target=(document.getElementById('trialTarget')?.value||'').trim();
+ const params=new URLSearchParams(location.search);
+ const requested=params.get('track');
+ const allowed=new Set(['concurso','oab2','oab1','magistratura','saude','educacao','certificacao','outro']);
  const old=u.profile||{};
+ const track=allowed.has(requested)?requested:(old.track||'concurso');
  const firstPreview=!u.trial?.previewStartedAt;
- u.profile={...old,track,target:target||trackLabels[track],area:track==='oab2'?'constitucional':'geral',hours:Number(old.hours||2),name:old.name||'',email:old.email||'',phone:old.phone||'',marketingConsent:!!old.marketingConsent,banca:old.banca||''};
- const hit=typeof applyOfficialExamMeta==='function'?applyOfficialExamMeta(u.profile.target):null;
- if(!hit){u.profile.examDate=old.examDate||null;u.profile.examDateSource=old.examDateSource||'unknown';universalExam=u.profile.examDate?new Date(u.profile.examDate+'T13:00:00-03:00'):null;}
+ u.profile={...old,track,target:old.target||trackLabels[track],area:track==='oab2'?'constitucional':(old.area||'geral'),hours:Number(old.hours||2),name:old.name||'',email:old.email||'',phone:old.phone||'',marketingConsent:!!old.marketingConsent,banca:old.banca||''};
  u.sessionLoggedOut=false;u.trial.startedAt=u.trial.startedAt||Date.now();u.trial.previewStartedAt=u.trial.previewStartedAt||Date.now();u.trial.mode='first-stage';
- if(firstPreview){u.trial.firstStageCompleted=false;u.trial.leadCaptured=!!(old.name&&old.phone);ae.day={};if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('StartTrialPreview',{content_name:'Aprova - teste sem cadastro',content_category:track});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_preview_start',{track,target:u.profile.target});}
- usave();aesave();const gate=document.getElementById('trialGate');if(gate)gate.hidden=true;uRenderAll();window.scrollTo({top:0,behavior:'smooth'});
+ if(firstPreview){u.trial.firstStageCompleted=false;u.trial.leadCaptured=!!old.phone;ae.day={};if(typeof mastery!=='undefined'&&mastery?.oab)mastery.oab.stage=0;if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('StartTrialPreview',{content_name:'Aprova - inicio do teste',content_category:track});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_preview_start',{track,target:u.profile.target});}
+ usave();aesave();const gate=document.getElementById('trialGate');if(gate)gate.hidden=true;uRenderAll();if(typeof renderMasterAll==='function')renderMasterAll();window.scrollTo({top:0,behavior:'smooth'});
 };
 
 window.requireTrialLeadCapture=function(flow,nextStage){
  if(u.trial?.paid||u.trial?.leadCaptured)return false;
- u.trial.pendingLeadFlow=flow||'contest';u.trial.pendingLeadStage=Number(nextStage)||1;usave();
+ u.trial.pendingLeadFlow=flow||'contest';u.trial.pendingLeadStage=Number(nextStage)||3;usave();
  const gate=document.getElementById('leadGate');if(!gate)return false;
- const n=document.getElementById('leadName'),p=document.getElementById('leadPhone'),h=document.getElementById('leadHours'),m=document.getElementById('leadMarketing');
- if(n)n.value=u.profile?.name||'';if(p)p.value=(u.profile?.phone||'').replace(/^\+55/,'');if(h)h.value=String(u.profile?.hours||2);if(m)m.checked=!!u.profile?.marketingConsent;
+ const p=document.getElementById('leadPhone');if(p)p.value=(u.profile?.phone||'').replace(/^\+55/,'');
  gate.hidden=false;
- if(!u.trial.leadGateTracked){u.trial.leadGateTracked=true;usave();if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('LeadGateView',{content_name:'Aprova - salvar progresso'});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('lead_gate_view',{track:u.profile?.track||'',target:u.profile?.target||''});}
+ if(!u.trial.leadGateTracked){u.trial.leadGateTracked=true;usave();if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('LeadGateView',{content_name:'Aprova - tres etapas concluidas'});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('lead_gate_view',{track:u.profile?.track||'',target:u.profile?.target||'',after_steps:3});}
  return true;
 };
 window.closeTrialLead=function(){const gate=document.getElementById('leadGate');if(gate)gate.hidden=true;};
 window.captureTrialLead=function(){
- const name=(document.getElementById('leadName')?.value||'').trim();
  const phoneRaw=(document.getElementById('leadPhone')?.value||'').trim(),digits=phoneRaw.replace(/\D/g,''),national=digits.replace(/^55(?=\d{10,11}$)/,''),phone='+55'+national;
- const hours=Number(document.getElementById('leadHours')?.value||2),marketingConsent=!!document.getElementById('leadMarketing')?.checked;
- if(name.length<2)return alert('Digite seu nome para salvar o progresso.');
  if(national.length<10||national.length>11)return alert('Informe um WhatsApp válido com DDD.');
- u.profile={...(u.profile||{}),name,phone,hours,marketingConsent,email:u.profile?.email||''};u.trial.leadCaptured=true;u.trial.leadCapturedAt=u.trial.leadCapturedAt||Date.now();
- const flow=u.trial.pendingLeadFlow||'contest',next=Number(u.trial.pendingLeadStage)||1;delete u.trial.pendingLeadFlow;delete u.trial.pendingLeadStage;
- if(!u.trial.leadEventTracked){u.trial.leadEventTracked=true;if(typeof window.aprovaTrack==='function'){window.aprovaTrack('Lead',{content_name:'Aprova - progresso salvo',content_category:u.profile?.track||''});window.aprovaTrack('CompleteRegistration',{content_name:'Aprova - teste continuado',content_category:u.profile?.track||'',status:true});}if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_lead',{...analyticsLeadIdentity(),track:u.profile?.track||'',target:u.profile?.target||'',hours});}
+ u.profile={...(u.profile||{}),phone,email:u.profile?.email||'',hours:Number(u.profile?.hours||2),marketingConsent:false};u.trial.leadCaptured=true;u.trial.leadCapturedAt=u.trial.leadCapturedAt||Date.now();
+ const flow=u.trial.pendingLeadFlow||'contest',next=Number(u.trial.pendingLeadStage)||3;delete u.trial.pendingLeadFlow;delete u.trial.pendingLeadStage;
+ if(!u.trial.leadEventTracked){u.trial.leadEventTracked=true;if(typeof window.aprovaTrack==='function'){window.aprovaTrack('Lead',{content_name:'Aprova - WhatsApp apos 3 etapas',content_category:u.profile?.track||''});window.aprovaTrack('CompleteRegistration',{content_name:'Aprova - teste continuado',content_category:u.profile?.track||'',status:true});}if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('trial_lead',{...analyticsLeadIdentity(),track:u.profile?.track||'',target:u.profile?.target||'',after_steps:3});}
  usave();const gate=document.getElementById('leadGate');if(gate)gate.hidden=true;
  if(flow==='oab'&&typeof setOabStage==='function')setOabStage(next);else if(flow==='contest'&&typeof setContestStage==='function')setContestStage(next);else if(typeof setEngineStage==='function')setEngineStage(next);
 };

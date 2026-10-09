@@ -22,3 +22,23 @@
 .consent-line input{width:auto!important;margin:3px 0 0!important;transform:scale(1.15)}
 .paywall-modal label{text-align:left}.paywall-modal label input{text-align:left}
 @media(max-width:600px){.trial-overlay{padding:14px}.trial-mini,.lead-gate-modal{padding:22px}.trial-mini h2,.lead-gate-modal h2{font-size:27px}.trial-points{gap:6px}.trial-points span{font-size:11px}.paywall-modal{padding:20px}}
+
+/* Funnel v3 — teste imediato, telefone após 3 etapas, feedback e planos */
+.trial-launch{width:min(430px,100%);text-align:center;padding:34px 28px}
+.launch-start{font-size:20px;padding:18px 22px;border-radius:16px;margin:0}
+.feedback-choice-grid{display:grid;gap:10px;margin:18px 0}
+.feedback-choice-grid button{border:1px solid #cfdae7;background:#f8fbff;color:#173c68;border-radius:14px;padding:15px 16px;font-size:16px;font-weight:900;cursor:pointer}
+.feedback-choice-grid button:hover{border-color:#1f6feb;background:#eef5ff}
+.plan-choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.plan-card{position:relative;display:flex;min-height:150px;flex-direction:column;justify-content:center;align-items:center;gap:7px;border:2px solid #d8e2ed;background:#fff;color:#173c68;border-radius:18px;padding:18px 12px;cursor:pointer}
+.plan-card strong{font-size:30px;line-height:1}
+.plan-card small{margin:0!important;color:#64748b!important}
+.plan-card.selected{border-color:#1f6feb;box-shadow:0 0 0 3px #1f6feb1c;background:#f6faff}
+.plan-card.plan-best{border-color:#38a169;background:linear-gradient(180deg,#f2fff7,#fff)}
+.plan-card.plan-best.selected{border-color:#177245;box-shadow:0 0 0 3px #17724522}
+.plan-kicker{font-size:11px;font-weight:950;letter-spacing:.08em;color:#1f6feb;background:#edf4ff;border-radius:999px;padding:6px 8px}
+.plan-best .plan-kicker{color:#126b43;background:#e5f8ed}
+#checkoutEmailBox{margin-top:12px;padding-top:8px;border-top:1px solid #e7edf4}
+@media(max-width:600px){.trial-launch{padding:28px 22px}.launch-start{font-size:18px}.plan-choice-grid{grid-template-columns:1fr}.plan-card{min-height:125px}.plan-card strong{font-size:28px}}
+.trial-modal.trial-launch{background:transparent;box-shadow:none;padding:0;overflow:visible;width:min(360px,100%)}
+.trial-modal.trial-launch .launch-start{margin:0;box-shadow:0 18px 45px #0005}
