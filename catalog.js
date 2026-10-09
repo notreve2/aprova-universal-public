@@ -14,7 +14,7 @@ function loadAprovaScript(src){
 }
 async function loadAprovaCatalog(){
  try{
-  await loadAprovaScript('validated_course_data.js?v=1');
+  await loadAprovaScript('validated_course_data.js?v=2');
   if(window.APROVA_VALIDATED_COURSE_IDS)window.APROVA_VALIDATED_COURSE_IDS.forEach(id=>DETAILED_PUBLIC_COURSE_IDS.add(id));
   const [c,s]=await Promise.all([fetch('data/catalog.json?ts='+Date.now()),fetch('data/sources.json?ts='+Date.now())]);
   const cj=await c.json(),sj=await s.json(),curated=Array.isArray(window.APROVA_CURATED_COURSES)?window.APROVA_CURATED_COURSES:[],curatedIds=new Set(curated.map(x=>x.id));
@@ -84,7 +84,7 @@ function renderCatalog(failed=false){const el=document.getElementById('catalogo'
 function filterCatalog(){const q=norm(document.getElementById('catalogSearch')?.value),b=document.getElementById('catalogBanca')?.value||'';const list=publicCatalogItems().filter(x=>(!b||x.banca===b)&&(!q||norm([x.title,x.banca,x.status,...(x.tags||[])].join(' ')).includes(q))).slice(0,100);const el=document.getElementById('catalogList');if(!el)return;el.innerHTML=list.length?list.map(x=>{const dateLabel=x.exam_date?`Prova: ${new Date(x.exam_date+'T12:00:00').toLocaleDateString('pt-BR')}`:'Data da prova: aguardando publicação oficial';return `<article class="catalog-card"><div><span class="pill">${x.banca}</span><h3>${x.title}</h3><p class="muted">${dateLabel} • ${x.status}</p></div><div class="catalog-actions"><button class="btn good" onclick="selectCatalogItem('${x.id}')">Estudar este</button><a class="btn secondary linkbtn" href="${x.source_url}" target="_blank" rel="noopener">Fonte oficial ↗</a></div></article>`}).join(''):'<p class="muted">Nenhum curso já validado encontrado com esse filtro.</p>';}
 async function bootValidatedCourseEngine(){
  try{
-  await loadAprovaScript('validated_course_engine.js?v=1');window.APROVA_VALIDATED_ENGINE_READY=true;
+  await loadAprovaScript('validated_course_engine.js?v=2');window.APROVA_VALIDATED_ENGINE_READY=true;
   await loadAprovaScript('exam_guard.js?v=1');
   if(typeof populateTrialCourseOptions==='function')populateTrialCourseOptions();
   if(aprovaCatalog.loaded){enrichTargetList();renderCatalog();}
