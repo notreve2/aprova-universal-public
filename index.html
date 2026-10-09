@@ -21,21 +21,17 @@
     });
   </script>
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=12" />
-  <link rel="stylesheet" href="engine.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=13" />
+  <link rel="stylesheet" href="engine.css?v=4" />
 </head>
 <body>
   <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2205454249646346&ev=PageView&noscript=1" /></noscript>
   <div id="trialGate" class="trial-overlay">
-    <div class="trial-modal">
-      <span class="trial-badge">PRIMEIRA ETAPA GRÁTIS</span>
-      <h2>Comece sem pagar.<br>Conclua a primeira etapa.</h2>
-      <p>Escolha sua prova e diga quanto tempo pode estudar por dia. O sistema libera a primeira matéria completa gratuitamente e conduz cada ação até o final.</p>
-      <div class="trial-points"><span>✓ Primeira matéria completa</span><span>✓ Sem cobrança agora</span><span>✓ Acesso imediato</span></div>
-      <label>Seu nome<input id="trialName" type="text" placeholder="Como devemos chamar você?"></label>
-      <label>Seu e-mail<input id="trialEmail" type="email" placeholder="voce@email.com"></label>
-      <label>Seu WhatsApp<input id="trialPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(79) 99999-9999"></label>
-      <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.35"><input id="trialMarketing" type="checkbox" style="width:auto;margin-top:2px"><span>Quero receber pelo WhatsApp lembretes do meu teste, conteúdos e ofertas do Aprova. Posso cancelar a qualquer momento.</span></label>
+    <div class="trial-modal trial-mini">
+      <span class="trial-badge">TESTE GRÁTIS • SEM CADASTRO AGORA</span>
+      <h2>Teste primeiro.<br>Cadastre-se só para continuar.</h2>
+      <p>Escolha o tipo de prova e entre direto na primeira explicação. Nada de nome, e-mail ou telefone antes de você ver o Aprova funcionando.</p>
+      <div class="trial-points"><span>✓ Sem cobrança agora</span><span>✓ Primeira explicação imediata</span><span>✓ Cadastro só depois de testar</span></div>
       <label>O que você está estudando?
         <select id="trialTrack" onchange="updateTrackFields()">
           <option value="concurso">Concurso público</option>
@@ -48,26 +44,40 @@
           <option value="outro">Outra prova</option>
         </select>
       </label>
-      <label>Qual prova, órgão ou cargo?
-        <input id="trialTarget" list="popularTargets" type="text" onchange="applyOfficialExamMeta(this.value)" onblur="applyOfficialExamMeta(this.value)" placeholder="Ex.: PC-BA Investigador, TRT8, SEFAZ...">
+      <label>Qual prova, órgão ou cargo? <span class="muted">(opcional)</span>
+        <input id="trialTarget" list="popularTargets" type="text" onchange="applyOfficialExamMeta(this.value)" onblur="applyOfficialExamMeta(this.value)" placeholder="Ex.: PC-BA Investigador, OAB 2ª fase, TRT8...">
         <datalist id="popularTargets">
-          <option value="PC-BA — Investigador / Escrivão"><option value="Polícia Civil do Paraná — FGV"><option value="DATAPREV — FGV"><option value="CNU 2 — FGV"><option value="TRT8 — FCC"><option value="SEFAZ — Área Fiscal"><option value="Polícia Penal — Cebraspe"><option value="ENAM — FGV"><option value="ENAC — FGV">
+          <option value="PC-BA — Investigador / Escrivão"><option value="47º Exame de Ordem Unificado"><option value="Polícia Civil do Paraná — FGV"><option value="DATAPREV — FGV"><option value="CNU 2 — FGV"><option value="TRT8 — FCC"><option value="SEFAZ — Área Fiscal"><option value="Polícia Penal — Cebraspe"><option value="ENAM — FGV"><option value="ENAC — FGV">
         </datalist>
       </label>
-      <label id="areaWrap" style="display:none">Área / especialidade<select id="trialArea"><option value="geral">Plano automático</option></select></label>
-      <label>Quanto tempo você pretende estudar por dia?
-        <select id="trialHours"><option value="0.5">30 minutos</option><option value="1">1 hora</option><option value="1.5">1h30</option><option value="2" selected>2 horas</option><option value="3">3 horas</option><option value="4">4 horas</option><option value="5">5 horas</option><option value="6">6 horas ou mais</option></select>
-      </label>
-      <label>Data da prova <span class="muted">(preenchida automaticamente quando houver edital)</span><input id="trialExamDate" type="date"></label>
-      <button class="btn trial-start" onclick="startFreeTrial()">Começar minha primeira etapa →</button>
-      <small>Nenhum pagamento é solicitado para concluir sua primeira etapa.</small>
+      <button class="btn trial-start" onclick="startFreeTrial()">Começar o teste grátis agora →</button>
+      <small>Você verá valor antes de informar seus dados. Nenhum pagamento é solicitado para testar.</small>
     </div>
   </div>
-  <div id="paywall" class="trial-overlay" hidden><div class="trial-modal paywall-modal"><span class="trial-badge">PRIMEIRA ETAPA CONCLUÍDA</span><h2>Continue seu plano automático.</h2><p>Você já viu o método completo funcionando. Seu progresso está salvo. Libere o acesso para iniciar a segunda matéria e continuar o plano, revisões, flashcards, PDF e áudio.</p><div class="price-box installment-box"><small>ACESSO COMPLETO</small><strong>10x de R$ 19,99</strong><span>ou R$ 199,90 no cartão • escolha suas parcelas no Mercado Pago</span></div><button class="btn trial-start" onclick="goToCheckout('card')">Pagar com cartão →</button><button class="btn pix-start" onclick="goToCheckout('pix')"><span>PIX</span><strong>R$ 179,90</strong><small>economize R$ 20,00</small></button><button class="text-btn" onclick="closePaywallPreview()">Agora não</button><small>Checkout Mercado Pago • parcelamento conforme condições exibidas no pagamento • acesso após confirmação.</small></div></div>
+
+  <div id="leadGate" class="trial-overlay" hidden>
+    <div class="trial-modal lead-gate-modal">
+      <span class="trial-badge">CONTINUE SEU TESTE</span>
+      <h2>Salve seu progresso e continue.</h2>
+      <p>Agora precisamos só do essencial para manter seu teste salvo e personalizar a sequência. O e-mail fica para a hora da compra.</p>
+      <div class="trial-points"><span>✓ Só nome + WhatsApp</span><span>✓ Sem pagamento</span><span>✓ Aula continua de onde parou</span></div>
+      <label>Como podemos chamar você?<input id="leadName" type="text" autocomplete="given-name" placeholder="Seu primeiro nome"></label>
+      <label>Seu WhatsApp<input id="leadPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(79) 99999-9999"></label>
+      <label>Quanto tempo você pretende estudar por dia?
+        <select id="leadHours"><option value="0.5">30 minutos</option><option value="1">1 hora</option><option value="1.5">1h30</option><option value="2" selected>2 horas</option><option value="3">3 horas</option><option value="4">4 horas</option><option value="5">5 horas</option><option value="6">6 horas ou mais</option></select>
+      </label>
+      <label class="consent-line"><input id="leadMarketing" type="checkbox"><span>Quero receber pelo WhatsApp lembretes do meu teste, conteúdos e ofertas do Aprova. Posso cancelar a qualquer momento.</span></label>
+      <button class="btn trial-start" onclick="captureTrialLead()">Salvar e continuar minha aula →</button>
+      <button class="text-btn full" onclick="closeTrialLead()">Voltar ao teste</button>
+      <small>Nenhuma cobrança é feita nesta etapa.</small>
+    </div>
+  </div>
+
+  <div id="paywall" class="trial-overlay" hidden><div class="trial-modal paywall-modal"><span class="trial-badge">PRIMEIRA AULA CONCLUÍDA</span><h2>Seu teste terminou. Quer continuar o plano?</h2><p>Você concluiu a primeira aula e viu o método funcionando. Seu progresso está salvo. Para liberar as próximas matérias, revisões, flashcards, PDFs e áudios, escolha uma forma de pagamento.</p><div class="price-box installment-box"><small>ACESSO COMPLETO</small><strong>10x de R$ 19,99</strong><span>ou R$ 199,90 no cartão • escolha suas parcelas no Mercado Pago</span></div><label>Seu e-mail para receber o acesso<input id="checkoutEmail" type="email" autocomplete="email" placeholder="voce@email.com"></label><button class="btn trial-start" onclick="goToCheckout('card')">Continuar com cartão →</button><button class="btn pix-start" onclick="goToCheckout('pix')"><span>PIX</span><strong>R$ 179,90</strong><small>economize R$ 20,00</small></button><button class="text-btn" onclick="closePaywallPreview()">Agora não</button><small>Você só paga após confirmar no Mercado Pago. Não existe cobrança automática ao terminar a aula.</small></div></div>
   <header class="topbar"><div><div class="eyebrow" id="examEyebrow">PLANO INTELIGENTE • ESTUDO GUIADO</div><h1 id="areaTitle">Sua próxima aprovação</h1></div><div class="topbar-actions"><div class="countdown" id="countdown">—</div><button class="logout-btn" type="button" onclick="logoutAprova()" aria-label="Deslogar da plataforma">Sair</button></div></header>
   <nav class="tabs" aria-label="Navegação principal"><button data-tab="hoje" class="active">Hoje</button><button data-tab="cronograma">Cronograma</button><button data-tab="catalogo">Catálogo</button><button data-tab="pecas">Conteúdo</button><button data-tab="vade">Material</button><button data-tab="questoes">Questões</button><button data-tab="simulados">Simulados</button><button data-tab="revisao">Revisão</button><button data-tab="erros">Erros</button></nav>
   <main><div class="smart-strip" id="smartStrip"><b>Plano automático:</b> calculando seus dias restantes…</div><section id="hoje" class="panel active"></section><section id="cronograma" class="panel"></section><section id="catalogo" class="panel"></section><section id="pecas" class="panel"></section><section id="vade" class="panel"></section><section id="questoes" class="panel"></section><section id="simulados" class="panel"></section><section id="revisao" class="panel"></section><section id="erros" class="panel"></section></main>
   <footer><span>Plataforma independente • estudo guiado com fontes oficiais e conteúdo próprio</span><span id="progressText"></span></footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="analytics.js?v=2"></script><script src="app.js?v=6"></script><script src="universal.js?v=8"></script><script src="catalog.js?v=9"></script><script src="subject_engine.js?v=11"></script><script src="mastery.js?v=1"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="analytics.js?v=2"></script><script src="app.js?v=6"></script><script src="universal.js?v=9"></script><script src="catalog.js?v=9"></script><script src="subject_engine.js?v=12"></script><script src="mastery.js?v=2"></script>
 </body>
 </html>

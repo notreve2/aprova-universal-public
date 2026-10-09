@@ -27,10 +27,13 @@ function restoreTrialUniversal(){if(u.sessionLoggedOut)return;if(!u.trial.starte
 const PAYMENT_API='https://aprova-payments-production.up.railway.app';
 async function goToCheckout(mode='card'){
  try{
-  const price=mode==='pix'?179.90:199.90,ident={name:u.profile?.name||'',email:u.profile?.email||'',phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent};
+  const email=((u.profile?.email||'').trim()||(document.getElementById('checkoutEmail')?.value||'').trim());
+  if(!/^\S+@\S+\.\S+$/.test(email))return alert('Informe um e-mail válido para receber e recuperar seu acesso.');
+  u.profile={...(u.profile||{}),email};usave();
+  const price=mode==='pix'?179.90:199.90,ident={name:u.profile?.name||'',email,phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent};
   if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:'Aprova - acesso completo',content_category:mode,value:price,currency:'BRL'});
   if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_start',{...ident,mode,value:price});
-  const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,email:u.profile?.email||'',name:u.profile?.name||'',phone:u.profile?.phone||''})});
+  const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,email,name:u.profile?.name||'',phone:u.profile?.phone||''})});
   const data=await res.json().catch(()=>({}));
   if(!res.ok||!data.checkout_url)throw new Error(data.error||'Checkout indisponível.');
   localStorage.setItem('aprova-pending-order',data.order_id||'');

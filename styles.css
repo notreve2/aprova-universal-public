@@ -13,3 +13,12 @@
 .mid-offer{margin:24px 0 14px;padding:22px;border:2px solid #0f7a46;border-radius:22px;background:linear-gradient(180deg,#f2fff7 0%,#ffffff 100%);box-shadow:0 12px 30px rgba(15,122,70,.12)}
 .mid-offer-badge{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;color:#0f7a46;background:#dff8e9;border-radius:999px;padding:7px 11px;margin-bottom:10px}
 .mid-offer h2{margin:4px 0 8px}.mid-offer p{margin:7px 0 12px}.mid-offer-price{display:flex;align-items:baseline;gap:8px;margin:14px 0 2px}.mid-offer-price strong{font-size:30px;line-height:1;color:#0d5f3a}.mid-offer-price span{font-weight:700;color:#52657b}.mid-offer-once{font-size:14px;color:#3d5269}.mid-buy{font-size:17px;padding:15px 16px;margin-top:8px}.mid-continue{display:block;width:100%;margin:12px auto 0;border:0;background:transparent;color:#60748a;text-decoration:underline;font-weight:700;cursor:pointer;padding:8px}.mid-continue:hover{color:#173b63}@media(max-width:640px){.mid-offer{padding:18px 16px}.mid-offer-price{display:block}.mid-offer-price strong{display:block;font-size:28px;margin-bottom:4px}}
+
+/* Funnel v2 — valor antes do cadastro */
+.trial-mini{width:min(520px,100%)}
+.trial-mini h2{margin-bottom:10px}.trial-mini>p{margin-top:0}.trial-mini .trial-points{margin:14px 0 18px}
+.lead-gate-modal{width:min(520px,100%)}
+.consent-line{display:flex!important;align-items:flex-start;gap:10px;font-size:13px!important;line-height:1.4!important;margin:14px 0!important}
+.consent-line input{width:auto!important;margin:3px 0 0!important;transform:scale(1.15)}
+.paywall-modal label{text-align:left}.paywall-modal label input{text-align:left}
+@media(max-width:600px){.trial-overlay{padding:14px}.trial-mini,.lead-gate-modal{padding:22px}.trial-mini h2,.lead-gate-modal h2{font-size:27px}.trial-points{gap:6px}.trial-points span{font-size:11px}.paywall-modal{padding:20px}}
