@@ -84,8 +84,8 @@ function renderCatalog(failed=false){const el=document.getElementById('catalogo'
 function filterCatalog(){const q=norm(document.getElementById('catalogSearch')?.value),b=document.getElementById('catalogBanca')?.value||'';const list=publicCatalogItems().filter(x=>(!b||x.banca===b)&&(!q||norm([x.title,x.banca,x.status,...(x.tags||[])].join(' ')).includes(q))).slice(0,100);const el=document.getElementById('catalogList');if(!el)return;el.innerHTML=list.length?list.map(x=>{const dateLabel=x.exam_date?`Prova: ${new Date(x.exam_date+'T12:00:00').toLocaleDateString('pt-BR')}`:'Data da prova: aguardando publicação oficial';return `<article class="catalog-card"><div><span class="pill">${x.banca}</span><h3>${x.title}</h3><p class="muted">${dateLabel} • ${x.status}</p></div><div class="catalog-actions"><button class="btn good" onclick="selectCatalogItem('${x.id}')">Estudar este</button><a class="btn secondary linkbtn" href="${x.source_url}" target="_blank" rel="noopener">Fonte oficial ↗</a></div></article>`}).join(''):'<p class="muted">Nenhum curso já validado encontrado com esse filtro.</p>';}
 async function bootValidatedCourseEngine(){
  try{
-  await loadAprovaScript('validated_course_engine.js?v=2');window.APROVA_VALIDATED_ENGINE_READY=true;
-  await loadAprovaScript('exam_guard.js?v=1');
+  await loadAprovaScript('validated_course_engine.js?v=3');window.APROVA_VALIDATED_ENGINE_READY=true;
+  await loadAprovaScript('exam_guard.js?v=2');
   if(typeof populateTrialCourseOptions==='function')populateTrialCourseOptions();
   if(aprovaCatalog.loaded){enrichTargetList();renderCatalog();}
  }catch(e){console.warn('Perfis adicionais validados não puderam ser carregados',e);}
