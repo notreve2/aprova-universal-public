@@ -12,6 +12,10 @@
     return q;
    };
   }
-  const ui=document.createElement('script');ui.src='validated_course_ui.js?v=1';ui.async=false;document.head.appendChild(ui);
+  const ui=document.createElement('script');ui.src='validated_course_ui.js?v=1';ui.async=false;
+  ui.addEventListener('load',()=>{
+   const patch=document.createElement('script');patch.src='trial_lead_patch.js?v=1';patch.async=false;document.head.appendChild(patch);
+  },{once:true});
+  document.head.appendChild(ui);
  }catch(e){console.warn('Trava de formato de questão indisponível',e);}
 })();
