@@ -81,7 +81,7 @@ function filterCatalog(){const q=norm(document.getElementById('catalogSearch')?.
 async function bootValidatedCourseEngine(){
  try{
   await loadAprovaScript('validated_course_engine.js?v=3');window.APROVA_VALIDATED_ENGINE_READY=true;
-  await loadAprovaScript('exam_guard.js?v=3');
+  await loadAprovaScript('exam_guard.js?v=4');
   if(typeof populateTrialCourseOptions==='function')populateTrialCourseOptions();
   if(aprovaCatalog.loaded){enrichTargetList();renderCatalog();}
  }catch(e){console.warn('Perfis adicionais validados não puderam ser carregados',e);}

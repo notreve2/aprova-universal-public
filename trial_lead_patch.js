@@ -1,6 +1,6 @@
 /* Aprova — lead no início + proteção de QA do teste gratuito */
 (function(){
-  const KNOWN_SUBJECT_AUDIO=new Set(['administrativo','atualidades','constitucional','direitoshumanos','informatica','legislacao','penal','portugues','processopenal','raciocinio']);
+  const KNOWN_SUBJECT_AUDIO=new Set(['administracaopoliticas','administracaopublica','administrativo','afo','ambiental','analisedemonstracoes','arquiteturasistemas','arquivologia','atuacao','atualidades','auditoriaavaliacao','auditoriacontratacoes','auditoriafiscal','auditoriagovernamental','biologia','ciberseguranca','cienciadados','cienciasnatureza','cienciassociais','civil','conhecimentosalagoas','constitucional','consumidor','contabilidade','contabilidadegeral','contabilidadepublica','controleexterno','desenvolvimentoseguro','desenvolvimentosistemas','direitopublicocontrole','direitoshumanos','eca','economia','economiasetorpublico','eleitoral','empresarial','engenhariadados','engenhariasoftware','especificos','estadodemocracia','estatistica','estatisticaprogramacao','eticaoab','eticapublica','evidenciasdadosia','filosofia','financascontpublica','financaspublicas','financeiro','fisica','gestaodadosia','gestaoservicosdigitais','governancariscos','igualdade','informatica','infraestruturatic','ingles','integridaderesponsabilizacao','inteligenciaartificial','internacional','legislacao','legislacaocbmal','legislacaogeral','legislacaoguarda','legislacaopenal','legislacaopmal','legislacaotribestadual','machinelearning','matematica','matematicafinanceira','mecanicageral','medicinalegal','nuvemvirtualizacao','pedagogia','penal','penalmilitar','penalprocessual','persistenciadados','politicasavaliacao','portugues','previdenciario','processocivil','processocontas','processopenal','processopenalmilitar','processotrabalho','quimica','raciocinio','realidadeacre','redessistemasdados','reformatributaria','sociedadebrasileira','trabalho','transparenciaouvidoria','tributario']);
   const fmtByBanca=b=>{b=String(b||'').toLowerCase();if(b.includes('cebraspe'))return'ce';if(b.includes('fgv')||b.includes('aocp'))return'abcde';return'';};
   const save=()=>{try{if(typeof usave==='function')usave();else localStorage.setItem('aprova-universal-v4',JSON.stringify(u));}catch(e){}};
   const identity=()=>({name:u?.profile?.name||'',email:u?.profile?.email||'',phone:u?.profile?.phone||'',marketing_consent:!!u?.profile?.marketingConsent});
@@ -93,13 +93,8 @@
     return report;
   };
 
-  function speakFallback(){
-    try{
-      if(!('speechSynthesis'in window))return alert('O áudio não está disponível neste navegador.');
-      const sub=typeof currentSubject==='function'?currentSubject():null;
-      const txt=sub?`Resumo de revisão. ${sub.name}. ${sub.summary}. ${(sub.flash||[]).map(f=>f[0]+': '+f[1]).join('. ')}`:`Resumo do seu estudo no Aprova.`;
-      speechSynthesis.cancel();const ut=new SpeechSynthesisUtterance(txt);ut.lang='pt-BR';ut.rate=.95;speechSynthesis.speak(ut);
-    }catch(e){alert('Não foi possível iniciar o áudio agora.');}
+  function noNaturalAudio(){
+    alert('O áudio natural desta matéria está sendo preparado. O Aprova não usa mais a voz automática do navegador.');
   }
   const baseSpeak=window.speakStudySummary;
   window.speakStudySummary=function(){
@@ -107,13 +102,13 @@
       if(typeof isOabMastery==='function'&&isOabMastery())return baseSpeak?.apply(this,arguments);
       const key=typeof currentSubjectKey==='function'?currentSubjectKey():'';
       if(KNOWN_SUBJECT_AUDIO.has(key)&&typeof baseSpeak==='function')return baseSpeak.apply(this,arguments);
-      return speakFallback();
-    }catch(e){return speakFallback();}
+      return noNaturalAudio();
+    }catch(e){return noNaturalAudio();}
   };
   const baseDownload=window.downloadMasterAudio;
   window.downloadMasterAudio=function(){
     try{if(typeof isOabMastery==='function'&&isOabMastery())return baseDownload?.apply(this,arguments);const key=typeof currentSubjectKey==='function'?currentSubjectKey():'';if(KNOWN_SUBJECT_AUDIO.has(key)&&typeof baseDownload==='function')return baseDownload.apply(this,arguments);}catch(e){}
-    alert('Este tema já tem áudio para ouvir no Aprova. O arquivo MP3 para download ainda não está disponível para esta matéria.');
+    alert('O arquivo de áudio natural desta matéria ainda não está disponível para download.');
   };
 
   function repairAudioElements(root=document){

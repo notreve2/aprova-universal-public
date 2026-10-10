@@ -21,11 +21,11 @@
   }
   const ui=document.createElement('script');ui.src='validated_course_ui.js?v=2';ui.async=false;
   ui.addEventListener('load',()=>{
-   const patch=document.createElement('script');patch.src='trial_lead_patch.js?v=2';patch.async=false;
+   const patch=document.createElement('script');patch.src='trial_lead_patch.js?v=3';patch.async=false;
    patch.addEventListener('load',()=>{
     const guard=document.createElement('script');guard.src='trial_quality_guard.js?v=1';guard.async=false;
     guard.addEventListener('load',()=>{
-     const conversion=document.createElement('script');conversion.src='trial_conversion_patch.js?v=1';conversion.async=false;document.head.appendChild(conversion);
+     const conversion=document.createElement('script');conversion.src='trial_conversion_patch.js?v=2';conversion.async=false;document.head.appendChild(conversion);
     },{once:true});
     document.head.appendChild(guard);
    },{once:true});

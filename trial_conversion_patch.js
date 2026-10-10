@@ -72,8 +72,8 @@
       return baseContestStageHtml?.apply(this,arguments)||'';
     }
     if(s===0){
-      if(d.index===0&&!d.startChosen)return `<div class="do-now">TESTE GRÁTIS • ESCOLHA SUA MATÉRIA</div><h2>Veja como o Aprova ensina em poucos minutos</h2><p class="muted center">Escolha uma matéria. O teste tem só 3 passos e já libera áudio e mapa mental em PDF.</p>${startSubjectChooser()}`;
-      return `${typeof examStructureCard==='function'?examStructureCard():''}<div class="do-now">1 DE 3 • ENTENDA RÁPIDO</div><h2>${sub.icon||'📘'} ${esc(sub.name)}</h2><div class="master-lesson"><div class="sticker">💡</div><div><b>Em linguagem simples</b><p>${esc(sub.summary)}</p></div></div><div class="master-finish-actions"><button class="btn secondary" onclick="speakStudySummary()">🎧 Ouvir resumo agora</button><button class="btn secondary" onclick="generateUniversalPDF()">🎨 Ver mapa mental em PDF</button><button class="text-btn" onclick="openFastTrialOffer()">Já quero ver os planos →</button></div>`;
+      if(d.index===0&&!d.startChosen)return `<div class="do-now">TESTE GRÁTIS • ESCOLHA SUA MATÉRIA</div><h2>Veja como o Aprova ensina em poucos minutos</h2><p class="muted center">Escolha uma matéria. O teste tem só 3 passos: uma explicação curta, uma questão e o resumo final com áudio e mapa mental em PDF.</p>${startSubjectChooser()}`;
+      return `${typeof examStructureCard==='function'?examStructureCard():''}<div class="do-now">1 DE 3 • ENTENDA RÁPIDO</div><h2>${sub.icon||'📘'} ${esc(sub.name)}</h2><div class="master-lesson"><div class="sticker">💡</div><div><b>Em linguagem simples</b><p>${esc(sub.summary)}</p></div></div><div class="master-finish-actions"><button class="text-btn" onclick="openFastTrialOffer()">Já quero ver os planos →</button></div>`;
     }
     if(s===1){
       const q=sub.questions[0],sel=d.masterAnswers?.[0],r=d.masterResults?.[0];
@@ -98,7 +98,7 @@
   window.oabStageHtml=function(){
     if(u?.trial?.paid)return baseOabStageHtml?.apply(this,arguments)||'';
     const m=oabCurrent(),s=Number(mastery.oab.stage)||0;
-    if(s===0)return `<div class="do-now">1 DE 3 • OAB EM POUCOS MINUTOS</div><h2>${esc(m.title)}</h2><div class="master-lesson"><div class="sticker">🧠</div><div><b>Entenda em uma frase</b><p>${esc(m.hook)}</p></div></div>${oabMap(m)}<div class="master-finish-actions"><button class="btn secondary" onclick="speakStudySummary()">🎧 Ouvir resumo agora</button><button class="btn secondary" onclick="generateUniversalPDF()">🎨 Mapa mental em PDF</button><button class="text-btn" onclick="openFastTrialOffer()">Já quero ver os planos →</button></div>`;
+    if(s===0)return `<div class="do-now">1 DE 3 • OAB EM POUCOS MINUTOS</div><h2>${esc(m.title)}</h2><div class="master-lesson"><div class="sticker">🧠</div><div><b>Entenda em uma frase</b><p>${esc(m.hook)}</p></div></div>${oabMap(m)}<div class="master-finish-actions"><button class="text-btn" onclick="openFastTrialOffer()">Já quero ver os planos →</button></div>`;
     if(s===1){const q=m.qa?.[0]||['Qual é o ponto central deste tema?',m.hook];return `<div class="do-now">2 DE 3 • EXEMPLO PRÁTICO</div><h2>${esc(q[0])}</h2><div class="qa-answer"><b>Resposta-modelo:</b><p>${esc(q[1])}</p></div><div class="callout"><b>Assim funciona no plano completo:</b> peça, fundamento, questões, correção e revisão ficam organizados em sequência.</div>`;}
     return `<div class="donehero"><div class="checkbig">✓</div><h2>Teste concluído</h2><p>Você já viu o método sem precisar atravessar nove telas.</p>${oabMap(m)}<div class="master-finish-actions"><button class="btn secondary" onclick="speakStudySummary()">🎧 Ouvir resumo</button><button class="btn secondary" onclick="generateUniversalPDF()">🎨 Mapa mental em PDF</button><button class="btn good" onclick="openFastTrialOffer()">Ver planos e continuar →</button></div><p class="muted center">Após o pagamento, o estudo completo da OAB volta ao fluxo normal.</p></div>`;
   };
