@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-09T16:10:48.858349+00:00",
+  "updated_at": "2026-10-10T15:20:57.322787+00:00",
   "count": 93,
   "scan_report": [
     {
@@ -441,7 +441,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-eqt-edital-2026.2-12.08.2026.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": "s 16h de 19/08/2026 prazo maximo para pagamento do boleto 20/08/2026 divulgacao dos locais da prova 21/09/2026 realizacao da prova de qualificacao tecnica geral 28/09/2026 realizacao da qualificacao tecnica geral para perito conta"
@@ -490,7 +490,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -506,7 +506,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -522,7 +522,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -538,7 +538,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -554,7 +554,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -570,7 +570,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital_cgm_-_retificado_2.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": " site 27/03/2023 12 envio dos titulos pelos candidatos (cargo: contador) 27/03/2023 - 10/04/2023 13 aplicacao da prova objetiva 02/04/2023 14 divulgacao do gabarito preliminar da prova objetiva 04/04/2023 15 interposicao de recursos contr"
@@ -587,7 +587,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -603,7 +603,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -619,7 +619,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -635,7 +635,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -651,7 +651,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -667,7 +667,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -683,7 +683,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-preliminar-pref-salvador-prof-e-coordenador-academico-01.2026-ret3.pdf",
       "exam_date_confidence": "official-explicit-event"
     },
@@ -699,7 +699,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-prefeitura-de-salvador-2026-guarda-retificado-1_1.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": "026 divulgacao da relacao candidato vaga 01/12/2026 publicacao dos locais de prova (cci) 11/01/2027 aplicacao da prova objetiva 17/01/2027 divulgacao do gabarito preliminar da prova objetiva 18/01/2027 prefeitura municipal do salvador edi"
@@ -716,7 +716,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown",
       "public_hidden": true
@@ -733,7 +733,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -765,7 +765,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma-previsto-rfb-final-19.09.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": "r de inscricao 09/02/2023 - 10/02/2023 10 publicacao da relacao definitiva de inscricao 24/02/23 11 aplicacao da prova objetiva e discursiva 19/03/23 12 publicacao do gabarito preliminar 21/03/23 13 interposicao de recursos contra o gabarito prelimi"
@@ -798,7 +798,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -814,7 +814,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital-consolidado-01.10-minuta.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -831,7 +831,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma-para-publicacao-10.09.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -848,7 +848,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -864,7 +864,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -880,7 +880,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital_retificado_3_1.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": "is para a realizacao das provas 07/11/2022 11 publicacao dos locais de provas no site 21/11/2022 12 aplicacao da prova objetiva 27/11/2022 13 divulgacao do gabarito preliminar da prova objetiva 28/11/2022 14 interposicao de recursos contr"
@@ -897,7 +897,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -913,7 +913,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -929,7 +929,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -945,7 +945,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -961,7 +961,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -977,7 +977,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -993,7 +993,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/sei_9998416_edital_consolidado.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1010,7 +1010,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-edital-2026.2-08.07.2026.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": "o) 07/08/2026 prazo maximo para pagamento do boleto 10/08/2026 divulgacao dos locais da prova (cci) 21/09/2026 aplicacao da prova 27/09/2026 divulgacao do gabarito preliminar da prova objetiva 28/09/2026 prazo para interposicao d"
@@ -1027,7 +1027,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cfc-edital-2026.3-05.10.2026.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1124,7 +1124,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/cronograma_enam-2026.2.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1141,7 +1141,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/minuta-edital-enac-2026.2-27.08.26-versao-final.pdf",
       "exam_date_confidence": "official-curated",
       "public_hidden": true
@@ -1259,7 +1259,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": "https://conhecimento.fgv.br/sites/default/files/concursos/edital_retificado_5.pdf",
       "exam_date_confidence": "official-explicit-event",
       "exam_event_context": "os homologados 20/09/2022 prova objetiva 1 1 publicacao dos locais de provas no site 03/10/2022 1 2 aplicacao da prova objetiva 09/10/2022 1 3 gabarito preliminar da prova objetiva 10/10/2022 1 4 interposicao de recursos contra o gabarito"
@@ -1404,7 +1404,7 @@
       "tags": [
         "FGV"
       ],
-      "last_seen": "2026-10-09",
+      "last_seen": "2026-10-10",
       "exam_date_source": null,
       "exam_date_confidence": "unknown"
     },
@@ -1547,7 +1547,7 @@
     }
   ],
   "date_enrichment": {
-    "run_at": "2026-10-09T16:10:48.858349+00:00",
+    "run_at": "2026-10-10T15:20:57.322787+00:00",
     "dated": 30,
     "unknown": 63,
     "method": "strict-explicit-event"
