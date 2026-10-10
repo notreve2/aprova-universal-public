@@ -42,6 +42,22 @@
     return true;
   };
 
+  const baseRenderMasterReview=window.renderMasterReview;
+  function trialFinalSummaryReached(){
+    if(u?.trial?.paid)return true;
+    try{
+      if(typeof isOabMastery==='function'&&isOabMastery())return Number(mastery?.oab?.stage||0)>=2;
+      return typeof contestState==='function'&&Number(contestState().masterStage||0)>=2;
+    }catch(e){return false;}
+  }
+  window.renderMasterReview=function(){
+    if(u?.trial?.paid)return baseRenderMasterReview?.apply(this,arguments);
+    if(trialFinalSummaryReached())return baseRenderMasterReview?.apply(this,arguments);
+    const el=document.getElementById('revisao');
+    if(el)el.innerHTML='<div class="card"><span class="pill">REVISÃO DO TESTE</span><h2>Áudio e mapa mental no resumo final</h2><p class="muted">Conclua a explicação curta e a questão do teste. No último passo você poderá ouvir o resumo e acessar o mapa mental em PDF.</p></div>';
+  };
+  setTimeout(()=>window.renderMasterReview?.(),0);
+
   const baseContestStageHtml=window.contestStageHtml;
   const baseContestNav=window.contestNav;
   const baseContestCanNext=window.contestCanNext;
