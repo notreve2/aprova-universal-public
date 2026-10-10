@@ -25,21 +25,17 @@ async function loadAprovaCatalog(){
 
 function isUpcomingCatalogItem(x){
  if(x.public_hidden) return false;
- // Fail-closed: o robô pode descobrir novos editais, mas eles só aparecem ao aluno depois de cargo, matérias e estrutura serem validados no Aprova.
  if(!DETAILED_PUBLIC_COURSE_IDS.has(x.id)) return false;
- // Cursos curados adicionais só entram quando o motor de cargos/disciplinas já terminou de carregar.
  if(window.APROVA_VALIDATED_COURSE_IDS?.has(x.id)&&!window.APROVA_VALIDATED_ENGINE_READY)return false;
  if(['aocp-saebba26','pcba-2026-inv-esc','fgv-37a4b75e30','fgv-cpnu2','fgv-pcpr26','fgv-seplagrj26','fgv-tjap-juiz26','fgv-ebserh26','aocp-sadpe-educ26','quad-sedesdf26','fgv-tjpe-juiz26'].includes(x.id)) return false;
  const today=new Date(); today.setHours(0,0,0,0);
  const status=norm(x.status||'');
  if(/historico|realizada|encerrado|finalizado|homologado|prova realizada/.test(status)) return false;
- // Regra principal: havendo data oficial da prova, qualquer prova anterior a hoje sai do catálogo público.
  if(x.exam_date){
    const d=new Date(x.exam_date+'T00:00:00');
    if(Number.isNaN(d.getTime())) return false;
    return d>=today;
  }
- // Sem data de prova, só permanece se estiver explicitamente ativo e tiver sido visto recentemente.
  const blob=norm([x.id,x.title,x.source_url].join(' '));
  const hasCurrentYear=/(?:^|[^0-9])(2026|2027)(?:[^0-9]|$)/.test(blob)||/(?:^|[-_])(26|27)(?:$|[-_])/.test(norm(x.id||''));
  const oldOnly=/(?:^|[^0-9])(2022|2023|2024|2025)(?:[^0-9]|$)/.test(blob) && !hasCurrentYear;
@@ -85,7 +81,7 @@ function filterCatalog(){const q=norm(document.getElementById('catalogSearch')?.
 async function bootValidatedCourseEngine(){
  try{
   await loadAprovaScript('validated_course_engine.js?v=3');window.APROVA_VALIDATED_ENGINE_READY=true;
-  await loadAprovaScript('exam_guard.js?v=2');
+  await loadAprovaScript('exam_guard.js?v=3');
   if(typeof populateTrialCourseOptions==='function')populateTrialCourseOptions();
   if(aprovaCatalog.loaded){enrichTargetList();renderCatalog();}
  }catch(e){console.warn('Perfis adicionais validados não puderam ser carregados',e);}
