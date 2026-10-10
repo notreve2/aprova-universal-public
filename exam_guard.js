@@ -23,7 +23,11 @@
   ui.addEventListener('load',()=>{
    const patch=document.createElement('script');patch.src='trial_lead_patch.js?v=2';patch.async=false;
    patch.addEventListener('load',()=>{
-    const guard=document.createElement('script');guard.src='trial_quality_guard.js?v=1';guard.async=false;document.head.appendChild(guard);
+    const guard=document.createElement('script');guard.src='trial_quality_guard.js?v=1';guard.async=false;
+    guard.addEventListener('load',()=>{
+     const conversion=document.createElement('script');conversion.src='trial_conversion_patch.js?v=1';conversion.async=false;document.head.appendChild(conversion);
+    },{once:true});
+    document.head.appendChild(guard);
    },{once:true});
    document.head.appendChild(patch);
   },{once:true});
