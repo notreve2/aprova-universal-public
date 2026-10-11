@@ -1,6 +1,6 @@
 /* Aprova — proteção do fluxo gratuito + qualidade das questões de reforço. */
 (function(){
- const VERSION='2026-10-11.3';
+ const VERSION='2026-10-11.4';
  function h(s){let x=2166136261;s=String(s||'');for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619);}return x>>>0;}
  function fmt(){try{return typeof courseQuestionFormat==='function'?courseQuestionFormat():(u?.profile?.questionFormat||'');}catch(e){return'';}}
  function explain(q,correct){const old=String(q?.why||'').trim();if(old.length>=35)return old;return `${old?old+' ':''}A alternativa correta é “${correct}”. Compare a regra com cada opção: as demais alteram um requisito, uma consequência ou um conceito essencial do conteúdo cobrado.`;}
@@ -16,7 +16,8 @@
    const pos=h(seed+'|multi')%count,out=wrong.slice(0,count-1);out.splice(pos,0,correct);
    return {...base,choices:out,ok:pos,why:explain(q,correct),authorial:true};
  }
- function resetLeadOverlay(){try{const g=document.getElementById('leadGate');if(g)g.hidden=true;if(u?.trial){delete u.trial.pendingLeadFlow;delete u.trial.pendingLeadStage;}}catch(e){}}
+ function flowNow(){try{return u?.trial?.pendingLeadFlow||'contest'}catch(e){return'contest'}}
+ function resetLeadOverlay(){try{const g=document.getElementById('leadGate');if(g)g.hidden=true;document.body?.classList.remove('aprova-lead-authorized');if(u?.trial){delete u.trial.pendingLeadFlow;delete u.trial.pendingLeadStage;}}catch(e){}}
  function completedThree(flow){
    try{
      if(flow==='contest')return Number(contestState()?.masterStage||0)>=2;
@@ -24,6 +25,13 @@
      if(flow==='oab-iframe')return true;
      const d=ensureDay(),idx=typeof engineStageIndex==='function'?engineStageIndex(d.stage||0):0;return idx>=2;
    }catch(e){return false;}
+ }
+ function gateAuthorized(){try{return completedThree(flowNow())}catch(e){return false}}
+ function installLeadGuard(){
+   if(!document.getElementById('aprovaLeadGuardStyle')){const st=document.createElement('style');st.id='aprovaLeadGuardStyle';st.textContent='#leadGate{display:none!important}body.aprova-lead-authorized #leadGate:not([hidden]){display:grid!important}';document.head.appendChild(st);}
+   const gate=document.getElementById('leadGate');if(!gate||gate.dataset.guardInstalled==='1')return;gate.dataset.guardInstalled='1';
+   const guard=()=>{if(!gate.hidden&&!gateAuthorized()){gate.hidden=true;document.body?.classList.remove('aprova-lead-authorized');}else if(!gate.hidden&&gateAuthorized())document.body?.classList.add('aprova-lead-authorized');};
+   new MutationObserver(guard).observe(gate,{attributes:true,attributeFilter:['hidden']});guard();
  }
  function addConsent(){
    const box=document.querySelector('#leadGate .lead-gate-modal');if(!box||document.getElementById('leadMarketingConsent'))return;
@@ -38,12 +46,13 @@
  }
  function boot(){
    if(typeof window.requireTrialLeadCapture!=='function'||typeof window.captureTrialLead!=='function'||typeof u==='undefined'){setTimeout(boot,120);return;}
-   if(window.__APROVA_EXPERIENCE_QUALITY===VERSION){loadQaSuite();return;}
+   if(window.__APROVA_EXPERIENCE_QUALITY===VERSION){installLeadGuard();loadQaSuite();return;}
    window.__APROVA_EXPERIENCE_QUALITY=VERSION;
    const baseRequire=window.requireTrialLeadCapture;
    window.requireTrialLeadCapture=function(flow,nextStage){
      if(u.trial?.paid||u.trial?.leadCaptured)return false;
-     if(!completedThree(flow||'contest'))return false;
+     if(!completedThree(flow||'contest')){resetLeadOverlay();return false;}
+     document.body?.classList.add('aprova-lead-authorized');
      return baseRequire.apply(this,arguments);
    };
    const baseCapture=window.captureTrialLead;
@@ -51,17 +60,19 @@
      const consent=!!document.getElementById('leadMarketingConsent')?.checked;
      const r=baseCapture.apply(this,arguments);
      try{u.profile={...(u.profile||{}),marketingConsent:consent};usave();}catch(e){}
+     document.body?.classList.remove('aprova-lead-authorized');
      return r;
    };
+   const close=window.closeTrialLead;if(typeof close==='function')window.closeTrialLead=function(){const r=close.apply(this,arguments);document.body?.classList.remove('aprova-lead-authorized');return r;};
    if(typeof reinforcementQuestions==='function'&&typeof REINFORCEMENT_BANK!=='undefined'){
      reinforcementQuestions=function(k,group){const arr=REINFORCEMENT_BANK[k]||[];return arr.slice(group*2,group*2+2).map((q,i)=>formatQuestion(q,`${k}|${group}|${i}|${q.q}`));};
      try{window.reinforcementQuestions=reinforcementQuestions;}catch(e){}
    }
    const start=window.startFreeTrial;if(typeof start==='function')window.startFreeTrial=function(){resetLeadOverlay();return start.apply(this,arguments);};
    const role=window.selectTrialRole;if(typeof role==='function')window.selectTrialRole=function(){resetLeadOverlay();return role.apply(this,arguments);};
-   addConsent();loadQaSuite();
+   addConsent();installLeadGuard();loadQaSuite();
    try{if(typeof renderMasterAll==='function')renderMasterAll();}catch(e){}
  }
  boot();
- document.addEventListener('DOMContentLoaded',()=>{addConsent();loadQaSuite();},{once:true});
+ document.addEventListener('DOMContentLoaded',()=>{addConsent();installLeadGuard();loadQaSuite();},{once:true});
 })();
