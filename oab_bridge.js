@@ -100,7 +100,7 @@
   if(type==='aprova-oab-lead-required'){
    if(u?.trial?.paid||u?.trial?.leadCaptured){const frame=document.getElementById('aprovaOab2Frame');try{frame?.contentWindow?.postMessage({type:'aprova-lead-captured'},OAB2_ORIGIN);}catch(e){}return;}
    u.trial=u.trial||{};u.trial.pendingLeadFlow='oab-iframe';u.trial.pendingLeadStage=3;usave();
-   const gate=document.getElementById('leadGate'),p=document.getElementById('leadPhone');if(p)p.value=(u.profile?.phone||'').replace(/^\+55/,'');if(gate)gate.hidden=false;
+   window.aprovaAuthorizeLeadGate?.();const gate=document.getElementById('leadGate'),p=document.getElementById('leadPhone');if(p)p.value=(u.profile?.phone||'').replace(/^\+55/,'');if(gate)gate.hidden=false;
    if(!u.trial.leadGateTracked){u.trial.leadGateTracked=true;usave();if(typeof window.aprovaTrackCustom==='function')window.aprovaTrackCustom('LeadGateView',{content_name:'Aprova OAB - tres etapas concluidas'});if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('lead_gate_view',{track:'oab2',target:u.profile?.target||'',after_steps:3});}
    return;
   }

@@ -1,6 +1,6 @@
 /* Aprova — proteção do fluxo gratuito + qualidade das questões de reforço. */
 (function(){
- const VERSION='2026-10-11.5';
+ const VERSION='2026-10-11.6';
  function h(s){let x=2166136261;s=String(s||'');for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619);}return x>>>0;}
  function fmt(){try{return typeof courseQuestionFormat==='function'?courseQuestionFormat():(u?.profile?.questionFormat||'');}catch(e){return'';}}
  function explain(q,correct){const old=String(q?.why||'').trim();if(old.length>=35)return old;return `${old?old+' ':''}A alternativa correta é “${correct}”. Compare a regra com cada opção: as demais alteram um requisito, uma consequência ou um conceito essencial do conteúdo cobrado.`;}
@@ -43,6 +43,7 @@
    if(back)back.textContent='← Voltar ao teste';
    if(small)small.textContent='Sem cobrança. O número identifica seu progresso. Mensagens de novidades e ofertas só serão enviadas se você marcar a autorização acima.';
  }
+ window.aprovaAuthorizeLeadGate=function(){updateAuthorizedLeadCopy();document.body?.classList.add('aprova-lead-authorized');};
  function addConsent(){
    const box=document.querySelector('#leadGate .lead-gate-modal');if(!box||document.getElementById('leadMarketingConsent'))return;
    const small=box.querySelector('small');const label=document.createElement('label');label.className='lead-consent';label.style.cssText='display:flex;gap:10px;align-items:flex-start;text-align:left;margin:12px 0;font-size:13px;line-height:1.35';
@@ -62,8 +63,7 @@
    window.requireTrialLeadCapture=function(flow,nextStage){
      if(u.trial?.paid||u.trial?.leadCaptured)return false;
      if(!completedThree(flow||'contest')){resetLeadOverlay();return false;}
-     updateAuthorizedLeadCopy();
-     document.body?.classList.add('aprova-lead-authorized');
+     window.aprovaAuthorizeLeadGate?.();
      return baseRequire.apply(this,arguments);
    };
    const baseCapture=window.captureTrialLead;
