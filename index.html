@@ -105,15 +105,17 @@
         <div class="plan-choice-grid">
           <button class="plan-card" onclick="selectCheckoutPlan('monthly')">
             <span class="plan-kicker">MENSAL</span>
-            <strong>R$ 99,90</strong>
-            <small>por mês • cancele quando quiser</small>
+            <strong>R$ 39,90</strong>
+            <small>por mês • cancele quando quiser • sem fidelidade</small>
           </button>
           <button class="plan-card plan-best" onclick="selectCheckoutPlan('lifetime')">
-            <span class="plan-kicker">MELHOR ESCOLHA</span>
-            <strong>R$ 199,99</strong>
-            <small>pagamento único • acesso vitalício</small>
+            <span class="plan-kicker">MAIS ESCOLHIDO</span>
+            <small style="text-decoration:line-through;opacity:.68">De R$ 199,90</small>
+            <strong>R$ 99,90</strong>
+            <small>pagamento único • acesso vitalício • oferta de lançamento</small>
           </button>
         </div>
+        <div class="license-notice compact"><b>🔥 Oferta de lançamento</b><span>O acesso vitalício por R$ 99,90 é promocional e pode ser encerrado para novas compras. No mensal, você pode cancelar quando quiser, sem multa e sem fidelidade.</span></div>
         <div id="checkoutEmailBox" hidden>
           <label>Seu e-mail para liberar e recuperar o acesso<input id="checkoutEmail" type="email" autocomplete="email" placeholder="voce@email.com"></label>
           <button id="checkoutContinueBtn" class="btn trial-start" onclick="continueSelectedCheckout()">Ir para pagamento seguro →</button>
@@ -179,5 +181,41 @@
   <main><div class="smart-strip" id="smartStrip"><b>Plano automático:</b> calculando seus dias restantes…</div><section id="hoje" class="panel active"></section><section id="cronograma" class="panel"></section><section id="catalogo" class="panel"></section><section id="pecas" class="panel"></section><section id="vade" class="panel"></section><section id="questoes" class="panel"></section><section id="simulados" class="panel"></section><section id="revisao" class="panel"></section><section id="erros" class="panel"></section></main>
   <footer><span>Plataforma independente • estudo guiado com fontes oficiais e conteúdo próprio</span><span id="progressText"></span></footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="analytics.js?v=3"></script><script src="app.js?v=6"></script><script src="universal.js?v=13"></script><script src="catalog.js?v=17"></script><script src="subject_engine.js?v=26"></script><script src="mastery.js?v=16"></script><script src="oab_bridge.js?v=1"></script>
+  <script>
+    (function(){
+      const MONTHLY_PRICE=39.90,LIFETIME_PRICE=99.90;
+      window.selectCheckoutPlan=function(plan){
+        selectedCheckoutPlan=plan==='monthly'?'monthly':'lifetime';
+        document.querySelectorAll('.plan-card').forEach(x=>x.classList.remove('selected'));
+        const cards=document.querySelectorAll('.plan-card');
+        if(selectedCheckoutPlan==='monthly')cards[0]?.classList.add('selected');else cards[1]?.classList.add('selected');
+        const box=document.getElementById('checkoutEmailBox'),btn=document.getElementById('checkoutContinueBtn');
+        if(box)box.hidden=false;
+        if(btn)btn.textContent=selectedCheckoutPlan==='monthly'?'Assinar por R$ 39,90/mês →':'Garantir vitalício por R$ 99,90 →';
+        if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_plan_select',{plan:selectedCheckoutPlan,value:selectedCheckoutPlan==='monthly'?MONTHLY_PRICE:LIFETIME_PRICE});
+      };
+      window.continueSelectedCheckout=async function(){
+        if(!selectedCheckoutPlan)return alert('Escolha Mensal ou Vitalício.');
+        const plan=selectedCheckoutPlan;
+        try{
+          const email=((document.getElementById('checkoutEmail')?.value||'').trim()||(u.profile?.email||'').trim());
+          if(!/^\S+@\S+\.\S+$/.test(email))return alert('Informe um e-mail válido para liberar e recuperar seu acesso.');
+          u.profile={...(u.profile||{}),email};usave();
+          const price=plan==='monthly'?MONTHLY_PRICE:LIFETIME_PRICE;
+          const ident={name:u.profile?.name||'',email,phone:u.profile?.phone||'',marketing_consent:!!u.profile?.marketingConsent};
+          if(typeof window.aprovaTrack==='function')window.aprovaTrack('InitiateCheckout',{content_name:plan==='monthly'?'Aprova - plano mensal':'Aprova - acesso vitalicio promocional',content_category:plan,value:price,currency:'BRL'});
+          if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_start',{...ident,plan,value:price,feedback:u.trial?.feedback||''});
+          const res=await fetch(PAYMENT_API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan,email,name:u.profile?.name||'',phone:u.profile?.phone||''})});
+          const data=await res.json().catch(()=>({}));
+          if(!res.ok||!data.checkout_url)throw new Error(data.error||'Checkout indisponível.');
+          localStorage.setItem('aprova-pending-order',data.order_id||'');
+          localStorage.setItem('aprova-pending-kind',data.kind||'order');
+          localStorage.setItem('aprova-pending-plan',data.plan||plan);
+          if(typeof window.aprovaAnalytics==='function')window.aprovaAnalytics('checkout_created',{...ident,plan,value:price,order_id:data.order_id||'',kind:data.kind||'order'});
+          window.location.href=data.checkout_url;
+        }catch(err){alert((err&&err.message)||'Não foi possível abrir o Mercado Pago agora. Tente novamente em instantes.');}
+      };
+    })();
+  </script>
 </body>
 </html>
