@@ -75,7 +75,9 @@
       document.querySelectorAll('#hoje button').forEach(function(btn){
         if(/pdf/i.test(btn.textContent||''))btn.remove();
       });
-    }else if(isEmbeddedInAprova()&&!paidAccess){
+    }else{
+      try{baseReview();}catch(e){}
+      if(isEmbeddedInAprova()&&!paidAccess){
       const actions=document.querySelector('#hoje .done-actions')||document.querySelector('#hoje .donehero');
       if(actions&&!document.getElementById('aprovaCheckoutAfterTest')){
         const btn=document.createElement('button');
@@ -84,6 +86,7 @@
         btn.textContent='Continuar para o acesso completo →';
         btn.addEventListener('click',function(){tellParent('aprova-oab-test-complete',{stage:8});});
         actions.appendChild(btn);
+      }
       }
     }
     return out;
