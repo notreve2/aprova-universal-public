@@ -14,5 +14,5 @@ window.APROVA_VALIDATED_COURSE_IDS=new Set(window.APROVA_CURATED_COURSES.map(x=>
    if([...document.scripts].some(s=>s.src&&s.src.includes(id)))return Promise.resolve();
    return new Promise(resolve=>{const s=document.createElement('script');s.src=src;s.async=false;s.onload=resolve;s.onerror=resolve;document.head.appendChild(s);});
  }
- load('question_quality.js?v=20261011-2','question_quality.js').then(()=>load('experience_quality.js?v=20261011-6','experience_quality.js'));
+ load('question_quality.js?v=20261011-2','question_quality.js').then(()=>load('experience_quality.js?v=20261011-7','experience_quality.js'));
 })();

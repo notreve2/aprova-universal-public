@@ -1,6 +1,6 @@
 /* Aprova — proteção do fluxo gratuito + qualidade das questões de reforço. */
 (function(){
- const VERSION='2026-10-11.6';
+ const VERSION='2026-10-11.7';
  function h(s){let x=2166136261;s=String(s||'');for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619);}return x>>>0;}
  function fmt(){try{return typeof courseQuestionFormat==='function'?courseQuestionFormat():(u?.profile?.questionFormat||'');}catch(e){return'';}}
  function explain(q,correct){const old=String(q?.why||'').trim();if(old.length>=35)return old;return `${old?old+' ':''}A alternativa correta é “${correct}”. Compare a regra com cada opção: as demais alteram um requisito, uma consequência ou um conceito essencial do conteúdo cobrado.`;}
@@ -50,6 +50,14 @@
    label.innerHTML='<input id="leadMarketingConsent" type="checkbox" style="width:auto;margin-top:2px"><span>Quero receber no WhatsApp lembretes de estudo, novidades e ofertas do Aprova. <b>Opcional.</b></span>';
    if(small)box.insertBefore(label,small);else box.appendChild(label);
  }
+ function preselectLandingCourse(){
+   try{
+     const target=new URLSearchParams(location.search).get('target');if(!target)return;
+     const hit=typeof exactCatalogCourseByTitle==='function'?exactCatalogCourseByTitle(target):null;if(!hit)return;
+     const input=document.getElementById('trialCourseSearch');if(input){input.value=hit.title;input.dataset.courseId=hit.id;}
+     const subtitle=document.querySelector('#courseGate .course-gate-modal > p');if(subtitle)subtitle.innerHTML=`Concurso do anúncio já selecionado: <b>${htmlEsc?htmlEsc(hit.title):hit.title}</b>. Confirme para iniciar o teste.`;
+   }catch(e){}
+ }
  function loadQaSuite(){
    if(new URLSearchParams(location.search).get('qa_suite')!=='1')return;
    if([...document.scripts].some(s=>s.src&&s.src.includes('qa_suite.js')))return;
@@ -79,6 +87,7 @@
      reinforcementQuestions=function(k,group){const arr=REINFORCEMENT_BANK[k]||[];return arr.slice(group*2,group*2+2).map((q,i)=>formatQuestion(q,`${k}|${group}|${i}|${q.q}`));};
      try{window.reinforcementQuestions=reinforcementQuestions;}catch(e){}
    }
+   const openCourse=window.openCourseChooser;if(typeof openCourse==='function')window.openCourseChooser=function(){const r=openCourse.apply(this,arguments);setTimeout(preselectLandingCourse,0);return r;};
    const start=window.startFreeTrial;if(typeof start==='function')window.startFreeTrial=function(){resetLeadOverlay();return start.apply(this,arguments);};
    const role=window.selectTrialRole;if(typeof role==='function')window.selectTrialRole=function(){resetLeadOverlay();return role.apply(this,arguments);};
    addConsent();installLeadGuard();loadQaSuite();
