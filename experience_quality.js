@@ -21,7 +21,7 @@
    try{
      if(flow==='contest')return Number(contestState()?.masterStage||0)>=2;
      if(flow==='oab')return Number(mastery?.oab?.stage||0)>=2;
-     if(flow==='oab-iframe')return true; // o iframe envia a solicitação somente ao sair da etapa 3.
+     if(flow==='oab-iframe')return true;
      const d=ensureDay(),idx=typeof engineStageIndex==='function'?engineStageIndex(d.stage||0):0;return idx>=2;
    }catch(e){return false;}
  }
@@ -31,9 +31,14 @@
    label.innerHTML='<input id="leadMarketingConsent" type="checkbox" style="width:auto;margin-top:2px"><span>Quero receber no WhatsApp lembretes de estudo, novidades e ofertas do Aprova. <b>Opcional.</b></span>';
    if(small)box.insertBefore(label,small);else box.appendChild(label);
  }
+ function loadQaSuite(){
+   if(new URLSearchParams(location.search).get('qa_suite')!=='1')return;
+   if([...document.scripts].some(s=>s.src&&s.src.includes('qa_suite.js')))return;
+   const s=document.createElement('script');s.src='qa_suite.js?v=20261011-1';s.async=false;document.head.appendChild(s);
+ }
  function boot(){
    if(typeof window.requireTrialLeadCapture!=='function'||typeof window.captureTrialLead!=='function'||typeof u==='undefined'){setTimeout(boot,120);return;}
-   if(window.__APROVA_EXPERIENCE_QUALITY===VERSION)return;
+   if(window.__APROVA_EXPERIENCE_QUALITY===VERSION){loadQaSuite();return;}
    window.__APROVA_EXPERIENCE_QUALITY=VERSION;
    const baseRequire=window.requireTrialLeadCapture;
    window.requireTrialLeadCapture=function(flow,nextStage){
@@ -52,12 +57,11 @@
      reinforcementQuestions=function(k,group){const arr=REINFORCEMENT_BANK[k]||[];return arr.slice(group*2,group*2+2).map((q,i)=>formatQuestion(q,`${k}|${group}|${i}|${q.q}`));};
      try{window.reinforcementQuestions=reinforcementQuestions;}catch(e){}
    }
-   // Sempre iniciar um novo teste com o modal de lead fechado; ele só reaparece via gate validado.
    const start=window.startFreeTrial;if(typeof start==='function')window.startFreeTrial=function(){resetLeadOverlay();return start.apply(this,arguments);};
    const role=window.selectTrialRole;if(typeof role==='function')window.selectTrialRole=function(){resetLeadOverlay();return role.apply(this,arguments);};
-   addConsent();
+   addConsent();loadQaSuite();
    try{if(typeof renderMasterAll==='function')renderMasterAll();}catch(e){}
  }
  boot();
- document.addEventListener('DOMContentLoaded',addConsent,{once:true});
+ document.addEventListener('DOMContentLoaded',()=>{addConsent();loadQaSuite();},{once:true});
 })();
