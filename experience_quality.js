@@ -1,6 +1,6 @@
 /* Aprova — proteção do fluxo gratuito + qualidade das questões de reforço. */
 (function(){
- const VERSION='2026-10-11.4';
+ const VERSION='2026-10-11.5';
  function h(s){let x=2166136261;s=String(s||'');for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619);}return x>>>0;}
  function fmt(){try{return typeof courseQuestionFormat==='function'?courseQuestionFormat():(u?.profile?.questionFormat||'');}catch(e){return'';}}
  function explain(q,correct){const old=String(q?.why||'').trim();if(old.length>=35)return old;return `${old?old+' ':''}A alternativa correta é “${correct}”. Compare a regra com cada opção: as demais alteram um requisito, uma consequência ou um conceito essencial do conteúdo cobrado.`;}
@@ -33,6 +33,16 @@
    const guard=()=>{if(!gate.hidden&&!gateAuthorized()){gate.hidden=true;document.body?.classList.remove('aprova-lead-authorized');}else if(!gate.hidden&&gateAuthorized())document.body?.classList.add('aprova-lead-authorized');};
    new MutationObserver(guard).observe(gate,{attributes:true,attributeFilter:['hidden']});guard();
  }
+ function updateAuthorizedLeadCopy(){
+   const gate=document.getElementById('leadGate');if(!gate)return;
+   const badge=gate.querySelector('.trial-badge'),h2=gate.querySelector('h2'),p=gate.querySelector('p'),btn=gate.querySelector('.btn'),back=gate.querySelector('.text-btn'),small=gate.querySelector('small');
+   if(badge)badge.textContent='3 ETAPAS CONCLUÍDAS';
+   if(h2)h2.textContent='Salve seu progresso e continue';
+   if(p)p.textContent='Informe seu WhatsApp para salvar o progresso destas 3 etapas e continuar o teste até o resumo final, áudio e PDF.';
+   if(btn)btn.textContent='Salvar e continuar o teste →';
+   if(back)back.textContent='← Voltar ao teste';
+   if(small)small.textContent='Sem cobrança. O número identifica seu progresso. Mensagens de novidades e ofertas só serão enviadas se você marcar a autorização acima.';
+ }
  function addConsent(){
    const box=document.querySelector('#leadGate .lead-gate-modal');if(!box||document.getElementById('leadMarketingConsent'))return;
    const small=box.querySelector('small');const label=document.createElement('label');label.className='lead-consent';label.style.cssText='display:flex;gap:10px;align-items:flex-start;text-align:left;margin:12px 0;font-size:13px;line-height:1.35';
@@ -52,6 +62,7 @@
    window.requireTrialLeadCapture=function(flow,nextStage){
      if(u.trial?.paid||u.trial?.leadCaptured)return false;
      if(!completedThree(flow||'contest')){resetLeadOverlay();return false;}
+     updateAuthorizedLeadCopy();
      document.body?.classList.add('aprova-lead-authorized');
      return baseRequire.apply(this,arguments);
    };
