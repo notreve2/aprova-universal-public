@@ -19,18 +19,12 @@
     return q;
    };
   }
-  const ui=document.createElement('script');ui.src='validated_course_ui.js?v=2';ui.async=false;
-  ui.addEventListener('load',()=>{
-   const patch=document.createElement('script');patch.src='trial_lead_patch.js?v=3';patch.async=false;
-   patch.addEventListener('load',()=>{
-    const guard=document.createElement('script');guard.src='trial_quality_guard.js?v=1';guard.async=false;
-    guard.addEventListener('load',()=>{
-     const conversion=document.createElement('script');conversion.src='trial_conversion_patch.js?v=3';conversion.async=false;document.head.appendChild(conversion);
-    },{once:true});
-    document.head.appendChild(guard);
-   },{once:true});
-   document.head.appendChild(patch);
-  },{once:true});
-  document.head.appendChild(ui);
+  /*
+   * Fluxo atual do teste: 3 etapas -> WhatsApp -> teste normal -> resumo/áudio/PDF -> checkout.
+   * Os antigos trial_lead_patch, trial_quality_guard e trial_conversion_patch exigiam
+   * WhatsApp antes do teste e reduziam o teste a 3 telas; por isso não são mais carregados.
+   * A proteção atual fica em experience_quality.js e o embaralhamento em question_quality.js.
+   */
+  const ui=document.createElement('script');ui.src='validated_course_ui.js?v=3';ui.async=false;document.head.appendChild(ui);
  }catch(e){console.warn('Trava de formato de questão indisponível',e);}
 })();
