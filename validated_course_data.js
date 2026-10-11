@@ -9,3 +9,8 @@ window.APROVA_CURATED_COURSES=[
  {id:'ceb-tceac26-auditor',title:'TCE/AC 2026 — Auditor – Conselheiro Substituto',banca:'Cebraspe',status:'Inscrições reabertas 05/10 a 26/10/2026 • provas 17/01/2027',category:'Concurso público',source_url:'https://www.cebraspe.org.br/concursos/TCE_AC_26',official:true,exam_date:'2027-01-17',tags:['TCE/AC','Auditor','Conselheiro Substituto','Cebraspe','Controle'],last_seen:'2026-10-09',validation:'edital-lido'}
 ];
 window.APROVA_VALIDATED_COURSE_IDS=new Set(window.APROVA_CURATED_COURSES.map(x=>x.id));
+(function(){
+ const src='question_quality.js?v=20261011-2';
+ if([...document.scripts].some(s=>s.src&&s.src.includes('question_quality.js')))return;
+ const s=document.createElement('script');s.src=src;s.async=false;document.head.appendChild(s);
+})();
