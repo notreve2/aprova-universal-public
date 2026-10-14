@@ -737,10 +737,51 @@ function openLawReader(name,ref,purpose=''){
 function closeLawReader(){const m=document.getElementById('lawReaderModal');if(m)m.hidden=true;document.body.classList.remove('modal-open');}
 
 function renderSchedule(){const active=currentDay().iso;document.getElementById('cronograma').innerHTML=`<div class="card"><h2>Plano intensivo até a prova</h2><p class="muted">Cada data mantém seu próprio material e seu próprio progresso. Clique em qualquer dia para abrir.</p>${days.map((d,i)=>`<button class="day ${d.iso===active?'auto-today':''}" style="width:100%;text-align:left;border:0;cursor:pointer" onclick="openStudyDay('${d.iso}')"><div class="date">${d.date}</div><div><b>${d.title}</b><div class="muted">${d.focus}</div></div><span class="module-count">${d.iso===active?'ABERTO':(state.daySessions?.[d.iso]?.guideFinished?'✓':'')}</span></button>`).join('')}</div>`;}
+function methodScratchTemplate(p){
+ return `CLIENTE: ______________________________\nQUEM PRATICOU O ATO/OMISSÃO: ______________________________\nPROBLEMA: ______________________________\nDIREITO VIOLADO/INVIABILIZADO: ______________________________\nPEÇA: ${p.name}\nFUNDAMENTO-ÂNCORA: ${p.base}\nCOMPETÊNCIA: ______________________________\nLEGITIMIDADE: ______________________________\nPRAZO: ______________________________\nLIMINAR/TUTELA: SIM (  )  NÃO (  )\n\nTESE 1: ______________________________\nARTIGO: ______________________________\nTESE 2: ______________________________\nARTIGO: ______________________________\nTESE 3: ______________________________\nARTIGO: ______________________________\n\nPEDIDO 1: ______________________________\nPEDIDO 2: ______________________________\nPEDIDO 3: ______________________________\n\nREVISÃO FINAL: competência → nome da peça → artigos → pedidos → fechamento.`;
+}
+function selectMethodPiece(i){
+ if(!pieceTemplates[i])return;
+ state.methodPieceIndex=i;
+ state.methodDrafts=state.methodDrafts||{};
+ localStorage.setItem(LS,JSON.stringify(state));
+ renderPieces();
+}
+function saveMethodDraft(i,value){
+ const p=pieceTemplates[i];if(!p)return;
+ state.methodDrafts=state.methodDrafts||{};
+ state.methodDrafts[p.name]=value;
+ localStorage.setItem(LS,JSON.stringify(state));
+}
+function copyMethodScratch(i){
+ const p=pieceTemplates[i];if(!p)return;
+ const text=state.methodDrafts?.[p.name]||methodScratchTemplate(p);
+ navigator.clipboard?.writeText(text).then(()=>alert('Rascunho copiado.')).catch(()=>alert('Selecione o rascunho e copie manualmente.'));
+}
+function resetMethodScratch(i){
+ const p=pieceTemplates[i];if(!p)return;
+ state.methodDrafts=state.methodDrafts||{};
+ delete state.methodDrafts[p.name];
+ localStorage.setItem(LS,JSON.stringify(state));
+ renderPieces();
+}
+function openMethodPiece(i){
+ const el=document.getElementById(`piece-model-${i}`);if(!el)return;
+ el.open=true;
+ setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+function renderPieceMethod(){
+ const idx=Math.min(Math.max(Number(state.methodPieceIndex)||0,0),pieceTemplates.length-1);
+ const p=pieceTemplates[idx];
+ const scratch=state.methodDrafts?.[p.name]||methodScratchTemplate(p);
+ const picker=pieceTemplates.map((x,i)=>`<button class="method-piece-btn ${i===idx?'active':''}" onclick="selectMethodPiece(${i})">${escapeHtml(x.name)}</button>`).join('');
+ return `<div class="card span-12 method-card"><span class="pill">MÉTODO CADERNO → RASCUNHO → PEÇA</span><h2>Aprenda a montar sem decorar texto inteiro</h2><p class="muted">Escolha a peça. O sistema mostra primeiro o que registrar no caderno, depois o rascunho que você faria na prova e, só no final, o modelo completo.</p><div class="method-piece-picker">${picker}</div><div class="method-rule"><b>Regra:</b> não comece a redigir sem fechar <b>peça + fundamento + competência + legitimidade + prazo</b>.</div><div class="method-grid"><section class="method-stage"><div class="method-step-badge">1</div><h3>✍️ Escreva no caderno</h3><p><b>Quando lembrar:</b><br>${escapeHtml(p.trigger)}</p><p><b>Fundamento-âncora:</b><br><span class="law">${escapeHtml(p.base)}</span></p><div class="method-mini-title">Responda antes de qualquer peça</div><ol><li>Quem é meu cliente?</li><li>Quem causou o problema ou está omisso?</li><li>O que aconteceu?</li><li>Qual direito foi violado ou inviabilizado?</li><li>Qual peça resolve isso?</li></ol><div class="callout"><b>Como reconhecer ${escapeHtml(p.name)}:</b><br>${escapeHtml(p.alert)}</div></section><section class="method-stage"><div class="method-step-badge">2</div><h3>📝 Faça o rascunho da prova</h3><p class="muted">Preencha em palavras curtas. O objetivo é organizar a cabeça antes de escrever a petição.</p><textarea class="scratch-pad" rows="22" oninput="saveMethodDraft(${idx},this.value)">${escapeHtml(scratch)}</textarea><div class="method-actions"><button class="btn secondary" onclick="copyMethodScratch(${idx})">Copiar rascunho</button><button class="btn secondary" onclick="resetMethodScratch(${idx})">Limpar treino</button></div></section><section class="method-stage"><div class="method-step-badge">3</div><h3>⚖️ Só então monte a peça</h3><p class="muted">Use o rascunho preenchido e transforme cada linha em um bloco da peça.</p><ol class="method-build-list"><li>Endereçamento</li><li>Qualificação / partes</li><li>Nome da peça + fundamento</li><li>Competência e legitimidade</li><li>Fatos essenciais</li><li>Teses: fato + lei + aplicação + conclusão</li><li>Liminar/tutela, se couber</li><li>Pedidos correspondentes às teses</li><li>Fechamento: Local... Data... ADVOGADO... OAB...</li></ol><div class="success"><b>Fórmula da tese:</b><br>FATO → LEI → APLICAÇÃO → CONCLUSÃO.</div><h4>Checklist específico de ${escapeHtml(p.name)}</h4><ol>${p.model.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ol><button class="btn good full" onclick="openMethodPiece(${idx})">Abrir modelo completo desta peça ↓</button></section></div></div>`;
+}
+
 function renderPieces(){
  const skeleton=universalSkeleton.map((x,i)=>{const ex=universalExamples[x[0]];return `<div class="template-step clickable-step"><div class="step-top"><b>${x[0]}</b><span class="step-number">${i+1}</span></div><span>${x[1]}</span><button class="example-btn" onclick="toggleUniversalExample(${i})">Ver exemplo de como fazer</button><div id="universal-example-${i}" class="universal-example" hidden>${ex?`<p class="example-intro">${ex.intro}</p>${ex.examples.map(e=>`<div class="example-box"><b>${e[0]}</b><pre>${e[1]}</pre></div>`).join('')}<div class="warning-inline"><b>Atenção:</b> ${ex.alert}</div>`:''}</div></div>`}).join('');
- const cards=pieceTemplates.map((p,i)=>`<details class="piece piece-model"><summary>${p.name} <span class="piece-trigger">${p.trigger}</span></summary><div class="piece-body"><p><span class="law">${p.base}</span></p><div class="callout"><b>Como reconhecer:</b> ${p.alert}</div><h4>Checklist da peça</h4><ol>${p.model.map(x=>`<li>${x}</li>`).join('')}</ol><div class="piece-full-head"><h4>Peça completa — modelo adaptável</h4><button class="example-btn" onclick="copyCompletePiece(${i})">Copiar peça completa</button></div><pre class="complete-piece-text">${p.fullText}</pre><div class="warning-inline"><b>Na prova:</b> adapte competência, partes, fatos, fundamentos e pedidos ao enunciado. Não invente dados que não foram fornecidos.</div></div></details>`).join('');
- document.getElementById('pecas').innerHTML=`<div class="grid"><div class="card span-12"><span class="pill">MODELO UNIVERSAL</span><h2>Estrutura que se adapta ao tema</h2><p>Não decore uma peça inteira. Decore a <b>ordem de raciocínio</b>: competência → legitimidade → cabimento → fatos → fundamento geral → fundamento específico → tutela → pedidos.</p><p class="muted">Agora cada etapa é interativa. Clique em <b>“Ver exemplo de como fazer”</b> para abrir modelos prontos de redação e entender como adaptar.</p><div class="template-grid">${skeleton}</div><div class="warning-inline"><b>Importante:</b> estes exemplos são moldes de estudo. A competência, as partes, a fundamentação e os pedidos devem sempre ser adaptados ao enunciado. Não transforme o Vade Mecum em roteiro de peça, porque o edital proíbe marcações/remissões que estruturem peças processuais.</div></div><div class="card span-12"><h2>Modelos por peça</h2><p class="muted">Abra a peça e treine substituindo os fatos, fundamentos e pedidos pelo tema do enunciado.</p>${cards}</div></div>`;
+ const cards=pieceTemplates.map((p,i)=>`<details id="piece-model-${i}" class="piece piece-model"><summary>${p.name} <span class="piece-trigger">${p.trigger}</span></summary><div class="piece-body"><p><span class="law">${p.base}</span></p><div class="callout"><b>Como reconhecer:</b> ${p.alert}</div><h4>Checklist da peça</h4><ol>${p.model.map(x=>`<li>${x}</li>`).join('')}</ol><div class="piece-full-head"><h4>Peça completa — modelo adaptável</h4><button class="example-btn" onclick="copyCompletePiece(${i})">Copiar peça completa</button></div><pre class="complete-piece-text">${p.fullText}</pre><div class="warning-inline"><b>Na prova:</b> adapte competência, partes, fatos, fundamentos e pedidos ao enunciado. Não invente dados que não foram fornecidos.</div></div></details>`).join('');
+ document.getElementById('pecas').innerHTML=`<div class="grid">${renderPieceMethod()}<div class="card span-12"><span class="pill">MODELO UNIVERSAL</span><h2>Estrutura que se adapta ao tema</h2><p>Não decore uma peça inteira. Decore a <b>ordem de raciocínio</b>: competência → legitimidade → cabimento → fatos → fundamento geral → fundamento específico → tutela → pedidos.</p><p class="muted">Agora cada etapa é interativa. Clique em <b>“Ver exemplo de como fazer”</b> para abrir modelos prontos de redação e entender como adaptar.</p><div class="template-grid">${skeleton}</div><div class="warning-inline"><b>Importante:</b> estes exemplos são moldes de estudo. A competência, as partes, a fundamentação e os pedidos devem sempre ser adaptados ao enunciado. Não transforme o Vade Mecum em roteiro de peça, porque o edital proíbe marcações/remissões que estruturem peças processuais.</div></div><div class="card span-12"><h2>Modelos por peça</h2><p class="muted">Abra a peça e treine substituindo os fatos, fundamentos e pedidos pelo tema do enunciado.</p>${cards}</div></div>`;
 }
 function toggleUniversalExample(i){const el=document.getElementById(`universal-example-${i}`);if(!el)return;el.hidden=!el.hidden;const btn=el.previousElementSibling;if(btn)btn.textContent=el.hidden?'Ver exemplo de como fazer':'Fechar exemplo';}
 function copyCompletePiece(i){const p=pieceTemplates[i];if(!p?.fullText)return;navigator.clipboard?.writeText(p.fullText).then(()=>alert(`${p.name}: peça completa copiada.`)).catch(()=>alert('Selecione o modelo e copie manualmente.'));}
